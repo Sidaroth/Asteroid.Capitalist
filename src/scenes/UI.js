@@ -49,7 +49,7 @@ const UI = function UIFunc() {
 
         gui.add(state.guiData, 'accelerationForceMag', 0, 20)
             .listen()
-            .onChange(v => store.player.setAccelerationForceMag(v));
+            .onChange(v => store.player.setAccelerationForceMagnitude(v));
 
         gui.add(state.guiData, 'maxSpeed', 1, 25)
             .listen()

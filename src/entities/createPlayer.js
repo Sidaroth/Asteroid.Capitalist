@@ -117,7 +117,7 @@ const createPlayer = function createPlayerFunc() {
         update,
         setMaxSpeed,
         setRateOfFire,
-        setAccelerationForce: setAccelerationForceMagnitude,
+        setAccelerationForceMagnitude,
     };
 
     // These are the substates, or components, that describe the functionality of the resulting object.
