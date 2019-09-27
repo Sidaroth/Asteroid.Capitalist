@@ -9,6 +9,7 @@ import createQuadTree from '../quadTree/createQuadTree';
 import Rect from '../quadTree/rect';
 import createKeyboard from 'core/createKeyboard';
 import store from 'root/store';
+import Phaser from 'phaser';
 
 /**
  * Responsible for delegating the various levels, holding the various core systems and such.
@@ -51,12 +52,13 @@ const Game = function GameFunc() {
 
     function createTextures() {
         // TODO: Fix proper textures....
-        let gfx = state.getScene().make.graphics({ x: 0, y: 0 }, false);
-        gfxContext.fillStyle(0xffb300, 1.0);
-        gfxContext.fillCircle(5, 5, 5);
-        gfxContext.generateTexture('Bullet', 5, 5);
+        // let gfx = state.getScene().make.graphics({ x: 0, y: 0 }, false);
+        let gfx = new Phaser.GameObjects.Graphics(state.getScene());
+        gfx.fillStyle(0xffb300, 1.0);
+        gfx.fillCircle(5, 5, 5);
+        gfx.generateTexture('Bullet', 5, 5);
 
-        gfx = state.getScene().make.graphics({ x: 0, y: 0 }, false);
+        gfx = new Phaser.GameObjects.Graphics(state.getScene());
         gfx.lineStyle(2, 0x00897b);
         gfx.fillStyle(0x00897b);
         gfx.beginPath();
