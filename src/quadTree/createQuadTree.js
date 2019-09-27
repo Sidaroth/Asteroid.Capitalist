@@ -3,6 +3,7 @@ import Rect from './rect';
 import store from '../store';
 
 // https://www.wikiwand.com/en/Quadtree
+// TODO: Look into Direct Access Quadtree Lookup (Chapter 4.5 Programming Gems 2) --> Bit magic.
 const createQuadTree = (boundary, cap = Infinity, divisions = Infinity, subDivision = 0, parentNode = undefined) => {
     const state = {};
 

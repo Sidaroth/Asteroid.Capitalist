@@ -84,6 +84,7 @@ const Game = function GameFunc() {
         createInput();
 
         const player = createPlayer();
+        store.player = player;
         gameEntities.push(player);
         qTree.insert(player);
     }

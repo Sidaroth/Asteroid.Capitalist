@@ -17,9 +17,9 @@ const createPlayer = function createPlayerFunc() {
     const velocity = new Vector();
     const acceleration = new Vector();
 
-    const accelerationForce = 5;
-    const maxSpeed = 10;
-    const rateOfFire = 15; // Per second.
+    let accelerationForceMag = 5;
+    let maxSpeed = 10;
+    let rateOfFire = 15; // Per second.
     let timeOfLastShot = 0;
     let facingDirection;
 
@@ -52,10 +52,10 @@ const createPlayer = function createPlayerFunc() {
 
         // TODO: Constify indices here.
         const accel = new Vector();
-        if (input[0]) accel.add(0, -accelerationForce);
-        if (input[1]) accel.add(0, accelerationForce);
-        if (input[2]) accel.add(-accelerationForce, 0);
-        if (input[3]) accel.add(accelerationForce, 0);
+        if (input[0]) accel.add(0, -accelerationForceMag);
+        if (input[1]) accel.add(0, accelerationForceMag);
+        if (input[2]) accel.add(-accelerationForceMag, 0);
+        if (input[3]) accel.add(accelerationForceMag, 0);
 
         acceleration.add(accel);
     }
@@ -94,8 +94,19 @@ const createPlayer = function createPlayerFunc() {
         state.setPosition(pos);
 
         lookAt(store.mouse);
-
         shoot();
+    }
+
+    function setMaxSpeed(speed) {
+        maxSpeed = speed;
+    }
+
+    function setRateOfFire(ROF) {
+        rateOfFire = ROF;
+    }
+
+    function setAccelerationForceMagnitude(forceMag) {
+        accelerationForceMag = forceMag;
     }
 
     // functions and properties listed here will be public.
@@ -104,6 +115,9 @@ const createPlayer = function createPlayerFunc() {
         // methods
         __constructor,
         update,
+        setMaxSpeed,
+        setRateOfFire,
+        setAccelerationForce: setAccelerationForceMagnitude,
     };
 
     // These are the substates, or components, that describe the functionality of the resulting object.
