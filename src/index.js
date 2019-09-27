@@ -9,16 +9,19 @@ import resizeCanvas from 'utils/resizeCanvas';
 import store from './store';
 import createMessageBus from 'core/createMessageBus';
 
+const game = Game();
 const phaserConfig = {
     type: Phaser.WEBGL,
     width: gameConfig.GAME.VIEWWIDTH,
     height: gameConfig.GAME.VIEWHEIGHT,
     backgroundColor: '#555555',
     parent: 'game',
-    scene: [BootScene().getScene(), LoadScene().getScene(), Game().getScene()],
+    scene: [BootScene().getScene(), LoadScene().getScene(), game.getScene()],
 };
 
+const app = new Phaser.Game(phaserConfig);
+store.game = game;
+store.app = app;
 store.messageBus = createMessageBus();
-const game = new Phaser.Game(phaserConfig);
 
 window.addEventListener('resize', resizeCanvas);

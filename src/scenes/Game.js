@@ -38,7 +38,13 @@ const Game = function GameFunc() {
         keyboard.enable();
         store.keyboard = keyboard;
 
+        state.getScene().input.on('pointermove', (pointer) => {
+            store.mouse = pointer;
+        });
+
         const player = createPlayer();
+        player.createShipTexture(state.getScene(), qTreeDebugContext);
+
         gameEntities.push(player);
         qTree.insert(player);
     }
@@ -49,8 +55,8 @@ const Game = function GameFunc() {
     }
 
     function update(time, delta) {
-        // TODO: If there's not a lot of entities moving
-        // it's faster to remove and reinsert only the dirty ones, instead of recreating.
+        // TODO: If there's not a lot of entities moving it's faster
+        // to remove and reinsert only the dirty ones, instead of recreating the tree from scratch (.clear())
         qTree.clear();
         qTreeDebugContext.clear();
         gameEntities.forEach((entity) => {

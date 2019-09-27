@@ -7,6 +7,8 @@ import canListen from 'components/events/canListen';
 import Vector from 'root/math/vector';
 import keybindings from 'configs/keybindings';
 import hasSprite from 'components/entities/hasSprite';
+import gameConfig from 'configs/gameConfig';
+import store from 'root/store';
 
 const createPlayer = function createPlayerFunc() {
     // variables and functions here are private unless listed below in localState.
@@ -16,9 +18,13 @@ const createPlayer = function createPlayerFunc() {
 
     const accelerationForce = 5;
     const maxSpeed = 10;
-    const airDensity = 1;
 
-    function __constructor() {}
+    // Drag
+    const airDensity = 0.1; // We're in space after all....
+
+    function __constructor() {
+        state.setPosition({ x: gameConfig.GAME.VIEWWIDTH / 2, y: gameConfig.GAME.VIEWHEIGHT / 2 });
+    }
 
     function calculateDrag(fluidDensity) {
         const speed = velocity.getLength();
@@ -45,6 +51,14 @@ const createPlayer = function createPlayerFunc() {
         acceleration.add(accel);
     }
 
+    function lookAt(pos) {
+        const sprite = state.getSprite();
+        if (sprite && pos) {
+            const direction = Vector.sub(new Vector(pos.x, pos.y), new Vector(state.getX(), state.getY())).getUnit();
+            sprite.rotation = direction.angle();
+        }
+    }
+
     function update() {
         acceleration.zero();
         checkMovement();
@@ -57,6 +71,8 @@ const createPlayer = function createPlayerFunc() {
         pos.x += velocity.x;
         pos.y += velocity.y;
         state.setPosition(pos);
+
+        lookAt(store.mouse);
     }
 
     // functions and properties listed here will be public.
