@@ -12,6 +12,7 @@ const UI = function UIFunc() {
     const state = {};
     let gui;
     let stats;
+    let guiController;
 
     function setupPerformanceStats() {
         stats = new Stats();
@@ -37,16 +38,18 @@ const UI = function UIFunc() {
         gui.addFolder('Test folder');
 
         state.guiData = {
-            name: 'name',
+            renderQTree: false,
         };
-        const guiController = gui.add(state.guiData, 'name');
-        guiController.onFinishChange((name) => {
-            console.log(name);
-        });
+
+        guiController = gui.add(state.guiData, 'renderQTree').listen();
+    }
+
+    function getGUIController() {
+        return guiController;
     }
 
     function create() {
-        // setupDatGui();
+        setupDatGui();
         // setupPerformanceStats();
     }
 
@@ -60,6 +63,7 @@ const UI = function UIFunc() {
         // methods
         create,
         destroy,
+        getGUIController,
     };
 
     return createState('UIScene', state, {

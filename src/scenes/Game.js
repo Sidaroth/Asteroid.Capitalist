@@ -22,11 +22,55 @@ const Game = function GameFunc() {
     // TODO: Move into world1/level1 scene, not the global world.
     const gameEntities = [];
     const qTree = createQuadTree(new Rect(0, 0, gameConfig.GAME.VIEWWIDTH, gameConfig.GAME.VIEWHEIGHT), 1, 8); // Specify world bounds.
-    let qTreeDebugContext;
+    let gfxContext;
 
     function cameraSetup() {
         state.getScene().cameras.main.setViewport(0, 0, gameConfig.GAME.VIEWWIDTH, gameConfig.GAME.VIEWHEIGHT);
-        state.getScene().cameras.main.setZoom(0.8);
+        state.getScene().cameras.main.setZoom(0.95); // remove?
+    }
+
+    function addEntity(entity) {
+        gameEntities.push(entity);
+        qTree.insert(entity);
+    }
+
+    function removeEntity(entity) {
+        const idx = gameEntities.findIndex(e => e.id === entity.id);
+        gameEntities.splice(idx, 1);
+        qTree.remove(entity);
+    }
+
+    function createInput() {
+        keyboard.enable();
+        store.keyboard = keyboard;
+
+        state.getScene().input.on('pointermove', (pointer) => {
+            store.mouse = pointer;
+        });
+    }
+
+    function createTextures() {
+        // TODO: Fix proper textures....
+        let gfx = state.getScene().make.graphics({ x: 0, y: 0 }, false);
+        gfxContext.fillStyle(0xffb300, 1.0);
+        gfxContext.fillCircle(5, 5, 5);
+        gfxContext.generateTexture('Bullet', 5, 5);
+
+        gfx = state.getScene().make.graphics({ x: 0, y: 0 }, false);
+        gfx.lineStyle(2, 0x00897b);
+        gfx.fillStyle(0x00897b);
+        gfx.beginPath();
+
+        const shipWidth = 18;
+        const shipHeight = 30;
+        gfx.moveTo(shipWidth / 2, 0);
+        gfx.lineTo(shipWidth, shipHeight);
+        gfx.lineTo(0, shipHeight);
+
+        gfx.closePath();
+        gfx.fillPath();
+        gfx.strokePath();
+        gfx.generateTexture('Ship', shipWidth, shipHeight);
     }
 
     function init() {
@@ -34,17 +78,12 @@ const Game = function GameFunc() {
         UIScene = UI();
         state.getScene().scene.add(gameConfig.SCENES.UI, UIScene.getScene(), true);
         audioManager = AudioManager(UIScene.getScene());
-        qTreeDebugContext = state.getScene().add.graphics();
-        keyboard.enable();
-        store.keyboard = keyboard;
+        gfxContext = state.getScene().add.graphics();
 
-        state.getScene().input.on('pointermove', (pointer) => {
-            store.mouse = pointer;
-        });
+        createTextures();
+        createInput();
 
         const player = createPlayer();
-        player.createShipTexture(state.getScene(), qTreeDebugContext);
-
         gameEntities.push(player);
         qTree.insert(player);
     }
@@ -54,30 +93,39 @@ const Game = function GameFunc() {
         cameraSetup();
     }
 
-    function update(time, delta) {
+    function getGfxContext() {
+        return gfxContext;
+    }
+
+    function update(time) {
         // TODO: If there's not a lot of entities moving it's faster
         // to remove and reinsert only the dirty ones, instead of recreating the tree from scratch (.clear())
         qTree.clear();
-        qTreeDebugContext.clear();
+        gfxContext.clear();
         gameEntities.forEach((entity) => {
-            entity.update();
+            entity.update(time);
             qTree.insert(entity);
         });
 
-        qTree.render(qTreeDebugContext);
+        if (UIScene.getGUIController().object.renderQTree) {
+            qTree.render(gfxContext);
+        }
     }
 
     function destroy() {
-        if (UI) UI.destroy();
+        if (UIScene) UIScene.destroy();
     }
 
     const localState = {
         // props
         // methods
+        addEntity,
+        removeEntity,
         init,
         create,
         update,
         destroy,
+        getGfxContext,
     };
 
     return createState('Game', state, {

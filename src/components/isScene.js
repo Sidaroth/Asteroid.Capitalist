@@ -17,8 +17,9 @@ const isScene = function isSceneFunc(state, sceneKey) {
         if (state.init) state.init();
     };
 
-    scene.update = () => {
-        if (state.update) state.update();
+    scene.update = (runTime, delta) => {
+        const time = { runTime, delta };
+        if (state.update) state.update(time);
     };
 
     scene.preload = () => {

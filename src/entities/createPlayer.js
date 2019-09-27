@@ -9,6 +9,7 @@ import keybindings from 'configs/keybindings';
 import hasSprite from 'components/entities/hasSprite';
 import gameConfig from 'configs/gameConfig';
 import store from 'root/store';
+import createBullet from './createBullet';
 
 const createPlayer = function createPlayerFunc() {
     // variables and functions here are private unless listed below in localState.
@@ -18,11 +19,19 @@ const createPlayer = function createPlayerFunc() {
 
     const accelerationForce = 5;
     const maxSpeed = 10;
+    const rateOfFire = 15; // Per second.
+    let timeOfLastShot = 0;
+    let facingDirection;
 
     // Drag
-    const airDensity = 0.1; // We're in space after all....
+    const airDensity = 0.075; // We're in space after all....
+
+    function createSprite() {
+        state.createSpriteFromKey(store.game.getScene(), 'Ship');
+    }
 
     function __constructor() {
+        createSprite();
         state.setPosition({ x: gameConfig.GAME.VIEWWIDTH / 2, y: gameConfig.GAME.VIEWHEIGHT / 2 });
     }
 
@@ -54,12 +63,24 @@ const createPlayer = function createPlayerFunc() {
     function lookAt(pos) {
         const sprite = state.getSprite();
         if (sprite && pos) {
-            const direction = Vector.sub(new Vector(pos.x, pos.y), new Vector(state.getX(), state.getY())).getUnit();
-            sprite.rotation = direction.angle();
+            facingDirection = Vector.sub(new Vector(pos.x, pos.y), new Vector(state.getX(), state.getY())).getUnit();
+            sprite.rotation = facingDirection.angle();
         }
     }
 
-    function update() {
+    function shoot() {
+        if (store.mouse && store.mouse.isDown) {
+            const now = Date.now();
+            if (now - timeOfLastShot > 1000 / rateOfFire) {
+                timeOfLastShot = now;
+
+                const pos = state.getPosition();
+                createBullet(new Vector(pos.x, pos.y).add(facingDirection.clone().multiply(15)), facingDirection);
+            }
+        }
+    }
+
+    function update(time) {
         acceleration.zero();
         checkMovement();
         calculateDrag(airDensity);
@@ -73,6 +94,8 @@ const createPlayer = function createPlayerFunc() {
         state.setPosition(pos);
 
         lookAt(store.mouse);
+
+        shoot();
     }
 
     // functions and properties listed here will be public.

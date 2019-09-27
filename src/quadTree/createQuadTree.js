@@ -140,6 +140,7 @@ const createQuadTree = (boundary, cap = Infinity, divisions = Infinity, subDivis
     function clear() {
         entities = [];
         subTrees = [];
+        state.isDivided = false;
     }
 
     function render(context) {

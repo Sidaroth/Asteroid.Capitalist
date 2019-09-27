@@ -6,28 +6,7 @@ const hasSprite = function hasSpriteFunc(state) {
 
     function __constructor() {}
 
-    function createShipTexture(scene, gfx) {
-        const shipWidth = 18;
-        const shipHeight = 30;
-
-        gfx.lineStyle(2, 0xff00ff);
-        gfx.fillStyle(0xff00ff);
-        gfx.beginPath();
-
-        gfx.moveTo(shipWidth / 2, 0);
-        gfx.lineTo(0, shipHeight);
-        gfx.lineTo(shipWidth, shipHeight);
-
-        gfx.closePath();
-        gfx.fillPath();
-        gfx.strokePath();
-        gfx.generateTexture('Ship', 30, 30);
-
-        sprite = new Phaser.GameObjects.Sprite(scene, state.getX(), state.getY(), 'Ship');
-        scene.add.existing(sprite);
-    }
-
-    function createSpriteFromKey(tileKey) {
+    function createSpriteFromKey(scene, tileKey) {
         key = tileKey;
 
         if (sprite) {
@@ -35,7 +14,9 @@ const hasSprite = function hasSpriteFunc(state) {
         }
 
         state.setKey(tileKey);
-        sprite = new Phaser.GameObjects.Sprite(state.getParentScene(), state.getPosition().x, state.getPosition().y, tileKey);
+        sprite = new Phaser.GameObjects.Sprite(scene, state.getX(), state.getY(), tileKey);
+        sprite.setOrigin(0.5);
+        scene.add.existing(sprite);
 
         return sprite;
     }
@@ -79,7 +60,6 @@ const hasSprite = function hasSpriteFunc(state) {
 
     return {
         __constructor,
-        createShipTexture,
         createSpriteFromKey,
         getKey,
         setKey,
