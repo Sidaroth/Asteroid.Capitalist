@@ -1,16 +1,23 @@
-import canEmit from 'components/canEmit';
+import canEmit from 'components/events/canEmit';
 import eventConfig from 'configs/eventConfig';
-import getFunctionUsage from 'utils/getFunctionUsage';
+import createState from 'utils/createState';
 
 const createKeyboardInput = function createKeyboardInputFunc() {
     const state = {};
+    const keyMap = new Map();
 
     function keyDownFn(e) {
-        state.emit(eventConfig.EVENTS.KEYBOARD.KEYDOWN, { key: e.key, repeat: e.repeat, keyCode: e.keyCode });
+        keyMap.set(e.keyCode, { repeat: e.repeat, down: true });
+        state.emit(eventConfig.KEY.DOWN, { key: e.key, repeat: e.repeat, keyCode: e.keyCode });
     }
 
     function keyUpFn(e) {
-        state.emit(eventConfig.EVENTS.KEYBOARD.KEYUP, { key: e.key, repeat: e.repeat, keyCode: e.keyCode });
+        keyMap.set(e.keyCode, { repeat: false, down: false });
+        state.emit(eventConfig.KEY.UP, { key: e.key, repeat: e.repeat, keyCode: e.keyCode });
+    }
+
+    function isKeyDown(keyCode) {
+        return keyMap.get(keyCode) && keyMap.get(keyCode).down;
     }
 
     function enable() {
@@ -28,13 +35,12 @@ const createKeyboardInput = function createKeyboardInputFunc() {
         // methods
         disable,
         enable,
+        isKeyDown,
     };
 
-    const canEmitState = canEmit(state);
-    const states = [{ state, name: 'state' }, { state: localState, name: 'localState' }, { state: canEmitState, name: 'canEmit' }];
-    getFunctionUsage(states, 'Keyboard');
-    return Object.assign(...states.map(s => s.state), {
-        // pipes and overrides
+    return createState('keyboard', state, {
+        localState,
+        canEmit: canEmit(state),
     });
 };
 

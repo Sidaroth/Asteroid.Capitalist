@@ -1,7 +1,9 @@
 export default {
-    EVENTS: {
-        GAME: {
-            STARTED: 'game started',
-        },
+    GAME: {
+        STARTED: 'game started',
+    },
+    KEY: {
+        DOWN: 'key down',
+        UP: 'key up',
     },
 };

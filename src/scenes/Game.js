@@ -1,13 +1,14 @@
-import { List } from 'immutable';
 import gameConfig from 'configs/gameConfig';
-import spriteConfig from 'configs/spriteConfig';
 import AudioManager from 'core/createAudioManager';
 import createPlayer from 'entities/createPlayer';
 import UI from 'scenes/UI';
-import audioConfig from 'configs/audioConfig';
 import canListen from 'components/events/canListen';
 import isScene from 'components/isScene';
 import createState from 'utils/createState';
+import createQuadTree from '../quadTree/createQuadTree';
+import Rect from '../quadTree/rect';
+import createKeyboard from 'core/createKeyboard';
+import store from 'root/store';
 
 /**
  * Responsible for delegating the various levels, holding the various core systems and such.
@@ -15,9 +16,13 @@ import createState from 'utils/createState';
 const Game = function GameFunc() {
     const state = {};
     let audioManager;
-    const entities = List([]);
     let UIScene;
-    let background;
+    const keyboard = createKeyboard();
+
+    // TODO: Move into world1/level1 scene, not the global world.
+    const gameEntities = [];
+    const qTree = createQuadTree(new Rect(0, 0, gameConfig.GAME.VIEWWIDTH, gameConfig.GAME.VIEWHEIGHT), 1, 8); // Specify world bounds.
+    let qTreeDebugContext;
 
     function cameraSetup() {
         state.getScene().cameras.main.setViewport(0, 0, gameConfig.GAME.VIEWWIDTH, gameConfig.GAME.VIEWHEIGHT);
@@ -29,6 +34,13 @@ const Game = function GameFunc() {
         UIScene = UI();
         state.getScene().scene.add(gameConfig.SCENES.UI, UIScene.getScene(), true);
         audioManager = AudioManager(UIScene.getScene());
+        qTreeDebugContext = state.getScene().add.graphics();
+        keyboard.enable();
+        store.keyboard = keyboard;
+
+        const player = createPlayer();
+        gameEntities.push(player);
+        qTree.insert(player);
     }
 
     function create() {
@@ -36,10 +48,20 @@ const Game = function GameFunc() {
         cameraSetup();
     }
 
-    function update(time, delta) {}
+    function update(time, delta) {
+        // TODO: If there's not a lot of entities moving
+        // it's faster to remove and reinsert only the dirty ones, instead of recreating.
+        qTree.clear();
+        qTreeDebugContext.clear();
+        gameEntities.forEach((entity) => {
+            entity.update();
+            qTree.insert(entity);
+        });
+
+        qTree.render(qTreeDebugContext);
+    }
 
     function destroy() {
-        if (background) state.getScene().background.destroy();
         if (UI) UI.destroy();
     }
 
