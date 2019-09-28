@@ -11,4 +11,8 @@ export default {
         DOWN: 'key down',
         UP: 'key up',
     },
+    COLLISION: {
+        START: 'collision start',
+        END: 'collision end',
+    },
 };

@@ -4,6 +4,9 @@ import isGameEntity from 'components/entities/isGameEntity';
 import hasSprite from 'components/entities/hasSprite';
 import hasPosition from 'components/hasPosition';
 import store from 'root/store';
+import hasCollision from 'components/entities/hasCollision';
+import Matter from 'matter-js';
+import gameConfig from 'configs/gameConfig';
 
 const createBullet = (pos, direction) => {
     const state = {};
@@ -27,13 +30,20 @@ const createBullet = (pos, direction) => {
             // TODO: Set inactive and reuseable in some bullet pool instead.
             state.destroy();
         }
+
         return time;
     }
 
     function __constructor() {
+        state.type = 'bullet';
         creationTime = Date.now();
         state.setPosition(pos);
         createSprite();
+
+        state.setColliderShape(Matter.Bodies.circle(state.getX(), state.getY(), 5));
+        state.setCollisionCategory(gameConfig.COLLISION.bullets);
+        state.setCollidesWith([gameConfig.COLLISION.enemies]);
+
         store.game.addEntity(state);
     }
 
@@ -53,6 +63,7 @@ const createBullet = (pos, direction) => {
         canEmit: canEmit(state),
         hasPosition: hasPosition(state),
         hasSprite: hasSprite(state),
+        hasCollision: hasCollision(state),
     });
 };
 

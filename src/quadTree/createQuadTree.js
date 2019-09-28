@@ -83,6 +83,12 @@ const createQuadTree = (boundary, cap = Infinity, divisions = Infinity, subDivis
         }
     }
 
+    function insertAll(ents) {
+        ents.forEach((entity) => {
+            state.insert(entity);
+        });
+    }
+
     function insert(entity) {
         const entityPos = entity.position || entity.getPosition();
         if (!bounds.contains(entityPos)) return false;
@@ -125,10 +131,13 @@ const createQuadTree = (boundary, cap = Infinity, divisions = Infinity, subDivis
         if (state.isDivided) {
             found = subTrees.reduce((arr, tree) => arr.concat(...tree.query(shape)), []);
         } else {
+            // if (entities.length) console.log(division, entities.length);
             entities.forEach((entity) => {
                 store.count += 1;
-                if (!entity.position && entity.getPosition && shape.contains(entity.getPosition())) {
-                    found.push(entity);
+                if (!entity.position && entity.getPosition) {
+                    if (shape.contains(entity.getPosition())) {
+                        found.push(entity);
+                    }
                 } else if (shape.contains(entity.position)) {
                     found.push(entity);
                 }
@@ -155,6 +164,7 @@ const createQuadTree = (boundary, cap = Infinity, divisions = Infinity, subDivis
 
     return Object.assign(state, {
         insert,
+        insertAll,
         remove,
         render,
         query,

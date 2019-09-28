@@ -18,6 +18,7 @@ const phaserConfig = {
     parent: 'game',
     scene: [BootScene().getScene(), LoadScene().getScene(), game.getScene()],
 };
+document.getElementById('game').style.cursor = 'crosshair';
 
 const app = new Phaser.Game(phaserConfig);
 store.game = game;

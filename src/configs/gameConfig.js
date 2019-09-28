@@ -31,4 +31,10 @@ export default {
             invulnerabilityPeriod: 4000,
         },
     },
+    COLLISION: {
+        default: 0x0001,
+        bullets: 0x0002,
+        player: 0x0003,
+        enemies: 0x0004,
+    },
 };
