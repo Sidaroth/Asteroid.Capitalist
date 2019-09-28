@@ -128,6 +128,10 @@ const Game = function GameFunc() {
         return gfxContext;
     }
 
+    function getUIScene() {
+        return UIScene;
+    }
+
     function update(time) {
         gfxContext.clear();
         qTree.clear();
@@ -158,6 +162,7 @@ const Game = function GameFunc() {
         update,
         destroy,
         getEntityTree,
+        getUIScene,
         // Debug,
         getGFXContext,
     };

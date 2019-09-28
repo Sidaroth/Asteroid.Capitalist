@@ -13,7 +13,6 @@ import createBullet from './createBullet';
 import hasHealth from 'components/entities/hasHealth';
 import hasCollision from 'components/entities/hasCollision';
 import Matter from 'matter-js';
-import Phaser from 'phaser';
 import spriteConfig from 'configs/spriteConfig';
 import eventConfig from 'configs/eventConfig';
 
@@ -46,7 +45,7 @@ const createPlayer = function createPlayerFunc() {
         state.setCollisionCategory(gameConfig.COLLISION.player);
         state.setCollidesWith([gameConfig.COLLISION.enemies]); // TODO: Enemy bullets, but not our own.
         for (let i = 0; i < state.getLives(); i += 1) {
-            const icon = store.game.getScene().add.image(30 + (80 * i), 30, spriteConfig.PLAYER_SHIP_ICON.KEY);
+            const icon = store.game.getUIScene().getScene().add.image(30 + (80 * i), 30, spriteConfig.PLAYER_SHIP_ICON.KEY);
             livesIcons.push(icon);
         }
 
