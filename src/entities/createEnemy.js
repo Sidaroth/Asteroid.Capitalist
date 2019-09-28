@@ -9,6 +9,7 @@ import hasCollision from 'components/entities/hasCollision';
 import Matter from 'matter-js';
 import gameConfig from 'configs/gameConfig';
 import eventConfig from 'configs/eventConfig';
+import hasHealth from 'components/entities/hasHealth';
 
 const createEnemy = (pos) => {
     const state = {};
@@ -20,6 +21,12 @@ const createEnemy = (pos) => {
         state.setCollisionCategory(gameConfig.COLLISION.enemies);
         state.setCollidesWith([gameConfig.COLLISION.bullets, gameConfig.COLLISION.player]);
 
+        state.listenOn(state, eventConfig.ENTITY.DIE, (e) => {
+            if (e.lives <= 0) {
+                state.destroy();
+            }
+        });
+
         // state.listenOn(state, eventConfig.COLLISION.START, e => console.log('start: ', e));
         // state.listenOn(state, eventConfig.COLLISION.END, e => console.log('end: ', e));
     }
@@ -29,9 +36,14 @@ const createEnemy = (pos) => {
         return time;
     }
 
+    function destroy() {
+        store.game.removeEntity(state);
+    }
+
     const localState = {
         __constructor,
         update,
+        destroy,
     };
 
     return createState('Enemy', state, {
@@ -42,6 +54,7 @@ const createEnemy = (pos) => {
         hasPosition: hasPosition(state),
         hasSprite: hasSprite(state),
         hasCollider: hasCollision(state),
+        hasHealth: hasHealth(state),
     });
 };
 

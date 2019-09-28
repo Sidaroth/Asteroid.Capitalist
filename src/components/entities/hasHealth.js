@@ -11,6 +11,12 @@ const hasHealth = function hasHealthFunc(state, config = {}) {
     let invulnerabilityPeriod = config.invulnerabilityPeriod || 0;
     let timeOfDeath = 0;
 
+    function __constructor() {
+        state.listenOn(state, eventConfig.COLLISION.START, (e) => {
+            state.takeDamage(1);
+        });
+    }
+
     function setHealth(h) {
         health = h;
     }
@@ -73,11 +79,9 @@ const hasHealth = function hasHealthFunc(state, config = {}) {
             health,
         });
 
-        respawn(respawnTime, respawnPosition);
-    }
-
-    function update(time) {
-        return time;
+        if (lives > 0) {
+            respawn(respawnTime, respawnPosition);
+        }
     }
 
     function destroy() {
@@ -89,6 +93,7 @@ const hasHealth = function hasHealthFunc(state, config = {}) {
     return {
         // props
         // methods
+        __constructor,
         setHealth,
         getHealth,
         setLives,
@@ -100,7 +105,6 @@ const hasHealth = function hasHealthFunc(state, config = {}) {
         respawn,
         takeDamage,
         die,
-        update,
         destroy,
     };
 };
