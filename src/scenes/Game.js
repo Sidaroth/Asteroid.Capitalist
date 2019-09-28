@@ -10,8 +10,9 @@ import Rect from '../quadTree/rect';
 import createKeyboard from 'core/createKeyboard';
 import store from 'root/store';
 import Phaser from 'phaser';
-import createEnemy from 'entities/createEnemy';
 import Vector from 'src/math/vector';
+import getRandomInt from 'src/math/getRandomInt';
+import enemyFactory from 'entities/createEnemyFactory';
 
 /**
  * Responsible for delegating the various levels, holding the various core systems and such.
@@ -99,11 +100,7 @@ const Game = function GameFunc() {
         createTextures();
         createInput();
 
-        for (let i = 0; i < 3; i += 1) {
-            const enemy = createEnemy(new Vector(1600, 200 + i * 300));
-            enemy.setRotation(-Math.PI / 2);
-            gameEntities.push(enemy);
-        }
+        enemyFactory.spawnWave(new Vector(1800, 0), 75, 24, 'standard', {});
 
         const player = createPlayer();
         store.player = player;

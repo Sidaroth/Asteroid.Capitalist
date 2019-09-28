@@ -10,29 +10,44 @@ import Matter from 'matter-js';
 import gameConfig from 'configs/gameConfig';
 import eventConfig from 'configs/eventConfig';
 import hasHealth from 'components/entities/hasHealth';
+import Vector from 'src/math/vector';
 
 const createEnemy = (pos) => {
     const state = {};
+    const available = false;
+    const maxSpeed = 3;
+    const velocity = new Vector(-2.5, 0);
+    let movementFunction;
 
     function __constructor() {
+        state.available = false;
         state.createSpriteFromKey(store.game.getScene(), 'Enemy');
         state.setPosition(pos);
         state.setColliderShape(Matter.Bodies.circle(state.getX(), state.getY(), 25));
         state.setCollisionCategory(gameConfig.COLLISION.enemies);
         state.setCollidesWith([gameConfig.COLLISION.bullets, gameConfig.COLLISION.player]);
+        state.setRotation(-Math.PI / 2);
 
         state.listenOn(state, eventConfig.ENTITY.DIE, (e) => {
             if (e.lives <= 0) {
                 state.destroy();
             }
         });
+    }
 
-        // state.listenOn(state, eventConfig.COLLISION.START, e => console.log('start: ', e));
-        // state.listenOn(state, eventConfig.COLLISION.END, e => console.log('end: ', e));
+    function setMovementFunction(func) {
+        movementFunction = func;
     }
 
     function update(time) {
-        // stuff
+        velocity.setLength(maxSpeed);
+
+        let newPos = new Vector(state.getX() + velocity.x, state.getY() + velocity.y);
+        if (movementFunction) {
+            newPos = movementFunction(newPos);
+        }
+
+        state.setPosition(newPos);
         return time;
     }
 
@@ -41,9 +56,12 @@ const createEnemy = (pos) => {
     }
 
     const localState = {
+        available,
+        // methods
         __constructor,
-        update,
         destroy,
+        update,
+        setMovementFunction,
     };
 
     return createState('Enemy', state, {

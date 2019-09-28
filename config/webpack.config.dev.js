@@ -36,6 +36,7 @@ module.exports = {
             utils: path.resolve(__dirname, '../src/utils'),
             root: path.resolve(__dirname, '../src'),
             src: path.resolve(__dirname, '../src'),
+            math: path.resolve(__dirname, '../src/math'),
         },
     },
     devServer: {

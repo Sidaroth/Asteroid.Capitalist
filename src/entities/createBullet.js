@@ -7,6 +7,8 @@ import store from 'root/store';
 import hasCollision from 'components/entities/hasCollision';
 import Matter from 'matter-js';
 import gameConfig from 'configs/gameConfig';
+import canListen from 'components/events/canListen';
+import eventConfig from 'configs/eventConfig';
 
 const createBullet = (pos, direction) => {
     const state = {};
@@ -18,6 +20,21 @@ const createBullet = (pos, direction) => {
 
     function createSprite() {
         state.createSpriteFromKey(store.game.getScene(), 'Bullet');
+    }
+
+    function __constructor() {
+        state.type = 'bullet';
+        creationTime = Date.now();
+        state.setPosition(pos);
+        createSprite();
+        state.setColliderShape(Matter.Bodies.circle(state.getX(), state.getY(), 5));
+        state.setCollisionCategory(gameConfig.COLLISION.bullets);
+        state.setCollidesWith([gameConfig.COLLISION.enemies]);
+
+        state.listenOn(state, eventConfig.COLLISION.START, (e) => {
+            state.destroy();
+        });
+        store.game.addEntity(state);
     }
 
     function update(time) {
@@ -34,19 +51,6 @@ const createBullet = (pos, direction) => {
         return time;
     }
 
-    function __constructor() {
-        state.type = 'bullet';
-        creationTime = Date.now();
-        state.setPosition(pos);
-        createSprite();
-
-        state.setColliderShape(Matter.Bodies.circle(state.getX(), state.getY(), 5));
-        state.setCollisionCategory(gameConfig.COLLISION.bullets);
-        state.setCollidesWith([gameConfig.COLLISION.enemies]);
-
-        store.game.addEntity(state);
-    }
-
     function destroy() {
         store.game.removeEntity(state);
     }
@@ -61,6 +65,7 @@ const createBullet = (pos, direction) => {
         localState,
         isGameEntity: isGameEntity(state),
         canEmit: canEmit(state),
+        canListen: canListen(state),
         hasPosition: hasPosition(state),
         hasSprite: hasSprite(state),
         hasCollision: hasCollision(state),

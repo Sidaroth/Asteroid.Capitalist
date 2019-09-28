@@ -87,9 +87,15 @@ const hasCollision = (state) => {
         const removedEntities = collidingWith.filter(e => !collidingEntities.find(ent => e.entity.id === ent.entity.id)); // We were colliding, but no longer.
         collidingWith = collidingEntities;
 
-        // TODO: Need global emits?
-        newEntities.forEach(e => state.emit(eventConfig.COLLISION.START, e));
-        removedEntities.forEach(e => state.emit(eventConfig.COLLISION.END, e));
+        newEntities.forEach((e) => {
+            e.entity.emit(eventConfig.COLLISION.START, { entity: state, data: e.collisionData });
+            state.emit(eventConfig.COLLISION.START, e);
+        });
+
+        removedEntities.forEach((e) => {
+            e.entity.emit(eventConfig.COLLISION.END, { entity: state, data: e.collisionData });
+            state.emit(eventConfig.COLLISION.END, e);
+        });
     }
 
     return {

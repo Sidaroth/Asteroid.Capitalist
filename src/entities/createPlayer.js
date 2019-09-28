@@ -11,6 +11,8 @@ import gameConfig from 'configs/gameConfig';
 import store from 'root/store';
 import createBullet from './createBullet';
 import hasHealth from 'components/entities/hasHealth';
+import hasCollision from 'components/entities/hasCollision';
+import Matter from 'matter-js';
 
 const createPlayer = function createPlayerFunc() {
     // variables and functions here are private unless listed below in localState.
@@ -34,6 +36,9 @@ const createPlayer = function createPlayerFunc() {
     function __constructor() {
         createSprite();
         state.setPosition({ x: gameConfig.GAME.VIEWWIDTH / 2, y: gameConfig.GAME.VIEWHEIGHT / 2 });
+        state.setColliderShape(Matter.Bodies.circle(state.getX(), state.getY(), 25));
+        state.setCollisionCategory(gameConfig.COLLISION.player);
+        state.setCollidesWith([gameConfig.COLLISION.enemies]); // TODO: Enemy bullets, but not our own.
     }
 
     function calculateDrag(fluidDensity) {
@@ -148,6 +153,7 @@ const createPlayer = function createPlayerFunc() {
         hasInput: hasInput(state),
         hasSprite: hasSprite(state),
         hasHealth: hasHealth(state, gameConfig.PLAYER.HEALTHCONFIG),
+        hasCollision: hasCollision(state),
     });
 };
 
