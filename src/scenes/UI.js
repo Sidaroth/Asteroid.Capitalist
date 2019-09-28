@@ -36,7 +36,7 @@ const UI = function UIFunc() {
 
     function setupDatGui() {
         gui = new dat.GUI();
-        gui.addFolder('Dev Settings');
+        const folder = gui.addFolder('Dev Settings');
 
         state.guiData = {
             renderQTree: false,
@@ -46,23 +46,29 @@ const UI = function UIFunc() {
             playerAirDensity: 0.05,
         };
 
-        guiController = gui.add(state.guiData, 'renderQTree').listen();
+        guiController = folder.add(state.guiData, 'renderQTree').listen();
 
-        gui.add(state.guiData, 'accelerationForceMag', 0, 20)
+        folder
+            .add(state.guiData, 'accelerationForceMag', 0, 20)
             .listen()
             .onChange(v => store.player.setAccelerationForceMagnitude(v));
 
-        gui.add(state.guiData, 'maxSpeed', 1, 25)
+        folder
+            .add(state.guiData, 'maxSpeed', 1, 25)
             .listen()
             .onChange(v => store.player.setMaxSpeed(v));
 
-        gui.add(state.guiData, 'rateOfFire', 1, 100)
+        folder
+            .add(state.guiData, 'rateOfFire', 1, 100)
             .listen()
             .onChange(v => store.player.setRateOfFire(v));
 
-        gui.add(state.guiData, 'playerAirDensity', 0.001, 0.5)
+        folder
+            .add(state.guiData, 'playerAirDensity', 0.001, 0.5)
             .listen()
             .onChange(v => store.player.setAirDensity(v));
+
+        folder.close();
     }
 
     function getGUIController() {
