@@ -8,7 +8,9 @@ const isGameEntity = function isGameEntityFunc(state) {
         console.log(`id: %c${state.id}`, 'color: yellow');
     }
 
-    function update() {}
+    function update(time) {
+        return time;
+    }
 
     return {
         // props
