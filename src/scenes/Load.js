@@ -30,7 +30,11 @@ const LoadScene = function LoadSceneFunc() {
     function loadImages() {
         Object.keys(spriteConfig).forEach((objKey) => {
             const SPRITE = spriteConfig[objKey];
-            state.getScene().load.image(SPRITE.KEY, SPRITE.PATH);
+            if (SPRITE.JSON) {
+                state.getScene().load.multiatlas(SPRITE.KEY, SPRITE.JSON, SPRITE.ATLAS);
+            } else {
+                state.getScene().load.image(SPRITE.KEY, SPRITE.PATH);
+            }
         });
     }
 

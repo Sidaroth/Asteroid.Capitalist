@@ -34,7 +34,7 @@ const createPlayer = function createPlayerFunc() {
     let airDensity = 0.05; // We're in space after all....
 
     function createSprite() {
-        state.createSpriteFromKey(store.game.getScene(), 'Ship');
+        state.createSpriteFromAtlas(store.game.getScene(), spriteConfig.SHIPPACK.KEY, 'playerShip2_green.png');
     }
 
     function __constructor() {

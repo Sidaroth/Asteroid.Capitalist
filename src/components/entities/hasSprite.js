@@ -21,6 +21,21 @@ const hasSprite = function hasSpriteFunc(state) {
         return sprite;
     }
 
+    function createSpriteFromAtlas(scene, atlasKey, tileKey) {
+        key = tileKey;
+
+        if (sprite) {
+            sprite.destroy();
+        }
+
+        state.setKey(tileKey);
+        sprite = new Phaser.GameObjects.Sprite(scene, state.getX(), state.getY(), atlasKey, tileKey);
+        sprite.setOrigin(0.5);
+        scene.add.existing(sprite);
+
+        return sprite;
+    }
+
     function getSprite() {
         return sprite;
     }
@@ -67,6 +82,7 @@ const hasSprite = function hasSpriteFunc(state) {
     return {
         __constructor,
         createSpriteFromKey,
+        createSpriteFromAtlas,
         setRotation,
         getKey,
         setKey,

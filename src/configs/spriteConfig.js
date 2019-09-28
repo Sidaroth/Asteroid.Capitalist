@@ -11,4 +11,9 @@ export default {
         KEY: 'player_ship_icon',
         PATH: 'assets/images/PNG/UI/playerLife2_green.png',
     },
+    SHIPPACK: {
+        KEY: 'ship',
+        JSON: 'assets/images/ships.json',
+        ATLAS: 'assets/images',
+    },
 };

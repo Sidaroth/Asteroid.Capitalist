@@ -66,18 +66,6 @@ const Game = function GameFunc() {
 
         const shipWidth = 18;
         const shipHeight = 30;
-        // Player ship
-        gfx = new Phaser.GameObjects.Graphics(state.getScene());
-        gfx.lineStyle(2, 0x00897b);
-        gfx.fillStyle(0x00897b);
-        gfx.beginPath();
-        gfx.moveTo(shipWidth / 2, 0);
-        gfx.lineTo(shipWidth, shipHeight);
-        gfx.lineTo(0, shipHeight);
-        gfx.closePath();
-        gfx.fillPath();
-        gfx.strokePath();
-        gfx.generateTexture('Ship', shipWidth, shipHeight);
 
         // Enemy ship
         gfx = new Phaser.GameObjects.Graphics(state.getScene());
