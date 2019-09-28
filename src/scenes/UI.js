@@ -43,6 +43,7 @@ const UI = function UIFunc() {
             accelerationForceMag: 5,
             maxSpeed: 10,
             rateOfFire: 15,
+            playerAirDensity: 0.05,
         };
 
         guiController = gui.add(state.guiData, 'renderQTree').listen();
@@ -58,6 +59,10 @@ const UI = function UIFunc() {
         gui.add(state.guiData, 'rateOfFire', 1, 100)
             .listen()
             .onChange(v => store.player.setRateOfFire(v));
+
+        gui.add(state.guiData, 'playerAirDensity', 0.001, 0.5)
+            .listen()
+            .onChange(v => store.player.setAirDensity(v));
     }
 
     function getGUIController() {

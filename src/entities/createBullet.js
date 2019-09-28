@@ -22,8 +22,8 @@ const createBullet = (pos, direction) => {
 
     function update(time) {
         const position = state.getPosition();
-        position.x += velocity.x;
-        position.y += velocity.y;
+        position.x += velocity.x * time.deltaScale;
+        position.y += velocity.y * time.deltaScale;
         state.setPosition(position);
 
         if (Date.now() - creationTime > lifeTime * 1000) {

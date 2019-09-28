@@ -154,7 +154,7 @@ const createQuadTree = (boundary, cap = Infinity, divisions = Infinity, subDivis
     }
 
     function render(context) {
-        context.lineStyle(1, 0x000000);
+        context.lineStyle(1, 0xffffff);
         context.strokeRect(bounds.x, bounds.y, bounds.w, bounds.h);
 
         subTrees.forEach((tree) => {

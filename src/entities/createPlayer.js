@@ -24,7 +24,7 @@ const createPlayer = function createPlayerFunc() {
     let facingDirection;
 
     // Drag
-    const airDensity = 0.1; // We're in space after all....
+    let airDensity = 0.05; // We're in space after all....
 
     function createSprite() {
         state.createSpriteFromKey(store.game.getScene(), 'Ship');
@@ -84,17 +84,24 @@ const createPlayer = function createPlayerFunc() {
         acceleration.zero();
         checkMovement();
         calculateDrag(airDensity);
-
+        acceleration.multiply(time.deltaScale);
         velocity.add(acceleration);
         velocity.limit(maxSpeed);
 
         const pos = state.getPosition();
-        pos.x += velocity.x;
-        pos.y += velocity.y;
+        pos.x += velocity.x * time.deltaScale;
+        pos.y += velocity.y * time.deltaScale;
+
+        if (pos.x < 0) pos.x = 0;
+        if (pos.x > gameConfig.GAME.VIEWWIDTH) pos.x = gameConfig.GAME.VIEWWIDTH;
+        if (pos.y < 0) pos.y = 0;
+        if (pos.y > gameConfig.GAME.VIEWHEIGHT) pos.y = gameConfig.GAME.VIEWHEIGHT;
+
         state.setPosition(pos);
 
         lookAt(store.mouse);
         shoot();
+        return time;
     }
 
     function setMaxSpeed(speed) {
@@ -109,6 +116,14 @@ const createPlayer = function createPlayerFunc() {
         accelerationForceMag = forceMag;
     }
 
+    function getAirDensity() {
+        return airDensity;
+    }
+
+    function setAirDensity(t) {
+        airDensity = t;
+    }
+
     // functions and properties listed here will be public.
     const localState = {
         // props
@@ -118,6 +133,8 @@ const createPlayer = function createPlayerFunc() {
         setMaxSpeed,
         setRateOfFire,
         setAccelerationForceMagnitude,
+        getAirDensity,
+        setAirDensity,
     };
 
     // These are the substates, or components, that describe the functionality of the resulting object.
