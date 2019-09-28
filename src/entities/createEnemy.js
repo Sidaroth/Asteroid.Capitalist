@@ -47,7 +47,7 @@ const createEnemy = (pos, movementFunc = undefined) => {
     function update(time) {
         velocity.setLength(maxSpeed);
 
-        let newPos = new Vector(state.getX() + velocity.x, state.getY() + velocity.y);
+        let newPos = new Vector(state.getX() + velocity.x * time.deltaScale, state.getY() + velocity.y * time.deltaScale);
         if (movementFunction) {
             newPos = movementFunction(newPos);
         }
