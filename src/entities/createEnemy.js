@@ -11,6 +11,7 @@ import gameConfig from 'configs/gameConfig';
 import eventConfig from 'configs/eventConfig';
 import hasHealth from 'components/entities/hasHealth';
 import Vector from 'math/vector';
+import spriteConfig from 'configs/spriteConfig';
 
 const createEnemy = (pos, movementFunc = undefined) => {
     const state = {};
@@ -22,7 +23,7 @@ const createEnemy = (pos, movementFunc = undefined) => {
 
     function __constructor() {
         state.available = false;
-        state.createSpriteFromKey(store.game.getScene(), 'Enemy');
+        state.createSpriteFromAtlas(store.game.getScene(), spriteConfig.SHIPPACK.KEY, 'enemyRed2.png');
         state.setPosition(pos);
         state.setColliderShape(Matter.Bodies.circle(state.getX(), state.getY(), 25));
         state.setCollisionCategory(gameConfig.COLLISION.enemies);

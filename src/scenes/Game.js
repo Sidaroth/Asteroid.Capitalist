@@ -59,26 +59,10 @@ const Game = function GameFunc() {
     function createTextures() {
         // TODO: Fix proper textures....
         // let gfx = state.getScene().make.graphics({ x: 0, y: 0 }, false);
-        let gfx = new Phaser.GameObjects.Graphics(state.getScene());
+        const gfx = new Phaser.GameObjects.Graphics(state.getScene());
         gfx.fillStyle(0xffb300, 1.0);
         gfx.fillCircle(5, 5, 5);
         gfx.generateTexture('Bullet', 5, 5);
-
-        const shipWidth = 18;
-        const shipHeight = 30;
-
-        // Enemy ship
-        gfx = new Phaser.GameObjects.Graphics(state.getScene());
-        gfx.lineStyle(2, 0xb71c1c);
-        gfx.fillStyle(0xb71c1c);
-        gfx.beginPath();
-        gfx.moveTo(shipWidth / 2, 0);
-        gfx.lineTo(shipWidth, shipHeight);
-        gfx.lineTo(0, shipHeight);
-        gfx.closePath();
-        gfx.fillPath();
-        gfx.strokePath();
-        gfx.generateTexture('Enemy', shipWidth, shipHeight);
     }
 
     function init() {
