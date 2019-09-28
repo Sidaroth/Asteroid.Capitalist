@@ -4,8 +4,8 @@
 			"image": "ships.png",
 			"format": "RGBA8888",
 			"size": {
-				"w": 295,
-				"h": 295
+				"w": 335,
+				"h": 335
 			},
 			"scale": 0.7,
 			"frames": [
@@ -45,7 +45,7 @@
 						"h": 59
 					},
 					"frame": {
-						"x": 57,
+						"x": 67,
 						"y": 0,
 						"w": 57,
 						"h": 59
@@ -66,7 +66,7 @@
 						"h": 59
 					},
 					"frame": {
-						"x": 114,
+						"x": 134,
 						"y": 0,
 						"w": 57,
 						"h": 59
@@ -87,7 +87,7 @@
 						"h": 59
 					},
 					"frame": {
-						"x": 171,
+						"x": 201,
 						"y": 0,
 						"w": 57,
 						"h": 59
@@ -108,7 +108,7 @@
 						"h": 59
 					},
 					"frame": {
-						"x": 228,
+						"x": 268,
 						"y": 0,
 						"w": 65,
 						"h": 59
@@ -130,7 +130,7 @@
 					},
 					"frame": {
 						"x": 0,
-						"y": 59,
+						"y": 69,
 						"w": 65,
 						"h": 59
 					}
@@ -150,8 +150,8 @@
 						"h": 59
 					},
 					"frame": {
-						"x": 65,
-						"y": 59,
+						"x": 75,
+						"y": 69,
 						"w": 65,
 						"h": 59
 					}
@@ -171,30 +171,9 @@
 						"h": 59
 					},
 					"frame": {
-						"x": 130,
-						"y": 59,
+						"x": 150,
+						"y": 69,
 						"w": 65,
-						"h": 59
-					}
-				},
-				{
-					"filename": "enemyBlue5.png",
-					"rotated": false,
-					"trimmed": false,
-					"sourceSize": {
-						"w": 68,
-						"h": 59
-					},
-					"spriteSourceSize": {
-						"x": 0,
-						"y": 0,
-						"w": 68,
-						"h": 59
-					},
-					"frame": {
-						"x": 195,
-						"y": 59,
-						"w": 68,
 						"h": 59
 					}
 				},
@@ -213,14 +192,14 @@
 						"h": 59
 					},
 					"frame": {
-						"x": 0,
-						"y": 118,
+						"x": 225,
+						"y": 69,
 						"w": 68,
 						"h": 59
 					}
 				},
 				{
-					"filename": "enemyBlack5.png",
+					"filename": "enemyBlue5.png",
 					"rotated": false,
 					"trimmed": false,
 					"sourceSize": {
@@ -234,8 +213,8 @@
 						"h": 59
 					},
 					"frame": {
-						"x": 68,
-						"y": 118,
+						"x": 0,
+						"y": 138,
 						"w": 68,
 						"h": 59
 					}
@@ -255,31 +234,31 @@
 						"h": 59
 					},
 					"frame": {
-						"x": 136,
-						"y": 118,
+						"x": 78,
+						"y": 138,
 						"w": 68,
 						"h": 59
 					}
 				},
 				{
-					"filename": "playerShip2_green.png",
+					"filename": "enemyBlack5.png",
 					"rotated": false,
 					"trimmed": false,
 					"sourceSize": {
-						"w": 78,
-						"h": 53
+						"w": 68,
+						"h": 59
 					},
 					"spriteSourceSize": {
 						"x": 0,
 						"y": 0,
-						"w": 78,
-						"h": 53
+						"w": 68,
+						"h": 59
 					},
 					"frame": {
-						"x": 204,
-						"y": 118,
-						"w": 78,
-						"h": 53
+						"x": 156,
+						"y": 138,
+						"w": 68,
+						"h": 59
 					}
 				},
 				{
@@ -297,8 +276,8 @@
 						"h": 59
 					},
 					"frame": {
-						"x": 0,
-						"y": 177,
+						"x": 234,
+						"y": 138,
 						"w": 72,
 						"h": 59
 					}
@@ -318,29 +297,8 @@
 						"h": 59
 					},
 					"frame": {
-						"x": 72,
-						"y": 177,
-						"w": 72,
-						"h": 59
-					}
-				},
-				{
-					"filename": "enemyBlue3.png",
-					"rotated": false,
-					"trimmed": false,
-					"sourceSize": {
-						"w": 72,
-						"h": 59
-					},
-					"spriteSourceSize": {
 						"x": 0,
-						"y": 0,
-						"w": 72,
-						"h": 59
-					},
-					"frame": {
-						"x": 144,
-						"y": 177,
+						"y": 207,
 						"w": 72,
 						"h": 59
 					}
@@ -360,8 +318,29 @@
 						"h": 59
 					},
 					"frame": {
-						"x": 216,
-						"y": 177,
+						"x": 82,
+						"y": 207,
+						"w": 72,
+						"h": 59
+					}
+				},
+				{
+					"filename": "enemyBlue3.png",
+					"rotated": false,
+					"trimmed": false,
+					"sourceSize": {
+						"w": 72,
+						"h": 59
+					},
+					"spriteSourceSize": {
+						"x": 0,
+						"y": 0,
+						"w": 72,
+						"h": 59
+					},
+					"frame": {
+						"x": 164,
+						"y": 207,
 						"w": 72,
 						"h": 59
 					}
@@ -381,8 +360,8 @@
 						"h": 59
 					},
 					"frame": {
-						"x": 0,
-						"y": 236,
+						"x": 246,
+						"y": 207,
 						"w": 73,
 						"h": 59
 					}
@@ -402,29 +381,8 @@
 						"h": 59
 					},
 					"frame": {
-						"x": 73,
-						"y": 236,
-						"w": 73,
-						"h": 59
-					}
-				},
-				{
-					"filename": "enemyBlack2.png",
-					"rotated": false,
-					"trimmed": false,
-					"sourceSize": {
-						"w": 73,
-						"h": 59
-					},
-					"spriteSourceSize": {
 						"x": 0,
-						"y": 0,
-						"w": 73,
-						"h": 59
-					},
-					"frame": {
-						"x": 146,
-						"y": 236,
+						"y": 276,
 						"w": 73,
 						"h": 59
 					}
@@ -444,10 +402,52 @@
 						"h": 59
 					},
 					"frame": {
-						"x": 219,
-						"y": 236,
+						"x": 83,
+						"y": 276,
 						"w": 73,
 						"h": 59
+					}
+				},
+				{
+					"filename": "enemyBlack2.png",
+					"rotated": false,
+					"trimmed": false,
+					"sourceSize": {
+						"w": 73,
+						"h": 59
+					},
+					"spriteSourceSize": {
+						"x": 0,
+						"y": 0,
+						"w": 73,
+						"h": 59
+					},
+					"frame": {
+						"x": 166,
+						"y": 276,
+						"w": 73,
+						"h": 59
+					}
+				},
+				{
+					"filename": "playerShip2_green.png",
+					"rotated": false,
+					"trimmed": false,
+					"sourceSize": {
+						"w": 78,
+						"h": 53
+					},
+					"spriteSourceSize": {
+						"x": 0,
+						"y": 0,
+						"w": 78,
+						"h": 53
+					},
+					"frame": {
+						"x": 249,
+						"y": 276,
+						"w": 78,
+						"h": 53
 					}
 				}
 			]
@@ -456,6 +456,6 @@
 	"meta": {
 		"app": "https://www.codeandweb.com/texturepacker",
 		"version": "3.0",
-		"smartupdate": "$TexturePacker:SmartUpdate:3afded30292cd508c2c19fa4896431ca:77e79194fd1d8895184b695dc75ee19d:78154fe33c5dfc8c7f67f0a3677ac0ac$"
+		"smartupdate": "$TexturePacker:SmartUpdate:6c67f7576f76f2c5c5239590bf2ec110:77e79194fd1d8895184b695dc75ee19d:78154fe33c5dfc8c7f67f0a3677ac0ac$"
 	}
 }
