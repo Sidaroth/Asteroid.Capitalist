@@ -102,10 +102,10 @@ const KEYS = {
 
 export default {
     MOVEMENT: {
-        UP: [KEYS.W, KEYS.UP_ARROW],
-        DOWN: [KEYS.S, KEYS.DOWN_ARROW],
-        LEFT: [KEYS.A, KEYS.LEFT_ARROW],
-        RIGHT: [KEYS.D, KEYS.RIGHT_ARROW],
+        UP: [KEYS.W, KEYS.UPARROW],
+        DOWN: [KEYS.S, KEYS.DOWNARROW],
+        LEFT: [KEYS.A, KEYS.LEFTARROW],
+        RIGHT: [KEYS.D, KEYS.RIGHTARROW],
     },
     INVENTORY: [KEYS.I],
 };
