@@ -14,7 +14,7 @@ const phaserConfig = {
     type: Phaser.WEBGL,
     width: gameConfig.GAME.VIEWWIDTH,
     height: gameConfig.GAME.VIEWHEIGHT,
-    backgroundColor: '#555555',
+    backgroundColor: '#000000',
     parent: 'game',
     scene: [BootScene().getScene(), LoadScene().getScene(), game.getScene()],
 };
