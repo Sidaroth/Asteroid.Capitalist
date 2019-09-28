@@ -16,6 +16,7 @@ import enemyFactory from 'entities/createEnemyFactory';
 import createCosine from 'math/movement/cosine';
 import createSigmoid from 'math/movement/sigmoid';
 import createReverseSigmoid from 'src/math/movement/reverseSigmoid';
+import createParallaxBackground from 'entities/createParallaxBackground';
 
 /**
  * Responsible for delegating the various levels, holding the various core systems and such.
@@ -25,6 +26,7 @@ const Game = function GameFunc() {
     let audioManager;
     let UIScene;
     const keyboard = createKeyboard();
+    let parallaxBackground;
 
     // TODO: Move into world1/level1 scene, not the global world.
     const gameEntities = [];
@@ -33,7 +35,7 @@ const Game = function GameFunc() {
 
     function cameraSetup() {
         state.getScene().cameras.main.setViewport(0, 0, gameConfig.GAME.VIEWWIDTH, gameConfig.GAME.VIEWHEIGHT);
-        state.getScene().cameras.main.setZoom(0.95); // remove?
+        // state.getScene().cameras.main.setZoom(0.95); // remove?
     }
 
     function addEntity(entity) {
@@ -75,6 +77,8 @@ const Game = function GameFunc() {
         createTextures();
         createInput();
 
+        parallaxBackground = createParallaxBackground();
+
         enemyFactory.spawnWave(new Vector(1800, gameConfig.GAME.VIEWHEIGHT / 2), 75, 3, 'standard', {}); // Straight
         enemyFactory.spawnWave(new Vector(1800, 0), 75, 12, 'standard', {}, createSine); // sinewave
         enemyFactory.spawnWave(new Vector(1800, 100), 75, 12, 'standard', {}, createCosine); // cosinewave
@@ -108,6 +112,8 @@ const Game = function GameFunc() {
         gfxContext.clear();
         qTree.clear();
         qTree.insertAll(gameEntities);
+
+        parallaxBackground.update(time);
 
         gameEntities.forEach((entity) => {
             entity.update(time);

@@ -11,6 +11,10 @@ export default {
         KEY: 'player_ship_icon',
         PATH: 'assets/images/PNG/UI/playerLife2_green.png',
     },
+    BACKGROUND_TILE: {
+        KEY: 'background_tile',
+        PATH: 'assets/images/Backgrounds/black.png',
+    },
     SHIPPACK: {
         KEY: 'ship',
         JSON: 'assets/images/ships.json',
