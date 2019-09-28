@@ -138,10 +138,12 @@ const Game = function GameFunc() {
         if (UIScene.getGUIController().object.renderQTree) {
             qTree.render(gfxContext);
         }
+        return time;
     }
 
     function destroy() {
         if (UIScene) UIScene.destroy();
+        if (qTree) qTree.clear();
     }
 
     const localState = {

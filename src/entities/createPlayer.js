@@ -84,17 +84,18 @@ const createPlayer = function createPlayerFunc() {
         acceleration.zero();
         checkMovement();
         calculateDrag(airDensity);
-
+        acceleration.multiply(time.deltaScale);
         velocity.add(acceleration);
         velocity.limit(maxSpeed);
 
         const pos = state.getPosition();
-        pos.x += velocity.x;
-        pos.y += velocity.y;
+        pos.x += velocity.x * time.deltaScale;
+        pos.y += velocity.y * time.deltaScale;
         state.setPosition(pos);
 
         lookAt(store.mouse);
         shoot();
+        return time;
     }
 
     function setMaxSpeed(speed) {

@@ -16,6 +16,7 @@ const createEnemy = (pos) => {
 
     function update(time) {
         // stuff
+        return time;
     }
 
     const localState = {

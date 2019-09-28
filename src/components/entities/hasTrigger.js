@@ -48,7 +48,7 @@ const hasTrigger = function hasTriggerFunc(state) {
     /**
      * It should be possible to optimize state to avoid a double loop (or is it?).
      */
-    function update() {
+    function update(time) {
         const previous = overlappedEntities;
         overlappedEntities = [];
         parentScene.physics.overlap(triggerZone, overlapsWith, (zone, entity) => {
@@ -67,6 +67,7 @@ const hasTrigger = function hasTriggerFunc(state) {
                 state.onEntityLeftRange(entity);
             }
         });
+        return time;
     }
 
     return {
