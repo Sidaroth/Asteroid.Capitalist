@@ -2,9 +2,9 @@ const hasPosition = function hasPositionFunc(state) {
     let x = 0;
     let y = 0;
 
-    function setPosition({ x: xp, y: yp }) {
-        x = xp;
-        y = yp;
+    function setPosition(pos) {
+        ({ x, y } = pos);
+
         return { x, y };
     }
 
@@ -14,7 +14,7 @@ const hasPosition = function hasPositionFunc(state) {
     }
 
     function setY(yp) {
-        state.setPosition({ x, y: yp });
+        state.setPosition({ x, yp });
         return yp;
     }
 

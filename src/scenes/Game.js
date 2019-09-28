@@ -10,6 +10,8 @@ import Rect from '../quadTree/rect';
 import createKeyboard from 'core/createKeyboard';
 import store from 'root/store';
 import Phaser from 'phaser';
+import createEnemy from 'entities/createEnemy';
+import Vector from 'src/math/vector';
 
 /**
  * Responsible for delegating the various levels, holding the various core systems and such.
@@ -58,21 +60,33 @@ const Game = function GameFunc() {
         gfx.fillCircle(5, 5, 5);
         gfx.generateTexture('Bullet', 5, 5);
 
+        const shipWidth = 18;
+        const shipHeight = 30;
+        // Player ship
         gfx = new Phaser.GameObjects.Graphics(state.getScene());
         gfx.lineStyle(2, 0x00897b);
         gfx.fillStyle(0x00897b);
         gfx.beginPath();
-
-        const shipWidth = 18;
-        const shipHeight = 30;
         gfx.moveTo(shipWidth / 2, 0);
         gfx.lineTo(shipWidth, shipHeight);
         gfx.lineTo(0, shipHeight);
-
         gfx.closePath();
         gfx.fillPath();
         gfx.strokePath();
         gfx.generateTexture('Ship', shipWidth, shipHeight);
+
+        // Enemy ship
+        gfx = new Phaser.GameObjects.Graphics(state.getScene());
+        gfx.lineStyle(2, 0xb71c1c);
+        gfx.fillStyle(0xb71c1c);
+        gfx.beginPath();
+        gfx.moveTo(shipWidth / 2, 0);
+        gfx.lineTo(shipWidth, shipHeight);
+        gfx.lineTo(0, shipHeight);
+        gfx.closePath();
+        gfx.fillPath();
+        gfx.strokePath();
+        gfx.generateTexture('Enemy', shipWidth, shipHeight);
     }
 
     function init() {
@@ -85,6 +99,12 @@ const Game = function GameFunc() {
         createTextures();
         createInput();
 
+        for (let i = 0; i < 3; i += 1) {
+            const enemy = createEnemy(new Vector(1600, 200 + i * 300));
+            enemy.setRotation(-Math.PI / 2);
+            gameEntities.push(enemy);
+        }
+
         const player = createPlayer();
         store.player = player;
         gameEntities.push(player);
@@ -96,8 +116,8 @@ const Game = function GameFunc() {
         cameraSetup();
     }
 
-    function getGfxContext() {
-        return gfxContext;
+    function getEntityTree() {
+        return qTree;
     }
 
     function update(time) {
@@ -108,6 +128,11 @@ const Game = function GameFunc() {
         gameEntities.forEach((entity) => {
             entity.update(time);
             qTree.insert(entity);
+            // if (entity.isDirty) {
+            //     qTree.remove(entity);
+            //     entity.isDirty = false;
+            //     qTree.insert(entity);
+            // }
         });
 
         if (UIScene.getGUIController().object.renderQTree) {
@@ -128,7 +153,7 @@ const Game = function GameFunc() {
         create,
         update,
         destroy,
-        getGfxContext,
+        getEntityTree,
     };
 
     return createState('Game', state, {

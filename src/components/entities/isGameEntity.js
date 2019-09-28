@@ -1,6 +1,8 @@
 import getUUID from 'utils/getUUID';
 
 const isGameEntity = function isGameEntityFunc(state) {
+    const isDirty = false;
+
     function printInfo() {
         console.log(`id: %c${state.id}`, 'color: yellow');
     }
@@ -13,6 +15,7 @@ const isGameEntity = function isGameEntityFunc(state) {
         // methods
         printInfo,
         update,
+        isDirty,
     };
 };
 

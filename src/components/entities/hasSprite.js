@@ -54,6 +54,12 @@ const hasSprite = function hasSpriteFunc(state) {
         return pos;
     }
 
+    function setRotation(radians) {
+        if (sprite) {
+            sprite.rotation = radians;
+        }
+    }
+
     function destroy() {
         sprite.destroy();
     }
@@ -61,6 +67,7 @@ const hasSprite = function hasSpriteFunc(state) {
     return {
         __constructor,
         createSpriteFromKey,
+        setRotation,
         getKey,
         setKey,
         setFlipX,

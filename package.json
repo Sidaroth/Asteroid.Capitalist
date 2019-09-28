@@ -54,6 +54,7 @@
     "dependencies": {
         "dat.gui": "^0.7.6",
         "immutable": "^3.8.2",
+        "matter-js": "^0.14.2",
         "phaser": "^3.19.0",
         "stats-js": "^1.0.1"
     }

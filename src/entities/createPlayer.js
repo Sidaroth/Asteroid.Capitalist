@@ -24,7 +24,7 @@ const createPlayer = function createPlayerFunc() {
     let facingDirection;
 
     // Drag
-    const airDensity = 0.075; // We're in space after all....
+    const airDensity = 0.1; // We're in space after all....
 
     function createSprite() {
         state.createSpriteFromKey(store.game.getScene(), 'Ship');
