@@ -20,8 +20,8 @@ const createEnemy = (pos) => {
         state.setCollisionCategory(gameConfig.COLLISION.enemies);
         state.setCollidesWith([gameConfig.COLLISION.bullets, gameConfig.COLLISION.player]);
 
-        state.listenOn(state, eventConfig.COLLISION.START, e => console.log('start: ', e));
-        state.listenOn(state, eventConfig.COLLISION.END, e => console.log('end: ', e));
+        // state.listenOn(state, eventConfig.COLLISION.START, e => console.log('start: ', e));
+        // state.listenOn(state, eventConfig.COLLISION.END, e => console.log('end: ', e));
     }
 
     function update(time) {
