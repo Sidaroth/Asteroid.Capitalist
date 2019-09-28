@@ -34,6 +34,7 @@ const createPlayer = function createPlayerFunc() {
     }
 
     function __constructor() {
+        state.type = 'player';
         createSprite();
         state.setPosition({ x: gameConfig.GAME.VIEWWIDTH / 2, y: gameConfig.GAME.VIEWHEIGHT / 2 });
         state.setColliderShape(Matter.Bodies.circle(state.getX(), state.getY(), 25));

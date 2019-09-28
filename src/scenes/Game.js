@@ -10,9 +10,11 @@ import Rect from '../quadTree/rect';
 import createKeyboard from 'core/createKeyboard';
 import store from 'root/store';
 import Phaser from 'phaser';
-import Vector from 'src/math/vector';
-import getRandomInt from 'src/math/getRandomInt';
+import Vector from 'math/vector';
+import createSine from 'math/movement/sine';
 import enemyFactory from 'entities/createEnemyFactory';
+import createCosine from 'math/movement/cosine';
+import createSigmoid from 'math/movement/sigmoid';
 
 /**
  * Responsible for delegating the various levels, holding the various core systems and such.
@@ -41,7 +43,7 @@ const Game = function GameFunc() {
     function removeEntity(entity) {
         const idx = gameEntities.findIndex(e => e.id === entity.id);
         gameEntities.splice(idx, 1);
-        qTree.remove(entity);
+        // qTree.remove(entity); // Because we're currently reinserting every frame, we can ignore this until next update.
     }
 
     function createInput() {
@@ -100,7 +102,10 @@ const Game = function GameFunc() {
         createTextures();
         createInput();
 
-        enemyFactory.spawnWave(new Vector(1800, 0), 75, 24, 'standard', {});
+        enemyFactory.spawnWave(new Vector(1800, gameConfig.GAME.VIEWHEIGHT / 2), 75, 3, 'standard', {}); // Straight
+        enemyFactory.spawnWave(new Vector(1800, 0), 75, 12, 'standard', {}, createSine); // sinewave
+        enemyFactory.spawnWave(new Vector(1800, 100), 75, 12, 'standard', {}, createCosine); // cosinewave
+        enemyFactory.spawnWave(new Vector(1800, 400), 75, 12, 'standard', {}, createSigmoid); // sigmoid "wave"
 
         const player = createPlayer();
         store.player = player;

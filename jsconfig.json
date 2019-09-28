@@ -10,7 +10,8 @@
             "entities/*": ["src/entities/*"],
             "components/*": ["src/components/*"],
             "utils/*": ["src/utils/*"],
-            "root/*": ["src/"],
+            "math/*": ["src/math"],
+            "src/*": ["src/"]
         }
     }
 }

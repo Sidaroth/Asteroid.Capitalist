@@ -1,6 +1,6 @@
 import gameConfig from 'configs/gameConfig';
 
-const createSineFunc = (pos) => {
+const createSine = (pos) => {
     const frequency = 150;
     const amplitude = 250;
     const y = Math.sin(pos.x / frequency) * amplitude + gameConfig.GAME.VIEWHEIGHT / 2;
@@ -8,4 +8,4 @@ const createSineFunc = (pos) => {
     return { x: pos.x, y };
 };
 
-export default createSineFunc;
+export default createSine;

@@ -10,14 +10,15 @@ import Matter from 'matter-js';
 import gameConfig from 'configs/gameConfig';
 import eventConfig from 'configs/eventConfig';
 import hasHealth from 'components/entities/hasHealth';
-import Vector from 'src/math/vector';
+import Vector from 'math/vector';
 
-const createEnemy = (pos) => {
+const createEnemy = (pos, movementFunc = undefined) => {
     const state = {};
     const available = false;
     const maxSpeed = 3;
     const velocity = new Vector(-2.5, 0);
-    let movementFunction;
+    const killZoneLimit = -200;
+    let movementFunction = movementFunc;
 
     function __constructor() {
         state.available = false;
@@ -39,6 +40,10 @@ const createEnemy = (pos) => {
         movementFunction = func;
     }
 
+    function setVelocity(vel) {
+        velocity.copy(vel);
+    }
+
     function update(time) {
         velocity.setLength(maxSpeed);
 
@@ -48,6 +53,9 @@ const createEnemy = (pos) => {
         }
 
         state.setPosition(newPos);
+
+        if (state.getX() < killZoneLimit) state.destroy();
+
         return time;
     }
 
@@ -62,6 +70,7 @@ const createEnemy = (pos) => {
         destroy,
         update,
         setMovementFunction,
+        setVelocity,
     };
 
     return createState('Enemy', state, {
