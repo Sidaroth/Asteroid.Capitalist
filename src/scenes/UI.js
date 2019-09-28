@@ -66,7 +66,7 @@ const UI = function UIFunc() {
 
     function create() {
         setupDatGui();
-        // setupPerformanceStats();
+        setupPerformanceStats();
     }
 
     function destroy() {

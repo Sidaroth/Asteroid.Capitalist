@@ -120,19 +120,17 @@ const Game = function GameFunc() {
         return qTree;
     }
 
+    function getGFXContext() {
+        return gfxContext;
+    }
+
     function update(time) {
-        // TODO: If there's not a lot of entities moving it's faster
-        // to remove and reinsert only the dirty ones, instead of recreating the tree from scratch (.clear())
-        qTree.clear();
         gfxContext.clear();
+        qTree.clear();
+        qTree.insertAll(gameEntities);
+
         gameEntities.forEach((entity) => {
             entity.update(time);
-            qTree.insert(entity);
-            // if (entity.isDirty) {
-            //     qTree.remove(entity);
-            //     entity.isDirty = false;
-            //     qTree.insert(entity);
-            // }
         });
 
         if (UIScene.getGUIController().object.renderQTree) {
@@ -154,6 +152,8 @@ const Game = function GameFunc() {
         update,
         destroy,
         getEntityTree,
+        // Debug,
+        getGFXContext,
     };
 
     return createState('Game', state, {
