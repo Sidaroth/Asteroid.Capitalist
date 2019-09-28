@@ -13,6 +13,9 @@ import createBullet from './createBullet';
 import hasHealth from 'components/entities/hasHealth';
 import hasCollision from 'components/entities/hasCollision';
 import Matter from 'matter-js';
+import Phaser from 'phaser';
+import spriteConfig from 'configs/spriteConfig';
+import eventConfig from 'configs/eventConfig';
 
 const createPlayer = function createPlayerFunc() {
     // variables and functions here are private unless listed below in localState.
@@ -25,6 +28,8 @@ const createPlayer = function createPlayerFunc() {
     let rateOfFire = 15; // Per second.
     let timeOfLastShot = 0;
     let facingDirection;
+
+    const livesIcons = [];
 
     // Drag
     let airDensity = 0.05; // We're in space after all....
@@ -40,6 +45,20 @@ const createPlayer = function createPlayerFunc() {
         state.setColliderShape(Matter.Bodies.circle(state.getX(), state.getY(), 25));
         state.setCollisionCategory(gameConfig.COLLISION.player);
         state.setCollidesWith([gameConfig.COLLISION.enemies]); // TODO: Enemy bullets, but not our own.
+        for (let i = 0; i < state.getLives(); i += 1) {
+            const icon = store.game.getScene().add.image(30 + (80 * i), 30, spriteConfig.PLAYER_SHIP_ICON.KEY);
+            livesIcons.push(icon);
+        }
+
+        state.listenOn(state, eventConfig.ENTITY.DIE, (e) => {
+            livesIcons.forEach((icon, index) => {
+                if (e.lives > index) {
+                    icon.setVisible(true);
+                } else {
+                    icon.setVisible(false);
+                }
+            });
+        });
     }
 
     function calculateDrag(fluidDensity) {
