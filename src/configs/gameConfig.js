@@ -19,8 +19,4 @@ export default {
     UI_DEFAULT: {
         tint: 0xaaaaaa,
     },
-    AUDIO: {
-        musicKeys: ['bgScore'],
-        sfxKeys: ['coinSfx'],
-    },
 };
