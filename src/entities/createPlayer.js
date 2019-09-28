@@ -91,6 +91,12 @@ const createPlayer = function createPlayerFunc() {
         const pos = state.getPosition();
         pos.x += velocity.x * time.deltaScale;
         pos.y += velocity.y * time.deltaScale;
+
+        if (pos.x < 0) pos.x = 0;
+        if (pos.x > gameConfig.GAME.VIEWWIDTH) pos.x = gameConfig.GAME.VIEWWIDTH;
+        if (pos.y < 0) pos.y = 0;
+        if (pos.y > gameConfig.GAME.VIEWHEIGHT) pos.y = gameConfig.GAME.VIEWHEIGHT;
+
         state.setPosition(pos);
 
         lookAt(store.mouse);
