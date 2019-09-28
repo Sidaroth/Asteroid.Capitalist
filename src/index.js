@@ -26,3 +26,19 @@ store.app = app;
 store.messageBus = createMessageBus();
 
 window.addEventListener('resize', resizeCanvas);
+
+const targetDelta = 1000 / 60;
+let times = [];
+function loop() {
+    requestAnimationFrame(loop);
+    times.push(performance.now());
+    times = times.filter(t => performance.now() - 1000 < t);
+    const delta = 1000 / times.length;
+    const deltaScale = (delta / targetDelta);
+    const time = { delta, deltaScale };
+    if (game.hasRunUpdateFromPhaser) {
+        game.update(time);
+    }
+}
+
+requestAnimationFrame(loop);

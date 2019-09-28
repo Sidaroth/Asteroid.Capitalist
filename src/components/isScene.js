@@ -8,7 +8,6 @@ const isScene = function isSceneFunc(state, sceneKey) {
         throw new Error('Missing sceneKey');
     }
     const scene = new Phaser.Scene(sceneKey);
-    const targetDelta = 1000 / 60;
 
     // 1
     scene.init = () => {
@@ -27,9 +26,7 @@ const isScene = function isSceneFunc(state, sceneKey) {
 
     // 4
     scene.update = (runTime, delta) => {
-        const deltaScale = (delta / targetDelta);
-        const time = { runTime, delta, deltaScale };
-        if (state.update) state.update(time);
+        state.hasRunUpdateFromPhaser = true;
     };
 
     scene.destroy = () => {
@@ -41,6 +38,7 @@ const isScene = function isSceneFunc(state, sceneKey) {
     }
 
     return {
+        hasRunUpdateFromPhaser: false,
         getScene,
     };
 };
