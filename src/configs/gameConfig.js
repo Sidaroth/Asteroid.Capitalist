@@ -19,4 +19,16 @@ export default {
     UI_DEFAULT: {
         tint: 0xaaaaaa,
     },
+    PLAYER: {
+        HEALTHCONFIG: {
+            health: 1,
+            respawnTime: 1000,
+            respawnPosition: {
+                x: 100,
+                y: 300,
+            },
+            lives: 3,
+            invulnerabilityPeriod: 4000,
+        },
+    },
 };

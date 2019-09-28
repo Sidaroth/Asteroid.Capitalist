@@ -10,6 +10,7 @@ import hasSprite from 'components/entities/hasSprite';
 import gameConfig from 'configs/gameConfig';
 import store from 'root/store';
 import createBullet from './createBullet';
+import hasHealth from 'components/entities/hasHealth';
 
 const createPlayer = function createPlayerFunc() {
     // variables and functions here are private unless listed below in localState.
@@ -146,6 +147,7 @@ const createPlayer = function createPlayerFunc() {
         canListen: canListen(state),
         hasInput: hasInput(state),
         hasSprite: hasSprite(state),
+        hasHealth: hasHealth(state, gameConfig.PLAYER.HEALTHCONFIG),
     });
 };
 
