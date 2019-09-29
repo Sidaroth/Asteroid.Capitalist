@@ -9,6 +9,7 @@ import Matter from 'matter-js';
 import gameConfig from 'configs/gameConfig';
 import canListen from 'components/events/canListen';
 import eventConfig from 'configs/eventConfig';
+import spriteConfig from 'configs/spriteConfig';
 
 const createBullet = (pos, direction) => {
     const state = {};
@@ -19,7 +20,8 @@ const createBullet = (pos, direction) => {
     let creationTime;
 
     function createSprite() {
-        state.createSpriteFromKey(store.world.getScene(), 'Bullet');
+        state.createSpriteFromKey(store.world.getScene(), spriteConfig.LASER.KEY);
+        state.setRotation(direction.angle());
     }
 
     function __constructor() {

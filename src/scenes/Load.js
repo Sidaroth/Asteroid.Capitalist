@@ -61,6 +61,23 @@ const LoadScene = function LoadSceneFunc() {
         blur.setFloat1('blur', 0.003);
     }
 
+    function create() {
+        Object.keys(spriteConfig).forEach((objKey) => {
+            const SPRITE = spriteConfig[objKey];
+            if (SPRITE.JSON && SPRITE.ANIMATIONS) {
+                SPRITE.ANIMATIONS.forEach((a) => {
+                    const frames = state.getScene().anims.generateFrameNames(SPRITE.KEY, a);
+                    state.getScene().anims.create({
+                        key: a.key,
+                        frames,
+                        frameRate: a.frameRate,
+                        repeat: a.repeat,
+                    });
+                });
+            }
+        });
+    }
+
     function destroy() {
         if (loadingBar) loadingBar.destroy();
     }
@@ -69,6 +86,7 @@ const LoadScene = function LoadSceneFunc() {
         // props
         // methods
         preload,
+        create,
         destroy,
     };
 

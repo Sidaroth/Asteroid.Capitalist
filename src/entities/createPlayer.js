@@ -15,6 +15,7 @@ import hasCollision from 'components/entities/hasCollision';
 import Matter from 'matter-js';
 import spriteConfig from 'configs/spriteConfig';
 import eventConfig from 'configs/eventConfig';
+import createExplosion from './createExplosion';
 
 const createPlayer = function createPlayerFunc() {
     // variables and functions here are private unless listed below in localState.
@@ -27,6 +28,9 @@ const createPlayer = function createPlayerFunc() {
     let rateOfFire = 5; // Per second.
     let timeOfLastShot = 0;
     let facingDirection;
+
+    const invulnerableBlinkTime = 100;
+    let lastBlink = performance.now();
 
     const livesIcons = [];
     let activePowerups = [];
@@ -51,6 +55,9 @@ const createPlayer = function createPlayerFunc() {
         }
 
         state.listenOn(state, eventConfig.ENTITY.DIE, (e) => {
+            const explosion = createExplosion();
+            explosion.setPosition(state.getPosition());
+            state.setPosition({ x: -500, y: -500 });
             livesIcons.forEach((icon, index) => {
                 if (e.lives > index) {
                     icon.setVisible(true);
@@ -127,12 +134,29 @@ const createPlayer = function createPlayerFunc() {
         state.setPosition(pos);
     }
 
+    function updateSprite() {
+        if (state.isInvulnerable()) {
+            if (performance.now() - lastBlink > invulnerableBlinkTime) {
+                const sprite = state.getSprite();
+                if (sprite.visible) {
+                    sprite.setVisible(false);
+                } else {
+                    sprite.setVisible(true);
+                }
+                lastBlink = performance.now();
+            }
+        } else if (!state.getSprite().visible) {
+            state.getSprite().setVisible(true);
+        }
+    }
+
     function update(time) {
         activePowerups = activePowerups.filter(p => p.isActive());
         activePowerups.forEach(power => power.update(time));
         move(time);
         lookAt(store.mouse);
         shoot();
+        updateSprite();
         return time;
     }
 

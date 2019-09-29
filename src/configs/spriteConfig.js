@@ -19,6 +19,10 @@ export default {
         KEY: 'powerup_doubleraf',
         PATH: 'assets/images/PNG/Power-ups/things_gold.png',
     },
+    LASER: {
+        KEY: 'laser',
+        PATH: 'assets/images/PNG/Lasers/laserGreen05.png',
+    },
     // Atlases/spritesheets.
     SHIPPACK: {
         KEY: 'ship',
@@ -38,6 +42,22 @@ export default {
             'meteorGrey_big2.png',
             'meteorGrey_big3.png',
             'meteorGrey_big4.png',
+        ],
+    },
+    EXPLOSIONPACK: {
+        KEY: 'explosion_pack',
+        JSON: 'assets/images/explosion.json',
+        ATLAS: 'assets/images',
+        ANIMATIONS: [
+            {
+                key: 'explosion',
+                prefix: 'explosion',
+                start: 0,
+                end: 3,
+                suffix: '.png',
+                frameRate: 16,
+                repeat: 0,
+            },
         ],
     },
 };

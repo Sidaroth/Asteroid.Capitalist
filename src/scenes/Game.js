@@ -60,15 +60,6 @@ const Game = function GameFunc() {
         });
     }
 
-    function createTextures() {
-        // TODO: Fix proper textures....
-        // let gfx = state.getScene().make.graphics({ x: 0, y: 0 }, false);
-        const gfx = new Phaser.GameObjects.Graphics(world.getScene());
-        gfx.fillStyle(0xffb300, 1.0);
-        gfx.fillCircle(5, 5, 5);
-        gfx.generateTexture('Bullet', 5, 5);
-    }
-
     function init() {
         // After assets are loaded.
         backgroundScene = Background();
@@ -84,7 +75,6 @@ const Game = function GameFunc() {
         audioManager = AudioManager(UIScene.getScene());
         gfxContext = UIScene.getScene().add.graphics();
 
-        createTextures();
         createInput();
 
         parallaxBackground = createParallaxBackground();

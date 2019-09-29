@@ -36,6 +36,10 @@ const hasSprite = function hasSpriteFunc(state) {
         return sprite;
     }
 
+    function playAnimation(animationKey) {
+        sprite.play(animationKey);
+    }
+
     function getSprite() {
         return sprite;
     }
@@ -87,6 +91,7 @@ const hasSprite = function hasSpriteFunc(state) {
         __constructor,
         createSpriteFromKey,
         createSpriteFromAtlas,
+        playAnimation,
         setPipeline,
         setRotation,
         getKey,

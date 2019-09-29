@@ -9,6 +9,7 @@ import getRandomInt from 'src/math/getRandomInt';
 import isGameEntity from 'components/entities/isGameEntity';
 import createMeteor from './createMeteor';
 import Vector from 'src/math/vector';
+import eventConfig from 'configs/eventConfig';
 
 const createParallaxBackground = () => {
     const state = {};
@@ -66,7 +67,11 @@ const createParallaxBackground = () => {
             const endPosition = new Vector(0, getRandomInt(-300, gameConfig.GAME.VIEWHEIGHT + 300));
             const startPosition = new Vector(gameConfig.GAME.VIEWWIDTH + 300, getRandomInt(0, gameConfig.GAME.VIEWHEIGHT));
             const meteorDirection = Vector.sub(endPosition, startPosition);
-            meteors.push(createMeteor(startPosition, meteorDirection, true));
+            const meteor = createMeteor(startPosition, meteorDirection, true);
+            meteors.push(meteor);
+            state.listenOnce(meteor, eventConfig.METEOR.DESTROY, () => {
+                meteors.splice(meteors.indexOf(meteor), 1);
+            });
         }
         return time;
     }
