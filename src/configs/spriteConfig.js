@@ -15,6 +15,11 @@ export default {
         KEY: 'background_tile',
         PATH: 'assets/images/Backgrounds/blue.png',
     },
+    POWERUP_DOUBLERAF: {
+        KEY: 'powerup_doubleraf',
+        PATH: 'assets/images/PNG/Power-ups/things_gold.png',
+    },
+    // Atlases/spritesheets.
     SHIPPACK: {
         KEY: 'ship',
         JSON: 'assets/images/ships.json',

@@ -28,8 +28,8 @@ const createBullet = (pos, direction) => {
         state.setPosition(pos);
         createSprite();
         state.setColliderShape(Matter.Bodies.circle(state.getX(), state.getY(), 5));
-        state.setCollisionCategory(gameConfig.COLLISION.bullets);
-        state.setCollidesWith([gameConfig.COLLISION.enemies]);
+        state.setCollisionCategory(gameConfig.COLLISION.bullet);
+        state.setCollidesWith([gameConfig.COLLISION.enemy]);
 
         state.listenOn(state, eventConfig.COLLISION.START, (e) => {
             state.destroy();

@@ -25,9 +25,9 @@ const createEnemy = (pos, movementFunc = undefined) => {
         state.available = false;
         state.createSpriteFromAtlas(store.world.getScene(), spriteConfig.SHIPPACK.KEY, 'enemyRed2.png');
         state.setPosition(pos);
-        state.setColliderShape(Matter.Bodies.circle(state.getX(), state.getY(), 25));
-        state.setCollisionCategory(gameConfig.COLLISION.enemies);
-        state.setCollidesWith([gameConfig.COLLISION.bullets, gameConfig.COLLISION.player]);
+        state.setColliderShape(Matter.Bodies.circle(state.getX(), state.getY(), 35));
+        state.setCollisionCategory(gameConfig.COLLISION.enemy);
+        state.setCollidesWith([gameConfig.COLLISION.bullet, gameConfig.COLLISION.player]);
         state.setRotation(-Math.PI / 2);
 
         state.listenOn(state, eventConfig.ENTITY.DIE, (e) => {

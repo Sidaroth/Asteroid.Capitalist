@@ -35,8 +35,17 @@ export default {
     },
     COLLISION: {
         default: 0x0001,
-        bullets: 0x0002,
+        bullet: 0x0002,
         player: 0x0003,
-        enemies: 0x0004,
+        enemy: 0x0004,
+        powerup: 0x0005,
+    },
+    CONSTS: {
+        DIRECTION: {
+            UP: 0,
+            DOWN: 1,
+            LEFT: 2,
+            RIGHT: 3,
+        },
     },
 };

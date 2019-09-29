@@ -2,6 +2,7 @@ import Matter from 'matter-js';
 import store from 'src/store';
 import Circle from 'src/quadTree/circle';
 import eventConfig from 'configs/eventConfig';
+import devConfig from 'configs/devConfig';
 
 const hasCollision = (state) => {
     let collisionCategory;
@@ -12,7 +13,7 @@ const hasCollision = (state) => {
 
     // Only used to filter out entities that are not necessary to check collision against.
     let visionCircle;
-    const visionRadius = 25;
+    const visionRadius = 35;
 
     function __constructor() {
         // Collider.
@@ -56,15 +57,23 @@ const hasCollision = (state) => {
         collidesWith.push(cat);
     }
 
-    function drawDebug(somethingInRange = false) {
+    function drawVision(somethingInRange = false) {
         const color = somethingInRange ? 0x00ff00 : 0xff0000;
         const gfx = store.game.getGFXContext();
         gfx.lineStyle(1, color);
         gfx.strokeCircle(state.getX(), state.getY(), visionRadius);
     }
 
+    // NOTE Only works for circular colliders!
+    function drawCollider() {
+        const color = 0xffff00;
+        const gfx = store.game.getGFXContext();
+        gfx.lineStyle(1, color);
+        gfx.strokeCircle(state.getX(), state.getY(), collider.circleRadius);
+    }
+
     function update() {
-        if (state.type === 'bullet' || !collider) return;
+        if (!collider) return;
 
         const collidingEntities = [];
 
@@ -82,6 +91,11 @@ const hasCollision = (state) => {
                     collidingEntities.push(data);
                 }
             });
+
+        if (devConfig.DEBUG && store.drawColliders) {
+            // drawVision(collidingEntities.length > 0);
+            drawCollider();
+        }
 
         const newEntities = collidingEntities.filter(e => !collidingWith.find(ent => e.entity.id === ent.entity.id)); // We werent't colliding, but we are now.
         const removedEntities = collidingWith.filter(e => !collidingEntities.find(ent => e.entity.id === ent.entity.id)); // We were colliding, but no longer.

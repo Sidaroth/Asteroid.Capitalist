@@ -43,7 +43,6 @@ const createEnemyFactory = () => {
                 nextWave.config.movement,
             );
             nextWave = upcomingWaves.pop();
-            if (!nextWave) console.log('Level end!');
         }
     }
 

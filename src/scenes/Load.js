@@ -25,8 +25,6 @@ const LoadScene = function LoadSceneFunc() {
         });
     }
 
-    function loadSpritesheets() {}
-
     function loadMaps() {}
 
     function loadImages() {
@@ -43,7 +41,6 @@ const LoadScene = function LoadSceneFunc() {
     function loadAssets() {
         loadAudio();
         loadImages();
-        loadSpritesheets();
         loadMaps();
     }
 

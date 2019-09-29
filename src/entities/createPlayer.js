@@ -29,6 +29,7 @@ const createPlayer = function createPlayerFunc() {
     let facingDirection;
 
     const livesIcons = [];
+    let activePowerups = [];
 
     // Drag
     let airDensity = 0.05; // We're in space after all....
@@ -41,9 +42,9 @@ const createPlayer = function createPlayerFunc() {
         state.type = 'player';
         createSprite();
         state.setPosition({ x: gameConfig.GAME.VIEWWIDTH / 2, y: gameConfig.GAME.VIEWHEIGHT / 2 });
-        state.setColliderShape(Matter.Bodies.circle(state.getX(), state.getY(), 25));
+        state.setColliderShape(Matter.Bodies.circle(state.getX(), state.getY(), 35));
         state.setCollisionCategory(gameConfig.COLLISION.player);
-        state.setCollidesWith([gameConfig.COLLISION.enemies]); // TODO: Enemy bullets, but not our own.
+        state.setCollidesWith([gameConfig.COLLISION.enemy]); // TODO: Enemy bullets, but not our own.
         for (let i = 0; i < state.getLives(); i += 1) {
             const icon = store.UIScene.getScene().add.image(30 + 80 * i, 30, spriteConfig.PLAYER_SHIP_ICON.KEY);
             livesIcons.push(icon);
@@ -75,12 +76,11 @@ const createPlayer = function createPlayerFunc() {
             input[direction] = state.isInputDown(...keybindings.MOVEMENT[key]);
         });
 
-        // TODO: Constify indices here.
         const accel = new Vector();
-        if (input[0]) accel.add(0, -accelerationForceMag);
-        if (input[1]) accel.add(0, accelerationForceMag);
-        if (input[2]) accel.add(-accelerationForceMag, 0);
-        if (input[3]) accel.add(accelerationForceMag, 0);
+        if (input[gameConfig.CONSTS.DIRECTION.UP]) accel.add(0, -accelerationForceMag);
+        if (input[gameConfig.CONSTS.DIRECTION.DOWN]) accel.add(0, accelerationForceMag);
+        if (input[gameConfig.CONSTS.DIRECTION.LEFT]) accel.add(-accelerationForceMag, 0);
+        if (input[gameConfig.CONSTS.DIRECTION.RIGHT]) accel.add(accelerationForceMag, 0);
 
         acceleration.add(accel);
     }
@@ -105,7 +105,7 @@ const createPlayer = function createPlayerFunc() {
         }
     }
 
-    function update(time) {
+    function move(time) {
         acceleration.zero();
         checkMovement();
         calculateDrag(airDensity);
@@ -125,10 +125,19 @@ const createPlayer = function createPlayerFunc() {
         if (pos.y > gameConfig.GAME.VIEWHEIGHT) pos.y = gameConfig.GAME.VIEWHEIGHT;
 
         state.setPosition(pos);
+    }
 
+    function update(time) {
+        activePowerups = activePowerups.filter(p => p.isActive());
+        activePowerups.forEach(power => power.update(time));
+        move(time);
         lookAt(store.mouse);
         shoot();
         return time;
+    }
+
+    function addPowerup(power) {
+        activePowerups.push(power);
     }
 
     function setMaxSpeed(speed) {
@@ -157,6 +166,7 @@ const createPlayer = function createPlayerFunc() {
         // methods
         __constructor,
         update,
+        addPowerup,
         setMaxSpeed,
         setRateOfFire,
         setAccelerationForceMagnitude,

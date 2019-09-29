@@ -4,6 +4,7 @@ import gameConfig from 'configs/gameConfig';
 import isScene from 'components/isScene';
 import createState from 'utils/createState';
 import store from 'root/store';
+import devConfig from 'configs/devConfig';
 
 /**
  * Layer/Scene for UI elements.
@@ -40,6 +41,7 @@ const UI = function UIFunc() {
 
         state.guiData = {
             renderQTree: false,
+            drawColliders: false,
             accelerationForceMag: 1.5,
             maxSpeed: 75,
             rateOfFire: 5,
@@ -47,6 +49,13 @@ const UI = function UIFunc() {
         };
 
         guiController = folder.add(state.guiData, 'renderQTree').listen();
+
+        folder
+            .add(state.guiData, 'drawColliders')
+            .listen()
+            .onChange((v) => {
+                store.drawColliders = v;
+            });
 
         folder
             .add(state.guiData, 'accelerationForceMag', 0, 20)
@@ -76,8 +85,10 @@ const UI = function UIFunc() {
     }
 
     function create() {
-        setupDatGui();
-        // setupPerformanceStats();
+        if (devConfig.DEBUG) {
+            setupDatGui();
+            // setupPerformanceStats();
+        }
     }
 
     function destroy() {

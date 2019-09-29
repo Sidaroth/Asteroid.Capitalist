@@ -15,6 +15,8 @@ import createParallaxBackground from 'entities/createParallaxBackground';
 import Background from './Background';
 import World from './World';
 import levels from 'configs/levels';
+import createDoubleRAF from 'entities/createDoubleRAF';
+import Vector from 'src/math/vector';
 
 /**
  * Responsible for delegating the various levels, holding the various core systems and such.
@@ -88,6 +90,8 @@ const Game = function GameFunc() {
         parallaxBackground = createParallaxBackground();
 
         enemyFactory.readSpawnConfig(levels.level1);
+
+        const RAF = createDoubleRAF(new Vector(gameConfig.GAME.VIEWWIDTH / 2, 400));
 
         const player = createPlayer();
         store.player = player;

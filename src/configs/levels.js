@@ -11,7 +11,7 @@ export default {
             {
                 config: {
                     location: new Vector(2000, gameConfig.GAME.VIEWHEIGHT / 2),
-                    enemyCount: 12,
+                    enemyCount: 6,
                     enemySpacing: 75,
                     enemyConfig: {
                         type: 'standard',

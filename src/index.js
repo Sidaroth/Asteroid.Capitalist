@@ -1,6 +1,7 @@
 import 'styles/main.scss';
 import Phaser from 'phaser';
 import gameConfig from 'configs/gameConfig';
+import devConfig from 'configs/devConfig';
 
 import BootScene from 'scenes/Boot';
 import LoadScene from 'scenes/Load';
@@ -27,6 +28,8 @@ store.messageBus = createMessageBus();
 
 window.addEventListener('resize', resizeCanvas);
 
+if (devConfig.DEBUG) console.warn('Game is running in DEBUG mode.');
+
 const targetDelta = 1000 / 60;
 let times = [];
 function loop() {
@@ -34,7 +37,7 @@ function loop() {
     times.push(performance.now());
     times = times.filter(t => performance.now() - 1000 < t);
     const delta = 1000 / times.length;
-    const deltaScale = (delta / targetDelta);
+    const deltaScale = delta / targetDelta;
     const time = { delta, deltaScale };
     if (game.hasRunUpdateFromPhaser) {
         game.update(time);

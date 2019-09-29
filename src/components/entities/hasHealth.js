@@ -13,7 +13,9 @@ const hasHealth = function hasHealthFunc(state, config = {}) {
 
     function __constructor() {
         state.listenOn(state, eventConfig.COLLISION.START, (e) => {
-            state.takeDamage(1);
+            if (e.entity.type !== 'powerup') {
+                state.takeDamage(1);
+            }
         });
     }
 
