@@ -13,7 +13,8 @@ import isGameEntity from 'components/entities/isGameEntity';
 const createDoubleRAF = (pos) => {
     const state = {};
     let startTime;
-    const duration = 15;
+    const duration = 3000;
+    const effect = 'doubleRAF';
 
     function __constructor() {
         state.type = 'powerup';
@@ -34,7 +35,7 @@ const createDoubleRAF = (pos) => {
         const sprite = state.getSprite();
         if (sprite) sprite.destroy();
         store.game.removeEntity(state);
-
+        startTime = performance.now();
         entity.addPowerup(state);
         // let player know about the effect, duration etc.
     }
@@ -45,7 +46,7 @@ const createDoubleRAF = (pos) => {
     }
 
     function isActive() {
-        return performance.now() > startTime + duration;
+        return performance.now() < startTime + duration;
     }
 
     const localState = {
@@ -53,6 +54,7 @@ const createDoubleRAF = (pos) => {
         update,
         activate,
         isActive,
+        effect,
     };
 
     return createState('powerup', state, {

@@ -43,7 +43,7 @@ const UI = function UIFunc() {
             renderQTree: false,
             drawColliders: false,
             accelerationForceMag: 1.5,
-            maxSpeed: 75,
+            maxSpeed: 7.5,
             rateOfFire: 5,
             playerAirDensity: 0.05,
         };

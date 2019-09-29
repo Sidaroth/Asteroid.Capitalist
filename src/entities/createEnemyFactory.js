@@ -2,12 +2,14 @@ import createEnemy from './createEnemy';
 import createState from 'utils/createState';
 import store from 'src/store';
 
-const createEnemyFactory = () => {
+const createLevelMaster = () => {
     const state = {};
     const enemyPool = [];
     const upcomingWaves = [];
+    const upcomingPowerups = [];
     let levelStartTime;
     let nextWave;
+    let nextPowerup;
 
     function spawnEnemy(location, config, movementFunc) {
         const availableEnemy = enemyPool.find(e => e.type === config.type && e.available);
@@ -24,12 +26,19 @@ const createEnemyFactory = () => {
     }
 
     function readSpawnConfig(config) {
-        const { waves } = config;
+        const { waves, powerups } = config;
         waves.forEach((wave) => {
             upcomingWaves.push(wave);
         });
         upcomingWaves.sort((a, b) => b.spawnTime - a.spawnTime);
         nextWave = upcomingWaves.pop();
+
+        powerups.forEach((powerup) => {
+            upcomingPowerups.push(powerup);
+        });
+        upcomingPowerups.sort((a, b) => b.spawnTime - a.spawnTime);
+        nextPowerup = upcomingPowerups.pop();
+
         levelStartTime = performance.now();
     }
 
@@ -58,5 +67,5 @@ const createEnemyFactory = () => {
     });
 };
 
-const factory = createEnemyFactory();
+const factory = createLevelMaster();
 export default factory;
