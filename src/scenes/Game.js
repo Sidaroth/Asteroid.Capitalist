@@ -17,6 +17,7 @@ import createCosine from 'math/movement/cosine';
 import createSigmoid from 'math/movement/sigmoid';
 import createReverseSigmoid from 'src/math/movement/reverseSigmoid';
 import createParallaxBackground from 'entities/createParallaxBackground';
+import levels from 'configs/levels';
 
 /**
  * Responsible for delegating the various levels, holding the various core systems and such.
@@ -79,11 +80,7 @@ const Game = function GameFunc() {
 
         parallaxBackground = createParallaxBackground();
 
-        enemyFactory.spawnWave(new Vector(1800, gameConfig.GAME.VIEWHEIGHT / 2), 75, 3, 'standard', {}); // Straight
-        enemyFactory.spawnWave(new Vector(1800, 0), 75, 12, 'standard', {}, createSine); // sinewave
-        enemyFactory.spawnWave(new Vector(1800, 100), 75, 12, 'standard', {}, createCosine); // cosinewave
-        enemyFactory.spawnWave(new Vector(1800, 400), 75, 12, 'standard', {}, createSigmoid); // sigmoid "wave"
-        enemyFactory.spawnWave(new Vector(1800, 400), 75, 12, 'standard', {}, createReverseSigmoid); // reverse/inverse sigmoid "wave"
+        enemyFactory.readSpawnConfig(levels.level1);
 
         const player = createPlayer();
         store.player = player;
@@ -114,6 +111,7 @@ const Game = function GameFunc() {
         qTree.insertAll(gameEntities);
 
         parallaxBackground.update(time);
+        enemyFactory.update(time);
 
         gameEntities.forEach((entity) => {
             entity.update(time);
