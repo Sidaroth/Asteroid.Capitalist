@@ -13,7 +13,7 @@ export default {
     },
     BACKGROUND_TILE: {
         KEY: 'background_tile',
-        PATH: 'assets/images/Backgrounds/purple.png',
+        PATH: 'assets/images/Backgrounds/blue.png',
     },
     SHIPPACK: {
         KEY: 'ship',
