@@ -73,6 +73,7 @@ const Game = function GameFunc() {
         state.getScene().scene.add(gameConfig.SCENES.UI, UIScene.getScene(), true);
         state.getScene().scene.bringToTop(UIScene.getScene());
         audioManager = AudioManager(UIScene.getScene());
+        store.audioManager = audioManager;
         gfxContext = UIScene.getScene().add.graphics();
 
         createInput();

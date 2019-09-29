@@ -16,6 +16,7 @@ import Matter from 'matter-js';
 import spriteConfig from 'configs/spriteConfig';
 import eventConfig from 'configs/eventConfig';
 import createExplosion from './createExplosion';
+import audioConfig from 'configs/audioConfig';
 
 const createPlayer = function createPlayerFunc() {
     // variables and functions here are private unless listed below in localState.
@@ -108,6 +109,7 @@ const createPlayer = function createPlayerFunc() {
 
                 const pos = state.getPosition();
                 createBullet(new Vector(pos.x, pos.y).add(facingDirection.clone().multiply(15)), facingDirection);
+                store.audioManager.playSfx(audioConfig.SFX.LASER.KEY);
             }
         }
     }

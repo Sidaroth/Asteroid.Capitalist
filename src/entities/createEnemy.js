@@ -33,6 +33,8 @@ const createEnemy = (pos, movementFunc = undefined) => {
 
         state.listenOn(state, eventConfig.ENTITY.DIE, (e) => {
             if (e.lives <= 0) {
+                const explosion = createExplosion();
+                explosion.setPosition(state.getPosition());
                 state.destroy();
             }
         });
@@ -63,8 +65,6 @@ const createEnemy = (pos, movementFunc = undefined) => {
 
     function destroy() {
         store.game.removeEntity(state);
-        const explosion = createExplosion();
-        explosion.setPosition(state.getPosition());
     }
 
     const localState = {
