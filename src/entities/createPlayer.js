@@ -15,6 +15,7 @@ import hasCollision from 'components/entities/hasCollision';
 import Matter from 'matter-js';
 import spriteConfig from 'configs/spriteConfig';
 import eventConfig from 'configs/eventConfig';
+import createExplosion from './createExplosion';
 
 const createPlayer = function createPlayerFunc() {
     // variables and functions here are private unless listed below in localState.
@@ -53,6 +54,8 @@ const createPlayer = function createPlayerFunc() {
         }
 
         state.listenOn(state, eventConfig.ENTITY.DIE, (e) => {
+            const explosion = createExplosion();
+            explosion.setPosition(state.getPosition());
             state.setPosition({ x: -500, y: -500 });
             livesIcons.forEach((icon, index) => {
                 if (e.lives > index) {

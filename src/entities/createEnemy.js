@@ -12,6 +12,7 @@ import eventConfig from 'configs/eventConfig';
 import hasHealth from 'components/entities/hasHealth';
 import Vector from 'math/vector';
 import spriteConfig from 'configs/spriteConfig';
+import createExplosion from './createExplosion';
 
 const createEnemy = (pos, movementFunc = undefined) => {
     const state = {};
@@ -62,6 +63,8 @@ const createEnemy = (pos, movementFunc = undefined) => {
 
     function destroy() {
         store.game.removeEntity(state);
+        const explosion = createExplosion();
+        explosion.setPosition(state.getPosition());
     }
 
     const localState = {
