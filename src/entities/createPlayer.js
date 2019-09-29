@@ -125,7 +125,7 @@ const createPlayer = function createPlayerFunc() {
         velocity.add(acceleration);
         velocity.limit(maxSpeed);
 
-        if (velocity.squaredLength() < 0.5) velocity.zero(); // We don't want to drift "endlessly" when the velocity is almost non-existant.
+        if (velocity.squaredLength() < 0.5 * time.deltaScale) velocity.zero(); // We don't want to drift "endlessly" when the velocity is almost non-existant.
 
         const pos = state.getPosition();
         pos.x += velocity.x * time.deltaScale;

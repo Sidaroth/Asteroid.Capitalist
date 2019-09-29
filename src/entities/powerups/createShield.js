@@ -36,7 +36,7 @@ const createShield = (pos) => {
         if (sprite) {
             sprite.x = state.entity.getX();
             sprite.y = state.entity.getY();
-            sprite.rotation += 0.02;
+            sprite.rotation += 0.05 * time.deltaScale;
         }
     }
 
