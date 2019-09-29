@@ -15,8 +15,9 @@ const createAudioManager = function createAudioManagerFunc(parentScene) {
     const muteIdentifier = `${gameConfig.GAME.TITLE.replace(/ /g, '_')}_isMuted`; // replace all spaces with _ for safety
     const soundEffects = new Map();
     const music = new Map();
-    const currentVolume = 0.7;
-    const defaultSongKey = '';
+    const currentVolume = 0.2;
+    const sfxVolume = 0.15;
+    const defaultSongKey = audioConfig.MUSIC.BACKGROUND.KEY;
 
     function _updateMute() {
         if (state.isAudioMuted()) {
@@ -70,9 +71,9 @@ const createAudioManager = function createAudioManagerFunc(parentScene) {
         return state;
     }
 
-    function playSfx(key) {
+    function playSfx(key, volume = 1) {
         if (soundEffects.has(key)) {
-            scene.sound.play(key);
+            scene.sound.play(key, { volume: sfxVolume * volume });
         }
     }
 

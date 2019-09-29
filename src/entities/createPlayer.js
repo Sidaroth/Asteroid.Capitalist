@@ -109,7 +109,7 @@ const createPlayer = function createPlayerFunc() {
 
                 const pos = state.getPosition();
                 createBullet(new Vector(pos.x, pos.y).add(facingDirection.clone().multiply(15)), facingDirection);
-                store.audioManager.playSfx(audioConfig.SFX.LASER.KEY);
+                store.audioManager.playSfx(audioConfig.SFX.LASER.KEY, 0.5);
             }
         }
     }

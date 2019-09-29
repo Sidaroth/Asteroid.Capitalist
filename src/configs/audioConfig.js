@@ -1,5 +1,10 @@
 export default {
-    MUSIC: {},
+    MUSIC: {
+        BACKGROUND: {
+            KEY: 'background',
+            PATH: 'assets/audio/zombies_are_coming.ogg',
+        },
+    },
     SFX: {
         LASER: {
             KEY: 'laser',
