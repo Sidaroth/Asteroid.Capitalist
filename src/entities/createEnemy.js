@@ -23,7 +23,7 @@ const createEnemy = (pos, movementFunc = undefined) => {
 
     function __constructor() {
         state.available = false;
-        state.createSpriteFromAtlas(store.game.getScene(), spriteConfig.SHIPPACK.KEY, 'enemyRed2.png');
+        state.createSpriteFromAtlas(store.world.getScene(), spriteConfig.SHIPPACK.KEY, 'enemyRed2.png');
         state.setPosition(pos);
         state.setColliderShape(Matter.Bodies.circle(state.getX(), state.getY(), 25));
         state.setCollisionCategory(gameConfig.COLLISION.enemies);

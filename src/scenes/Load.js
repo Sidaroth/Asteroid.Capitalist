@@ -4,6 +4,8 @@ import spriteConfig from 'configs/spriteConfig';
 import audioConfig from 'configs/audioConfig';
 import isScene from 'components/isScene';
 import createState from 'utils/createState';
+import store from 'src/store';
+import Blur from 'src/pipelines/Blur';
 
 const LoadScene = function LoadSceneFunc() {
     const state = {};
@@ -57,6 +59,9 @@ const LoadScene = function LoadSceneFunc() {
         });
 
         loadAssets();
+
+        const blur = store.app.renderer.addPipeline('Blur', new Blur(store.app));
+        blur.setFloat1('blur', 0.003);
     }
 
     function destroy() {

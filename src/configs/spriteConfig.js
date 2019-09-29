@@ -13,11 +13,26 @@ export default {
     },
     BACKGROUND_TILE: {
         KEY: 'background_tile',
-        PATH: 'assets/images/Backgrounds/black.png',
+        PATH: 'assets/images/Backgrounds/purple.png',
     },
     SHIPPACK: {
         KEY: 'ship',
         JSON: 'assets/images/ships.json',
         ATLAS: 'assets/images',
+    },
+    METEORPACK: {
+        KEY: 'meteor',
+        JSON: 'assets/images/meteors.json',
+        ATLAS: 'assets/images',
+        SPRITEKEYS: [
+            'meteorBrown_big1.png',
+            'meteorBrown_big2.png',
+            'meteorBrown_big3.png',
+            'meteorBrown_big4.png',
+            'meteorGrey_big1.png',
+            'meteorGrey_big2.png',
+            'meteorGrey_big3.png',
+            'meteorGrey_big4.png',
+        ],
     },
 };

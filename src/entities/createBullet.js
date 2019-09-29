@@ -19,7 +19,7 @@ const createBullet = (pos, direction) => {
     let creationTime;
 
     function createSprite() {
-        state.createSpriteFromKey(store.game.getScene(), 'Bullet');
+        state.createSpriteFromKey(store.world.getScene(), 'Bullet');
     }
 
     function __constructor() {

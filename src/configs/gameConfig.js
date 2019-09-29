@@ -9,6 +9,8 @@ export default {
         LOAD: 'game_load',
         GAME: 'game_game',
         UI: 'UI',
+        BACKGROUND: 'game_background',
+        WORLD: 'game_world',
     },
     DEFAULT_TEXT_STYLE: {
         font: 'Roboto',

@@ -40,6 +40,10 @@ const hasSprite = function hasSpriteFunc(state) {
         return sprite;
     }
 
+    function setPipeline(pipeline) {
+        sprite.setPipeline(pipeline);
+    }
+
     function getKey() {
         return key;
     }
@@ -83,6 +87,7 @@ const hasSprite = function hasSpriteFunc(state) {
         __constructor,
         createSpriteFromKey,
         createSpriteFromAtlas,
+        setPipeline,
         setRotation,
         getKey,
         setKey,

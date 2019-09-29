@@ -17,6 +17,8 @@ import createCosine from 'math/movement/cosine';
 import createSigmoid from 'math/movement/sigmoid';
 import createReverseSigmoid from 'src/math/movement/reverseSigmoid';
 import createParallaxBackground from 'entities/createParallaxBackground';
+import Background from './Background';
+import World from './World';
 
 /**
  * Responsible for delegating the various levels, holding the various core systems and such.
@@ -25,6 +27,8 @@ const Game = function GameFunc() {
     const state = {};
     let audioManager;
     let UIScene;
+    let backgroundScene;
+    let world;
     const keyboard = createKeyboard();
     let parallaxBackground;
 
@@ -61,7 +65,7 @@ const Game = function GameFunc() {
     function createTextures() {
         // TODO: Fix proper textures....
         // let gfx = state.getScene().make.graphics({ x: 0, y: 0 }, false);
-        const gfx = new Phaser.GameObjects.Graphics(state.getScene());
+        const gfx = new Phaser.GameObjects.Graphics(world.getScene());
         gfx.fillStyle(0xffb300, 1.0);
         gfx.fillCircle(5, 5, 5);
         gfx.generateTexture('Bullet', 5, 5);
@@ -69,10 +73,18 @@ const Game = function GameFunc() {
 
     function init() {
         // After assets are loaded.
+        backgroundScene = Background();
+        store.backgroundScene = backgroundScene;
+        world = World();
+        store.world = world;
         UIScene = UI();
+        store.UIScene = UIScene;
+        state.getScene().scene.add(gameConfig.SCENES.BACKGROUND, backgroundScene.getScene(), true);
+        state.getScene().scene.add(gameConfig.SCENES.WORLD, world.getScene(), true);
         state.getScene().scene.add(gameConfig.SCENES.UI, UIScene.getScene(), true);
+        state.getScene().scene.bringToTop(UIScene.getScene());
         audioManager = AudioManager(UIScene.getScene());
-        gfxContext = state.getScene().add.graphics();
+        gfxContext = UIScene.getScene().add.graphics();
 
         createTextures();
         createInput();

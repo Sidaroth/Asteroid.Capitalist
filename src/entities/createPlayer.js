@@ -34,7 +34,7 @@ const createPlayer = function createPlayerFunc() {
     let airDensity = 0.05; // We're in space after all....
 
     function createSprite() {
-        state.createSpriteFromAtlas(store.game.getScene(), spriteConfig.SHIPPACK.KEY, 'playerShip2_green.png');
+        state.createSpriteFromAtlas(store.world.getScene(), spriteConfig.SHIPPACK.KEY, 'playerShip2_green.png');
     }
 
     function __constructor() {
@@ -45,7 +45,7 @@ const createPlayer = function createPlayerFunc() {
         state.setCollisionCategory(gameConfig.COLLISION.player);
         state.setCollidesWith([gameConfig.COLLISION.enemies]); // TODO: Enemy bullets, but not our own.
         for (let i = 0; i < state.getLives(); i += 1) {
-            const icon = store.game.getUIScene().getScene().add.image(30 + (80 * i), 30, spriteConfig.PLAYER_SHIP_ICON.KEY);
+            const icon = store.UIScene.getScene().add.image(30 + (80 * i), 30, spriteConfig.PLAYER_SHIP_ICON.KEY);
             livesIcons.push(icon);
         }
 
