@@ -1,4 +1,5 @@
 import eventConfig from 'configs/eventConfig';
+import gameConfig from 'configs/gameConfig';
 
 const hasHealth = function hasHealthFunc(state, config = {}) {
     const maxHealth = config.health || 1;
@@ -10,13 +11,19 @@ const hasHealth = function hasHealthFunc(state, config = {}) {
     let showHealthBar = config.showHealthBar || false;
     let invulnerabilityPeriod = config.invulnerabilityPeriod || 0;
     let timeOfDeath = -Infinity;
+    let isImmune = false;
 
     function __constructor() {
         state.listenOn(state, eventConfig.COLLISION.START, (e) => {
-            if (e.entity.type !== 'powerup') {
+            if (isImmune || state.isInvulnerable()) return;
+            if (e.entity.type !== gameConfig.TYPES.POWERUP) {
                 state.takeDamage(1);
             }
         });
+    }
+
+    function setImmune(status) {
+        isImmune = status;
     }
 
     function isInvulnerable() {
@@ -111,6 +118,7 @@ const hasHealth = function hasHealthFunc(state, config = {}) {
         setRespawnPosition,
         setRespawnTime,
         setShowHealthBar,
+        setImmune,
         setInvulnerabilityPeriod,
         respawn,
         takeDamage,

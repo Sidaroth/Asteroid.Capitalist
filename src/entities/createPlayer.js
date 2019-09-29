@@ -29,7 +29,9 @@ const createPlayer = function createPlayerFunc() {
     let rateOfFire = 5; // Per second.
     let timeOfLastShot = 0;
     let facingDirection;
-    let RAFModifier = 1;
+
+    // powerups. TODO: Do this better.
+    let ROFModifier = 1;
 
     const invulnerableBlinkTime = 100;
     let lastBlink = performance.now();
@@ -45,7 +47,7 @@ const createPlayer = function createPlayerFunc() {
     }
 
     function __constructor() {
-        state.type = 'player';
+        state.type = gameConfig.TYPES.PLAYER;
         createSprite();
         state.setPosition({ x: gameConfig.GAME.VIEWWIDTH / 2, y: gameConfig.GAME.VIEWHEIGHT / 2 });
         state.setColliderShape(Matter.Bodies.circle(state.getX(), state.getY(), 35));
@@ -105,7 +107,7 @@ const createPlayer = function createPlayerFunc() {
     function shoot() {
         if (store.mouse && store.mouse.isDown) {
             const now = Date.now();
-            if (now - timeOfLastShot > 1000 / (rateOfFire * RAFModifier)) {
+            if (now - timeOfLastShot > 1000 / (rateOfFire * ROFModifier)) {
                 timeOfLastShot = now;
 
                 const pos = state.getPosition();
@@ -153,25 +155,27 @@ const createPlayer = function createPlayerFunc() {
         }
     }
 
-    function checkPowerups(time) {
-        RAFModifier = 1;
-
+    function updatePowerups(time) {
         activePowerups = activePowerups.filter(p => p.isActive());
         activePowerups.forEach((power) => {
             power.update(time);
-            if (power.effect === 'doubleRAF') {
-                RAFModifier = 2;
-            }
         });
     }
 
     function update(time) {
-        checkPowerups(time);
-        move(time);
-        lookAt(store.mouse);
-        shoot();
-        updateSprite();
+        if (!state.waitingForRespawn) {
+            updatePowerups(time);
+            move(time);
+            lookAt(store.mouse);
+            shoot();
+            updateSprite();
+        }
+
         return time;
+    }
+
+    function setROFModifier(mod) {
+        ROFModifier = mod;
     }
 
     function addPowerup(power) {
@@ -210,6 +214,8 @@ const createPlayer = function createPlayerFunc() {
         setAccelerationForceMagnitude,
         getAirDensity,
         setAirDensity,
+        // powerups
+        setROFModifier,
     };
 
     // These are the substates, or components, that describe the functionality of the resulting object.

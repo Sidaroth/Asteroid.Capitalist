@@ -76,7 +76,6 @@ const hasCollision = (state) => {
         if (!collider) return;
 
         const collidingEntities = [];
-
         const nearbyEntities = store.game.getEntityTree().query(visionCircle);
         nearbyEntities
             .filter(e => e !== state && e.getCollider && collidesWith.indexOf(e.getCollisionCategory()) !== -1)

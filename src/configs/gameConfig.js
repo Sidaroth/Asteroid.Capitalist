@@ -48,4 +48,11 @@ export default {
             RIGHT: 3,
         },
     },
+    TYPES: {
+        PLAYER: 'player',
+        POWERUP: 'powerup',
+        ENEMY: 'enemy',
+        BULLET: 'bullet',
+        BACKGROUND: 'parallaxBackground',
+    },
 };
