@@ -15,4 +15,7 @@ export default {
         START: 'collision start',
         END: 'collision end',
     },
+    METEOR: {
+        DESTROY: 'meteor destroyed',
+    },
 };

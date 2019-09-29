@@ -4,6 +4,8 @@ import spriteConfig from 'configs/spriteConfig';
 import store from 'src/store';
 import hasPosition from 'components/hasPosition';
 import getRandomInt from 'src/math/getRandomInt';
+import canEmit from 'components/events/canEmit';
+import eventConfig from 'configs/eventConfig';
 
 const createMeteor = (startPosition, direction, inBG = true) => {
     const state = {};
@@ -37,15 +39,21 @@ const createMeteor = (startPosition, direction, inBG = true) => {
         return time;
     }
 
+    function destroy() {
+        state.emit(eventConfig.METEOR.DESTROY, state);
+    }
+
     const localState = {
         __constructor,
         update,
+        destroy,
     };
 
     return createState('Meteor', state, {
         localState,
         hasSprite: hasSprite(state),
         hasPosition: hasPosition(state),
+        canEmit: canEmit(state),
     });
 };
 
