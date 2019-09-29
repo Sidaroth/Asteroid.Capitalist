@@ -25,7 +25,7 @@ const createBullet = (pos, direction) => {
     }
 
     function __constructor() {
-        state.type = 'bullet';
+        state.type = gameConfig.TYPES.BULLET;
         creationTime = Date.now();
         state.setPosition(pos);
         createSprite();

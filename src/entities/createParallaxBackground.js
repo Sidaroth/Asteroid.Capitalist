@@ -23,14 +23,19 @@ const createParallaxBackground = () => {
     let timeSinceLastMeteor = 0;
 
     function __constructor() {
-        state.type = 'parallaxBackground';
-        const yCount = parseInt((gameConfig.GAME.VIEWHEIGHT / tileSize) + 1);
-        const xCount = parseInt((gameConfig.GAME.VIEWWIDTH / tileSize) + 2);
+        state.type = gameConfig.TYPES.BACKGROUND;
+        const yCount = parseInt(gameConfig.GAME.VIEWHEIGHT / tileSize + 1);
+        const xCount = parseInt(gameConfig.GAME.VIEWWIDTH / tileSize + 2);
         for (let i = 0; i < yCount; i += 1) {
             if (!tiles[i]) tiles[i] = [];
             for (let j = 0; j < xCount; j += 1) {
                 const rot = getRandomInt(0, 3);
-                const sprite = new Phaser.GameObjects.Sprite(store.backgroundScene.getScene(), j * tileSize + tileSize / 2, i * tileSize + tileSize / 2, spriteConfig.BACKGROUND_TILE.KEY);
+                const sprite = new Phaser.GameObjects.Sprite(
+                    store.backgroundScene.getScene(),
+                    j * tileSize + tileSize / 2,
+                    i * tileSize + tileSize / 2,
+                    spriteConfig.BACKGROUND_TILE.KEY,
+                );
                 sprite.setRotation(rot * ((2 * Math.PI) / 4));
                 tiles[i].push(sprite);
                 store.backgroundScene.getScene().add.existing(sprite);

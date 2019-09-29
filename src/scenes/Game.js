@@ -9,13 +9,12 @@ import createQuadTree from '../quadTree/createQuadTree';
 import Rect from '../quadTree/rect';
 import createKeyboard from 'core/createKeyboard';
 import store from 'root/store';
-import Phaser from 'phaser';
 import enemyFactory from 'entities/createEnemyFactory';
 import createParallaxBackground from 'entities/createParallaxBackground';
 import Background from './Background';
 import World from './World';
 import levels from 'configs/levels';
-import createDoubleRAF from 'entities/createDoubleRAF';
+import createRateOfFireModifier from 'entities/powerups/createRateOfFireModifier';
 import Vector from 'src/math/vector';
 
 /**
@@ -82,7 +81,8 @@ const Game = function GameFunc() {
 
         enemyFactory.readSpawnConfig(levels.level1);
 
-        const RAF = createDoubleRAF(new Vector(gameConfig.GAME.VIEWWIDTH / 2, 400));
+        const RAF = createRateOfFireModifier(new Vector(gameConfig.GAME.VIEWWIDTH / 2, 400));
+        const shield = createRateOfFireModifier(new Vector(gameConfig.GAME.VIEWWIDTH / 2, 800));
 
         const player = createPlayer();
         store.player = player;
