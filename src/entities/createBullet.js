@@ -19,7 +19,8 @@ const createBullet = (pos, direction) => {
     let creationTime;
 
     function createSprite() {
-        state.createSpriteFromKey(store.world.getScene(), 'Bullet');
+        state.createSpriteFromKey(store.world.getScene(), 'laser');
+        state.setRotation(direction.angle());
     }
 
     function __constructor() {

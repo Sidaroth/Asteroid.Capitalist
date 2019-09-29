@@ -15,6 +15,10 @@ export default {
         KEY: 'background_tile',
         PATH: 'assets/images/Backgrounds/blue.png',
     },
+    LASER: {
+        KEY: 'laser',
+        PATH: 'assets/images/PNG/Lasers/laserGreen05.png',
+    },
     SHIPPACK: {
         KEY: 'ship',
         JSON: 'assets/images/ships.json',
