@@ -28,6 +28,7 @@ const createPlayer = function createPlayerFunc() {
     let rateOfFire = 5; // Per second.
     let timeOfLastShot = 0;
     let facingDirection;
+    let RAFModifier = 1;
 
     const invulnerableBlinkTime = 100;
     let lastBlink = performance.now();
@@ -103,7 +104,7 @@ const createPlayer = function createPlayerFunc() {
     function shoot() {
         if (store.mouse && store.mouse.isDown) {
             const now = Date.now();
-            if (now - timeOfLastShot > 1000 / rateOfFire) {
+            if (now - timeOfLastShot > 1000 / (rateOfFire * RAFModifier)) {
                 timeOfLastShot = now;
 
                 const pos = state.getPosition();
@@ -150,9 +151,20 @@ const createPlayer = function createPlayerFunc() {
         }
     }
 
-    function update(time) {
+    function checkPowerups(time) {
+        RAFModifier = 1;
+
         activePowerups = activePowerups.filter(p => p.isActive());
-        activePowerups.forEach(power => power.update(time));
+        activePowerups.forEach((power) => {
+            power.update(time);
+            if (power.effect === 'doubleRAF') {
+                RAFModifier = 2;
+            }
+        });
+    }
+
+    function update(time) {
+        checkPowerups(time);
         move(time);
         lookAt(store.mouse);
         shoot();
