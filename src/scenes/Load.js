@@ -70,7 +70,6 @@ const LoadScene = function LoadSceneFunc() {
             if (SPRITE.JSON && SPRITE.ANIMATIONS) {
                 SPRITE.ANIMATIONS.forEach((a) => {
                     const frames = state.getScene().anims.generateFrameNames(SPRITE.KEY, a);
-                    console.log(frames);
                     state.getScene().anims.create({
                         key: a.key,
                         frames,
