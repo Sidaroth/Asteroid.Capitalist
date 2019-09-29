@@ -69,6 +69,7 @@ export default {
                 spawnTime: 50000,
             },
         ],
+        powerups: [],
         levelLength: 75000, // in ms.
     },
 };

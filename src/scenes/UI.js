@@ -40,9 +40,9 @@ const UI = function UIFunc() {
 
         state.guiData = {
             renderQTree: false,
-            accelerationForceMag: 5,
-            maxSpeed: 10,
-            rateOfFire: 15,
+            accelerationForceMag: 1.5,
+            maxSpeed: 75,
+            rateOfFire: 5,
             playerAirDensity: 0.05,
         };
 

@@ -22,9 +22,9 @@ const createPlayer = function createPlayerFunc() {
     const velocity = new Vector();
     const acceleration = new Vector();
 
-    let accelerationForceMag = 5;
-    let maxSpeed = 10;
-    let rateOfFire = 15; // Per second.
+    let accelerationForceMag = 1.5;
+    let maxSpeed = 7.5;
+    let rateOfFire = 5; // Per second.
     let timeOfLastShot = 0;
     let facingDirection;
 
@@ -45,7 +45,7 @@ const createPlayer = function createPlayerFunc() {
         state.setCollisionCategory(gameConfig.COLLISION.player);
         state.setCollidesWith([gameConfig.COLLISION.enemies]); // TODO: Enemy bullets, but not our own.
         for (let i = 0; i < state.getLives(); i += 1) {
-            const icon = store.UIScene.getScene().add.image(30 + (80 * i), 30, spriteConfig.PLAYER_SHIP_ICON.KEY);
+            const icon = store.UIScene.getScene().add.image(30 + 80 * i, 30, spriteConfig.PLAYER_SHIP_ICON.KEY);
             livesIcons.push(icon);
         }
 
@@ -112,6 +112,8 @@ const createPlayer = function createPlayerFunc() {
         acceleration.multiply(time.deltaScale);
         velocity.add(acceleration);
         velocity.limit(maxSpeed);
+
+        if (velocity.squaredLength() < 0.5) velocity.zero(); // We don't want to drift "endlessly" when the velocity is almost non-existant.
 
         const pos = state.getPosition();
         pos.x += velocity.x * time.deltaScale;
