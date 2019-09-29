@@ -15,9 +15,17 @@ export default {
         KEY: 'background_tile',
         PATH: 'assets/images/Backgrounds/blue.png',
     },
-    POWERUP_DOUBLERAF: {
-        KEY: 'powerup_doubleraf',
+    POWERUP_DOUBLEROF: {
+        KEY: 'powerup_doublerof',
         PATH: 'assets/images/PNG/Power-ups/things_gold.png',
+    },
+    POWERUP_SHIELD_ICON: {
+        KEY: 'powerup_shield_icon',
+        PATH: 'assets/images/PNG/Power-ups/shield_silver.png',
+    },
+    SHIELD: {
+        KEY: 'shield',
+        PATH: 'assets/images/PNG/Effects/shield.png',
     },
     LASER: {
         KEY: 'laser',

@@ -16,6 +16,7 @@ import World from './World';
 import levels from 'configs/levels';
 import createRateOfFireModifier from 'entities/powerups/createRateOfFireModifier';
 import Vector from 'src/math/vector';
+import createShield from 'entities/powerups/createShield';
 
 /**
  * Responsible for delegating the various levels, holding the various core systems and such.
@@ -82,7 +83,7 @@ const Game = function GameFunc() {
         enemyFactory.readSpawnConfig(levels.level1);
 
         const RAF = createRateOfFireModifier(new Vector(gameConfig.GAME.VIEWWIDTH / 2, 400));
-        const shield = createRateOfFireModifier(new Vector(gameConfig.GAME.VIEWWIDTH / 2, 800));
+        const shield = createShield(new Vector(gameConfig.GAME.VIEWWIDTH / 2, 800));
 
         const player = createPlayer();
         store.player = player;

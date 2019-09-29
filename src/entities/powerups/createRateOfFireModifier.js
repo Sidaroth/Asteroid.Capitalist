@@ -7,13 +7,14 @@ import canListen from 'components/events/canListen';
 import canEmit from 'components/events/canEmit';
 import isGameEntity from 'components/entities/isGameEntity';
 import isPowerup from 'components/isPowerup';
+import spriteConfig from 'configs/spriteConfig';
 
 const createRateOfFireModifier = (pos) => {
     const state = {};
     const modifier = 2;
 
     function __constructor() {
-        state.createSpriteFromKey(store.world.getScene(), 'powerup_doubleraf');
+        state.createSpriteFromKey(store.world.getScene(), spriteConfig.POWERUP_DOUBLEROF.KEY);
         state.setPosition(pos);
         state.setDuration(10000);
     }
@@ -32,7 +33,7 @@ const createRateOfFireModifier = (pos) => {
         activate,
     };
 
-    return createState('powerup', state, {
+    return createState('ROFPowerup', state, {
         localState,
         isPowerup: isPowerup(state),
         isGameEntity: isGameEntity(state),
