@@ -10,11 +10,12 @@ import isPowerup from 'components/isPowerup';
 
 const createRateOfFireModifier = (pos) => {
     const state = {};
-    const modifier = 2;
+    const modifier = 8;
 
     function __constructor() {
         state.createSpriteFromKey(store.world.getScene(), 'powerup_doubleraf');
         state.setPosition(pos);
+        state.setDuration(10000);
     }
 
     function activate() {

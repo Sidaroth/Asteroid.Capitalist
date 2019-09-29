@@ -35,7 +35,7 @@ const isPowerup = (state) => {
         store.game.removeEntity(state);
 
         startTime = performance.now();
-        entity.addPowerup(state);
+        state.entity.addPowerup(state);
         active = true;
     }
 
@@ -44,7 +44,7 @@ const isPowerup = (state) => {
     }
 
     function update() {
-        if (performance.now() > startTime + duration) deactivate();
+        if (performance.now() > startTime + duration) state.deactivate();
     }
 
     function isActive() {
