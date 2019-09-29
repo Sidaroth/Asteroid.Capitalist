@@ -9,12 +9,16 @@ const hasHealth = function hasHealthFunc(state, config = {}) {
     let respawnTime = config.respawnTime || 0;
     let showHealthBar = config.showHealthBar || false;
     let invulnerabilityPeriod = config.invulnerabilityPeriod || 0;
-    let timeOfDeath = 0;
+    let timeOfDeath = -Infinity;
 
     function __constructor() {
         state.listenOn(state, eventConfig.COLLISION.START, (e) => {
             state.takeDamage(1);
         });
+    }
+
+    function isInvulnerable() {
+        return performance.now() - timeOfDeath < invulnerabilityPeriod;
     }
 
     function setHealth(h) {
@@ -50,14 +54,16 @@ const hasHealth = function hasHealthFunc(state, config = {}) {
     }
 
     function respawn(time, position) {
+        state.waitingForRespawn = true;
         respawnTimeout = setTimeout(() => {
             state.setPosition(position);
+            state.waitingForRespawn = false;
             state.emit(eventConfig.ENTITY.RESPAWN);
         }, time);
     }
 
     function takeDamage(damage) {
-        if (performance.now() - timeOfDeath > invulnerabilityPeriod) {
+        if (!state.isInvulnerable()) {
             health -= 1;
             state.emit(eventConfig.ENTITY.TAKEDAMAGE, {
                 health,
@@ -74,14 +80,14 @@ const hasHealth = function hasHealthFunc(state, config = {}) {
         health = maxHealth;
         timeOfDeath = performance.now();
 
+        if (lives > 0) {
+            respawn(respawnTime, respawnPosition);
+        }
+
         state.emit(eventConfig.ENTITY.DIE, {
             lives,
             health,
         });
-
-        if (lives > 0) {
-            respawn(respawnTime, respawnPosition);
-        }
     }
 
     function destroy() {
@@ -92,8 +98,10 @@ const hasHealth = function hasHealthFunc(state, config = {}) {
 
     return {
         // props
+        waitingForRespawn: false,
         // methods
         __constructor,
+        isInvulnerable,
         setHealth,
         getHealth,
         setLives,

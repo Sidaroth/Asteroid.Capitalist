@@ -28,6 +28,9 @@ const createPlayer = function createPlayerFunc() {
     let timeOfLastShot = 0;
     let facingDirection;
 
+    const invulnerableBlinkTime = 100;
+    let lastBlink = performance.now();
+
     const livesIcons = [];
 
     // Drag
@@ -50,6 +53,7 @@ const createPlayer = function createPlayerFunc() {
         }
 
         state.listenOn(state, eventConfig.ENTITY.DIE, (e) => {
+            state.setPosition({ x: -500, y: -500 });
             livesIcons.forEach((icon, index) => {
                 if (e.lives > index) {
                     icon.setVisible(true);
@@ -106,28 +110,43 @@ const createPlayer = function createPlayerFunc() {
     }
 
     function update(time) {
-        acceleration.zero();
-        checkMovement();
-        calculateDrag(airDensity);
-        acceleration.multiply(time.deltaScale);
-        velocity.add(acceleration);
-        velocity.limit(maxSpeed);
+        if (!state.waitingForRespawn) {
+            acceleration.zero();
+            checkMovement();
+            calculateDrag(airDensity);
+            acceleration.multiply(time.deltaScale);
+            velocity.add(acceleration);
+            velocity.limit(maxSpeed);
 
-        if (velocity.squaredLength() < 0.5) velocity.zero(); // We don't want to drift "endlessly" when the velocity is almost non-existant.
+            if (velocity.squaredLength() < 0.5) velocity.zero(); // We don't want to drift "endlessly" when the velocity is almost non-existant.
 
-        const pos = state.getPosition();
-        pos.x += velocity.x * time.deltaScale;
-        pos.y += velocity.y * time.deltaScale;
+            const pos = state.getPosition();
+            pos.x += velocity.x * time.deltaScale;
+            pos.y += velocity.y * time.deltaScale;
 
-        if (pos.x < 0) pos.x = 0;
-        if (pos.x > gameConfig.GAME.VIEWWIDTH) pos.x = gameConfig.GAME.VIEWWIDTH;
-        if (pos.y < 0) pos.y = 0;
-        if (pos.y > gameConfig.GAME.VIEWHEIGHT) pos.y = gameConfig.GAME.VIEWHEIGHT;
+            if (pos.x < 0) pos.x = 0;
+            if (pos.x > gameConfig.GAME.VIEWWIDTH) pos.x = gameConfig.GAME.VIEWWIDTH;
+            if (pos.y < 0) pos.y = 0;
+            if (pos.y > gameConfig.GAME.VIEWHEIGHT) pos.y = gameConfig.GAME.VIEWHEIGHT;
 
-        state.setPosition(pos);
+            state.setPosition(pos);
 
-        lookAt(store.mouse);
-        shoot();
+            lookAt(store.mouse);
+            shoot();
+            if (state.isInvulnerable()) {
+                if (performance.now() - lastBlink > invulnerableBlinkTime) {
+                    const sprite = state.getSprite();
+                    if (sprite.visible) {
+                        sprite.setVisible(false);
+                    } else {
+                        sprite.setVisible(true);
+                    }
+                    lastBlink = performance.now();
+                }
+            } else if (!state.getSprite().visible) {
+                state.getSprite().setVisible(true);
+            }
+        }
         return time;
     }
 
