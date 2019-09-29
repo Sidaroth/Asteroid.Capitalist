@@ -33,6 +33,8 @@ const isPowerup = (state) => {
         const sprite = state.getSprite();
         if (sprite) sprite.destroy();
         store.game.removeEntity(state);
+        state.setColliderShape(undefined);
+        state.setCollidesWith([]);
 
         startTime = performance.now();
         state.entity.addPowerup(state);
