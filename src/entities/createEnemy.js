@@ -13,18 +13,30 @@ import hasHealth from 'components/entities/hasHealth';
 import Vector from 'math/vector';
 import spriteConfig from 'configs/spriteConfig';
 import createExplosion from './createExplosion';
+import getRandomInt from 'src/math/getRandomInt';
+import createBullet from './createBullet';
+import audioConfig from 'configs/audioConfig';
 
-const createEnemy = (pos, movementFunc = undefined) => {
+const createEnemy = (pos, conf = {}, movementFunc = undefined) => {
     const state = {};
     const available = false;
     const maxSpeed = 3;
     const velocity = new Vector(-2.5, 0);
     const killZoneLimit = -200;
     let movementFunction = movementFunc;
+    const config = conf;
+
+    const rateOfFire = getRandomInt(5, 10) / 10;
+    let timeOfLastShot = 0;
 
     function __constructor() {
         state.available = false;
-        state.createSpriteFromAtlas(store.world.getScene(), spriteConfig.SHIPPACK.KEY, 'spaceShips_001.png');
+        if (config.type === 'standard') {
+            state.createSpriteFromAtlas(store.world.getScene(), spriteConfig.SHIPPACK.KEY, 'spaceShips_001.png');
+        } else if (config.type === 'shooting') {
+            state.createSpriteFromAtlas(store.world.getScene(), spriteConfig.SHIPPACK.KEY, 'spaceShips_001.png');
+        }
+
         state.setPosition(pos);
         state.setColliderShape(Matter.Bodies.circle(state.getX(), state.getY(), 35));
         state.setCollisionCategory(gameConfig.COLLISION.enemy);
@@ -48,6 +60,23 @@ const createEnemy = (pos, movementFunc = undefined) => {
         velocity.copy(vel);
     }
 
+    function shoot() {
+        const now = performance.now();
+        if (now - timeOfLastShot > 1000 / rateOfFire) {
+            const p = new Vector().copy(state.getPosition());
+            const playerPos = store.player.getPosition();
+
+            const direction = new Vector()
+                .copy(playerPos)
+                .sub(p)
+                .getUnit();
+            createBullet(p.add(direction.clone().multiply(15)), direction, gameConfig.TYPES.ENEMY);
+            store.audioManager.playSfx(audioConfig.SFX.LASER.KEY, 0.5);
+
+            timeOfLastShot = performance.now();
+        }
+    }
+
     function update(time) {
         velocity.setLength(maxSpeed);
 
@@ -55,8 +84,12 @@ const createEnemy = (pos, movementFunc = undefined) => {
         if (movementFunction) {
             newPos = movementFunction(newPos);
         }
-
         state.setPosition(newPos);
+
+        // If the enemy is a shooting type, and it has actually moved onto the screen.
+        if (config.type === 'shooting' && newPos.x < gameConfig.GAME.VIEWWIDTH - 50) {
+            shoot();
+        }
 
         if (state.getX() < killZoneLimit) state.destroy();
 

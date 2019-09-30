@@ -13,11 +13,16 @@ import hasHealth from 'components/entities/hasHealth';
 import normalizeRange from 'src/math/normalizeRange';
 import createBullet from './createBullet';
 import Vector from 'src/math/vector';
+import audioConfig from 'configs/audioConfig';
+import eventConfig from 'configs/eventConfig';
+import createExplosion from './createExplosion';
 
-const createBoss = (pos) => {
+const createBoss = (pos, config) => {
     const state = {};
 
-    const healthConfig = {};
+    const healthConfig = {
+        health: config.health,
+    };
     let theta = 0;
 
     let timeOfLastShot = 0;
@@ -26,15 +31,24 @@ const createBoss = (pos) => {
     function __constructor() {
         state.createSpriteFromAtlas(store.world.getScene(), spriteConfig.SHIPPACK.KEY, 'spaceShips_005.png');
         state.setRotation(Math.PI / 2);
-        state.setPosition(pos);
+        state.setPosition(pos.clone().add(800));
 
         const collisionRadius = 100;
         state.setColliderShape(Matter.Bodies.circle(state.getX(), state.getY(), collisionRadius));
         state.setVisionRadius(collisionRadius);
         state.setCollisionCategory(gameConfig.COLLISION.enemy);
         state.setCollidesWith([gameConfig.COLLISION.bullet, gameConfig.COLLISION.player]);
-
         store.game.addEntity(state);
+        store.audioManager.playSfx(audioConfig.SFX.SIREN.KEY, 2);
+
+        state.listenOn(state, eventConfig.ENTITY.DIE, (e) => {
+            if (e.lives <= 0) {
+                const explosion = createExplosion();
+                explosion.setPosition(state.getPosition());
+                explosion.setScale(3);
+                state.destroy();
+            }
+        });
     }
 
     function shoot() {
@@ -57,6 +71,7 @@ const createBoss = (pos) => {
                 .sub(bottomGunPos)
                 .getUnit();
             createBullet(bottomGunPos, bottomDirection, gameConfig.TYPES.ENEMY);
+            store.audioManager.playSfx(audioConfig.SFX.LASER.KEY, 0.5);
 
             timeOfLastShot = performance.now();
         }
@@ -65,9 +80,16 @@ const createBoss = (pos) => {
     function update(time) {
         theta += 0.01 * time.deltaScale;
         const y = normalizeRange(Math.sin(theta), -1, 1, 200, gameConfig.GAME.VIEWHEIGHT - 200);
-        state.setPosition({ x: state.getX(), y });
+        let x = state.getX();
 
-        shoot();
+        if (x > pos.x) x -= 3 * time.deltaScale;
+
+        state.setPosition({ x, y });
+
+        // Don't shoot at the player until we're on the screen.
+        if (x < gameConfig.GAME.VIEWWIDTH - 150) {
+            shoot();
+        }
 
         return time;
     }
@@ -77,7 +99,7 @@ const createBoss = (pos) => {
         update,
     };
 
-    return createState('boss', state, {
+    return createState('Boss', state, {
         localState,
         canEmit: canEmit(state),
         canListen: canListen(state),

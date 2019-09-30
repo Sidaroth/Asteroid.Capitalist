@@ -1,6 +1,7 @@
 import createEnemy from './createEnemy';
 import createState from 'utils/createState';
 import store from 'src/store';
+import createBoss from './createBoss';
 
 const createLevelMaster = () => {
     const state = {};
@@ -15,16 +16,27 @@ const createLevelMaster = () => {
         const availableEnemy = enemyPool.find(e => e.type === config.type && e.available);
         if (availableEnemy) return availableEnemy;
 
-        const newEnemy = createEnemy(location, movementFunc);
+        const newEnemy = createEnemy(location, config, movementFunc);
         return newEnemy;
     }
 
+    function spawnBoss(location, config) {
+        const boss = createBoss(location, config);
+
+        return boss;
+    }
+
     function spawnWave(location, spacing, size, config, movementFunction) {
-        for (let i = 0; i < size; i += 1) {
-            store.game.addEntity(state.spawnEnemy(location.add(spacing), config, movementFunction));
+        if (config.type === 'boss') {
+            store.game.addEntity(state.spawnBoss(location, config));
+        } else {
+            for (let i = 0; i < size; i += 1) {
+                store.game.addEntity(state.spawnEnemy(location.add(spacing), config, movementFunction));
+            }
         }
     }
 
+    // TODO: MUST-FIX powerup spawning.
     function readSpawnConfig(config) {
         const { waves, powerups } = config;
         waves.forEach((wave) => {
@@ -40,8 +52,6 @@ const createLevelMaster = () => {
         nextPowerup = upcomingPowerups.pop();
 
         levelStartTime = performance.now();
-
-        // console.log(nextWave);
     }
 
     function update(time) {
@@ -60,6 +70,7 @@ const createLevelMaster = () => {
     const localState = {
         spawnEnemy,
         spawnWave,
+        spawnBoss,
         readSpawnConfig,
         update,
     };

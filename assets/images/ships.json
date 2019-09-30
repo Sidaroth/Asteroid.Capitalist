@@ -491,27 +491,6 @@
 						"w": 57,
 						"h": 59
 					}
-				},
-				{
-					"filename": "enemyRed4.png",
-					"rotated": false,
-					"trimmed": false,
-					"sourceSize": {
-						"w": 57,
-						"h": 59
-					},
-					"spriteSourceSize": {
-						"x": 0,
-						"y": 0,
-						"w": 57,
-						"h": 59
-					},
-					"frame": {
-						"x": 379,
-						"y": 341,
-						"w": 57,
-						"h": 59
-					}
 				}
 			]
 		}
@@ -519,6 +498,6 @@
 	"meta": {
 		"app": "https://www.codeandweb.com/texturepacker",
 		"version": "3.0",
-		"smartupdate": "$TexturePacker:SmartUpdate:fce0a0a264244d57d15cc37dcb726d3a:f15cb59f82a111cf073eb60cdb486f3f:78154fe33c5dfc8c7f67f0a3677ac0ac$"
+		"smartupdate": "$TexturePacker:SmartUpdate:7feb2b235bdad3c4d1430952d84c5141:bb1995f767d9f5b9067683e98190d97a:78154fe33c5dfc8c7f67f0a3677ac0ac$"
 	}
 }

@@ -53,7 +53,7 @@ const createAudioManager = function createAudioManagerFunc(parentScene) {
             soundEffects.set(SFX.KEY, scene.sound.add(SFX.KEY));
         });
 
-        state.setPauseOnBlur(true);
+        state.setPauseOnBlur(false);
 
         return state;
     }

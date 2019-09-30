@@ -14,11 +14,6 @@ import createParallaxBackground from 'entities/createParallaxBackground';
 import Background from './Background';
 import World from './World';
 import levels from 'configs/levels';
-import createRateOfFireModifier from 'entities/powerups/createRateOfFireModifier';
-import Vector from 'src/math/vector';
-import createShield from 'entities/powerups/createShield';
-import createBoss from 'entities/createBoss';
-import clamp from 'src/math/clamp';
 
 /**
  * Responsible for delegating the various levels, holding the various core systems and such.
@@ -39,7 +34,6 @@ const Game = function GameFunc() {
 
     function cameraSetup() {
         state.getScene().cameras.main.setViewport(0, 0, gameConfig.GAME.VIEWWIDTH, gameConfig.GAME.VIEWHEIGHT);
-        // state.getScene().cameras.main.setZoom(0.95); // remove?
     }
 
     function addEntity(entity) {
@@ -81,17 +75,11 @@ const Game = function GameFunc() {
         createInput();
 
         parallaxBackground = createParallaxBackground();
-
         enemyFactory.readSpawnConfig(levels.level1);
-
-        const RAF = createRateOfFireModifier(new Vector(gameConfig.GAME.VIEWWIDTH / 2, 400));
-        const shield = createShield(new Vector(gameConfig.GAME.VIEWWIDTH / 2, 800));
-        const boss = createBoss(new Vector(1600, 400));
 
         const player = createPlayer();
         store.player = player;
-        gameEntities.push(player);
-        qTree.insert(player);
+        addEntity(player);
     }
 
     function create() {

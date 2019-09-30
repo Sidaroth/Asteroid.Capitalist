@@ -47,7 +47,6 @@ const createPlayer = function createPlayerFunc() {
     }
 
     function __constructor() {
-        state.setImmune(true);
         state.type = gameConfig.TYPES.PLAYER;
         createSprite();
         state.setPosition({ x: gameConfig.GAME.VIEWWIDTH / 2, y: gameConfig.GAME.VIEWHEIGHT / 2 });

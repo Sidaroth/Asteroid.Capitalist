@@ -8,41 +8,54 @@ import createReverseSigmoid from 'src/math/movement/reverseSigmoid';
 export default {
     level1: {
         waves: [
+            // {
+            //     config: {
+            //         location: new Vector(2000, gameConfig.GAME.VIEWHEIGHT / 2),
+            //         enemyCount: 6,
+            //         enemySpacing: new Vector(75, 0),
+            //         enemyConfig: {
+            //             type: 'standard',
+            //         },
+            //         movement: undefined, // straight.
+            //     },
+            //     spawnTime: 1500,
+            // },
+            // {
+            //     config: {
+            //         location: new Vector(2000, 0),
+            //         enemyCount: 12,
+            //         enemySpacing: new Vector(75, 0),
+            //         enemyConfig: {
+            //             type: 'standard',
+            //         },
+            //         movement: createSine,
+            //     },
+            //     spawnTime: 6000,
+            // },
             {
                 config: {
-                    location: new Vector(2000, gameConfig.GAME.VIEWHEIGHT / 2),
+                    location: new Vector(2000, 75),
                     enemyCount: 6,
-                    enemySpacing: new Vector(75, 0),
-                    enemyConfig: {
-                        type: 'standard',
-                    },
-                    movement: undefined, // straight.
-                },
-                spawnTime: 1500,
-            },
-            {
-                config: {
-                    location: new Vector(2000, 0),
-                    enemyCount: 12,
-                    enemySpacing: new Vector(75, 0),
-                    enemyConfig: {
-                        type: 'standard',
-                    },
-                    movement: createSine,
-                },
-                spawnTime: 6000,
-            },
-            {
-                config: {
-                    location: new Vector(2000, 0),
-                    enemyCount: 5,
-                    enemySpacing: new Vector(0, 75),
+                    enemySpacing: new Vector(0, 130),
                     enemyConfig: {
                         type: 'shooting',
                     },
-                    movement: createSine,
+                    movement: undefined,
                 },
-                spawnTime: 12000,
+                spawnTime: 3000,
+            },
+            {
+                config: {
+                    location: new Vector(1700, 0),
+                    enemyCount: 12,
+                    enemySpacing: new Vector(75, 0),
+                    enemyConfig: {
+                        type: 'boss',
+                        health: 4,
+                    },
+                    movement: undefined,
+                },
+                spawnTime: 800,
             },
             {
                 config: {

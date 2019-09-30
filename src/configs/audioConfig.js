@@ -26,5 +26,9 @@ export default {
             KEY: 'double_rof',
             PATH: 'assets/audio/powerup.ogg',
         },
+        SIREN: {
+            KEY: 'siren',
+            PATH: 'assets/audio/siren.ogg',
+        },
     },
 };
