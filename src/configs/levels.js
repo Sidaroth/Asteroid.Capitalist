@@ -517,6 +517,7 @@ export default {
                     location: new Vector(gameConfig.GAME.VIEWWIDTH / 2, 800),
                     type: gameConfig.CONSTS.POWERUPS.DOUBLE_ROF,
                 },
+                spawnTime: 110000,
             },
         ],
         levelLength: 360000, // estimated, in ms.
