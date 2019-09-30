@@ -47,6 +47,9 @@ const createBoss = (pos, config) => {
                 explosion.setPosition(state.getPosition());
                 explosion.setScale(3);
                 state.destroy();
+                setTimeout(() => {
+                    state.emitGlobal(eventConfig.GAME.ENDED);
+                }, 1500);
             }
         });
 
