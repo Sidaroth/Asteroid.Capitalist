@@ -21,7 +21,7 @@ const createBoss = (pos) => {
     let theta = 0;
 
     let timeOfLastShot = 0;
-    const rateOfFire = 1.5;
+    const rateOfFire = 2;
 
     function __constructor() {
         state.createSpriteFromAtlas(store.world.getScene(), spriteConfig.SHIPPACK.KEY, 'spaceShips_005.png');
@@ -42,19 +42,23 @@ const createBoss = (pos) => {
         if (now - timeOfLastShot > 1000 / rateOfFire) {
             const p = new Vector().copy(state.getPosition());
             const playerPos = store.player.getPosition();
-            const direction = new Vector()
-                .copy(playerPos)
-                .sub(p)
-                .getUnit();
+            const topGunPos = new Vector(p.x - 90, p.y - 40);
 
-            const gunPos = new Vector(p.x, p.y);
-            const bullet = createBullet(gunPos, direction, gameConfig.TYPES.ENEMY);
-            bullet.setCollidesWith([gameConfig.COLLISION.player]);
-            bullet.setCollisionCategory(gameConfig.COLLISION.enemyBullet);
+            // for the top gun.
+            const topDirection = new Vector()
+                .copy(playerPos)
+                .sub(topGunPos)
+                .getUnit();
+            createBullet(topGunPos, topDirection, gameConfig.TYPES.ENEMY);
+
+            const bottomGunPos = new Vector(p.x - 90, p.y + 40);
+            const bottomDirection = new Vector()
+                .copy(playerPos)
+                .sub(bottomGunPos)
+                .getUnit();
+            createBullet(bottomGunPos, bottomDirection, gameConfig.TYPES.ENEMY);
 
             timeOfLastShot = performance.now();
-
-            // console.log('shoot');
         }
     }
 

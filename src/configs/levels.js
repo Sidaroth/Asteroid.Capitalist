@@ -12,7 +12,7 @@ export default {
                 config: {
                     location: new Vector(2000, gameConfig.GAME.VIEWHEIGHT / 2),
                     enemyCount: 6,
-                    enemySpacing: 75,
+                    enemySpacing: new Vector(75, 0),
                     enemyConfig: {
                         type: 'standard',
                     },
@@ -24,7 +24,7 @@ export default {
                 config: {
                     location: new Vector(2000, 0),
                     enemyCount: 12,
-                    enemySpacing: 75,
+                    enemySpacing: new Vector(75, 0),
                     enemyConfig: {
                         type: 'standard',
                     },
@@ -35,8 +35,20 @@ export default {
             {
                 config: {
                     location: new Vector(2000, 0),
+                    enemyCount: 5,
+                    enemySpacing: new Vector(0, 75),
+                    enemyConfig: {
+                        type: 'shooting',
+                    },
+                    movement: createSine,
+                },
+                spawnTime: 12000,
+            },
+            {
+                config: {
+                    location: new Vector(2000, 0),
                     enemyCount: 12,
-                    enemySpacing: 75,
+                    enemySpacing: new Vector(75, 0),
                     enemyConfig: {
                         type: 'standard',
                     },
@@ -48,7 +60,7 @@ export default {
                 config: {
                     location: new Vector(2000, 0),
                     enemyCount: 12,
-                    enemySpacing: 75,
+                    enemySpacing: new Vector(75, 0),
                     enemyConfig: {
                         type: 'standard',
                     },
@@ -60,7 +72,7 @@ export default {
                 config: {
                     location: new Vector(2000, 0),
                     enemyCount: 12,
-                    enemySpacing: 75,
+                    enemySpacing: new Vector(75, 0),
                     enemyConfig: {
                         type: 'standard',
                     },
