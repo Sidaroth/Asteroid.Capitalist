@@ -4,7 +4,7 @@
         <key>fileFormatVersion</key>
         <int>4</int>
         <key>texturePackerVersion</key>
-        <string>5.1.0</string>
+        <string>4.12.1</string>
         <key>autoSDSettings</key>
         <array>
             <struct type="AutoSDSettings">
@@ -181,86 +181,6 @@
         </struct>
         <key>individualSpriteSettings</key>
         <map type="IndividualSpriteSettingsMap">
-            <key type="filename">../images/PNG/Enemies/enemyBlack1.png</key>
-            <key type="filename">../images/PNG/Enemies/enemyBlue1.png</key>
-            <key type="filename">../images/PNG/Enemies/enemyGreen1.png</key>
-            <key type="filename">../images/PNG/Enemies/enemyRed1.png</key>
-            <struct type="IndividualSpriteSettings">
-                <key>pivotPoint</key>
-                <point_f>0.5,0.5</point_f>
-                <key>scale9Enabled</key>
-                <false/>
-                <key>scale9Borders</key>
-                <rect>23,21,47,42</rect>
-                <key>scale9Paddings</key>
-                <rect>23,21,47,42</rect>
-                <key>scale9FromFile</key>
-                <false/>
-            </struct>
-            <key type="filename">../images/PNG/Enemies/enemyBlack2.png</key>
-            <key type="filename">../images/PNG/Enemies/enemyBlue2.png</key>
-            <key type="filename">../images/PNG/Enemies/enemyGreen2.png</key>
-            <key type="filename">../images/PNG/Enemies/enemyRed2.png</key>
-            <struct type="IndividualSpriteSettings">
-                <key>pivotPoint</key>
-                <point_f>0.5,0.5</point_f>
-                <key>scale9Enabled</key>
-                <false/>
-                <key>scale9Borders</key>
-                <rect>26,21,52,42</rect>
-                <key>scale9Paddings</key>
-                <rect>26,21,52,42</rect>
-                <key>scale9FromFile</key>
-                <false/>
-            </struct>
-            <key type="filename">../images/PNG/Enemies/enemyBlack3.png</key>
-            <key type="filename">../images/PNG/Enemies/enemyBlue3.png</key>
-            <key type="filename">../images/PNG/Enemies/enemyGreen3.png</key>
-            <key type="filename">../images/PNG/Enemies/enemyRed3.png</key>
-            <struct type="IndividualSpriteSettings">
-                <key>pivotPoint</key>
-                <point_f>0.5,0.5</point_f>
-                <key>scale9Enabled</key>
-                <false/>
-                <key>scale9Borders</key>
-                <rect>26,21,51,42</rect>
-                <key>scale9Paddings</key>
-                <rect>26,21,51,42</rect>
-                <key>scale9FromFile</key>
-                <false/>
-            </struct>
-            <key type="filename">../images/PNG/Enemies/enemyBlack4.png</key>
-            <key type="filename">../images/PNG/Enemies/enemyBlue4.png</key>
-            <key type="filename">../images/PNG/Enemies/enemyGreen4.png</key>
-            <key type="filename">../images/PNG/Enemies/enemyRed4.png</key>
-            <struct type="IndividualSpriteSettings">
-                <key>pivotPoint</key>
-                <point_f>0.5,0.5</point_f>
-                <key>scale9Enabled</key>
-                <false/>
-                <key>scale9Borders</key>
-                <rect>21,21,41,42</rect>
-                <key>scale9Paddings</key>
-                <rect>21,21,41,42</rect>
-                <key>scale9FromFile</key>
-                <false/>
-            </struct>
-            <key type="filename">../images/PNG/Enemies/enemyBlack5.png</key>
-            <key type="filename">../images/PNG/Enemies/enemyBlue5.png</key>
-            <key type="filename">../images/PNG/Enemies/enemyGreen5.png</key>
-            <key type="filename">../images/PNG/Enemies/enemyRed5.png</key>
-            <struct type="IndividualSpriteSettings">
-                <key>pivotPoint</key>
-                <point_f>0.5,0.5</point_f>
-                <key>scale9Enabled</key>
-                <false/>
-                <key>scale9Borders</key>
-                <rect>24,21,49,42</rect>
-                <key>scale9Paddings</key>
-                <rect>24,21,49,42</rect>
-                <key>scale9FromFile</key>
-                <false/>
-            </struct>
             <key type="filename">../images/PNG/Sprites X2/Ships/spaceShips_005.png</key>
             <struct type="IndividualSpriteSettings">
                 <key>pivotPoint</key>
@@ -287,6 +207,19 @@
                 <key>scale9FromFile</key>
                 <false/>
             </struct>
+            <key type="filename">../images/PNG/Sprites/Ships/spaceShips_003.png</key>
+            <struct type="IndividualSpriteSettings">
+                <key>pivotPoint</key>
+                <point_f>0.5,0.5</point_f>
+                <key>scale9Enabled</key>
+                <false/>
+                <key>scale9Borders</key>
+                <rect>25,24,50,47</rect>
+                <key>scale9Paddings</key>
+                <rect>25,24,50,47</rect>
+                <key>scale9FromFile</key>
+                <false/>
+            </struct>
             <key type="filename">../images/PNG/playerShip2_green.png</key>
             <struct type="IndividualSpriteSettings">
                 <key>pivotPoint</key>
@@ -304,28 +237,9 @@
         <key>fileList</key>
         <array>
             <filename>../images/PNG/playerShip2_green.png</filename>
-            <filename>../images/PNG/Enemies/enemyBlack5.png</filename>
-            <filename>../images/PNG/Enemies/enemyBlue1.png</filename>
-            <filename>../images/PNG/Enemies/enemyBlue2.png</filename>
-            <filename>../images/PNG/Enemies/enemyBlue3.png</filename>
-            <filename>../images/PNG/Enemies/enemyBlue4.png</filename>
-            <filename>../images/PNG/Enemies/enemyBlue5.png</filename>
-            <filename>../images/PNG/Enemies/enemyGreen1.png</filename>
-            <filename>../images/PNG/Enemies/enemyGreen2.png</filename>
-            <filename>../images/PNG/Enemies/enemyGreen3.png</filename>
-            <filename>../images/PNG/Enemies/enemyGreen4.png</filename>
-            <filename>../images/PNG/Enemies/enemyGreen5.png</filename>
-            <filename>../images/PNG/Enemies/enemyRed1.png</filename>
-            <filename>../images/PNG/Enemies/enemyRed2.png</filename>
-            <filename>../images/PNG/Enemies/enemyRed3.png</filename>
-            <filename>../images/PNG/Enemies/enemyRed4.png</filename>
-            <filename>../images/PNG/Enemies/enemyRed5.png</filename>
-            <filename>../images/PNG/Enemies/enemyBlack1.png</filename>
-            <filename>../images/PNG/Enemies/enemyBlack2.png</filename>
-            <filename>../images/PNG/Enemies/enemyBlack3.png</filename>
-            <filename>../images/PNG/Enemies/enemyBlack4.png</filename>
             <filename>../images/PNG/Sprites X2/Ships/spaceShips_005.png</filename>
             <filename>../images/PNG/Sprites/Ships/spaceShips_001.png</filename>
+            <filename>../images/PNG/Sprites/Ships/spaceShips_003.png</filename>
         </array>
         <key>ignoreFileList</key>
         <array/>

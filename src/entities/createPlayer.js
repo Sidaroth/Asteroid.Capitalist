@@ -126,7 +126,7 @@ const createPlayer = function createPlayerFunc() {
                 timeOfLastShot = now;
 
                 const pos = state.getPosition();
-                createBullet(new Vector(pos.x, pos.y).add(facingDirection.clone().multiply(15)), facingDirection);
+                createBullet(new Vector(pos.x, pos.y).add(facingDirection.clone().multiply(35)), facingDirection);
                 store.audioManager.playSfx(audioConfig.SFX.LASER.KEY, 0.5);
             }
         }
