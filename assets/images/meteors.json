@@ -4,8 +4,8 @@
 			"image": "meteors.png",
 			"format": "RGBA8888",
 			"size": {
-				"w": 447,
-				"h": 184
+				"w": 229,
+				"h": 416
 			},
 			"scale": 1,
 			"frames": [
@@ -24,8 +24,8 @@
 						"h": 98
 					},
 					"frame": {
-						"x": 1,
-						"y": 1,
+						"x": 5,
+						"y": 5,
 						"w": 120,
 						"h": 98
 					}
@@ -45,31 +45,10 @@
 						"h": 98
 					},
 					"frame": {
-						"x": 123,
-						"y": 1,
+						"x": 5,
+						"y": 113,
 						"w": 120,
 						"h": 98
-					}
-				},
-				{
-					"filename": "meteorBrown_big1.png",
-					"rotated": false,
-					"trimmed": false,
-					"sourceSize": {
-						"w": 101,
-						"h": 84
-					},
-					"spriteSourceSize": {
-						"x": 0,
-						"y": 0,
-						"w": 101,
-						"h": 84
-					},
-					"frame": {
-						"x": 245,
-						"y": 1,
-						"w": 101,
-						"h": 84
 					}
 				},
 				{
@@ -87,31 +66,31 @@
 						"h": 96
 					},
 					"frame": {
-						"x": 348,
-						"y": 1,
+						"x": 5,
+						"y": 221,
 						"w": 98,
 						"h": 96
 					}
 				},
 				{
-					"filename": "meteorGrey_big4.png",
+					"filename": "meteorBrown_big1.png",
 					"rotated": false,
 					"trimmed": false,
 					"sourceSize": {
-						"w": 98,
-						"h": 96
+						"w": 101,
+						"h": 84
 					},
 					"spriteSourceSize": {
 						"x": 0,
 						"y": 0,
-						"w": 98,
-						"h": 96
+						"w": 101,
+						"h": 84
 					},
 					"frame": {
-						"x": 245,
-						"y": 87,
-						"w": 98,
-						"h": 96
+						"x": 5,
+						"y": 327,
+						"w": 101,
+						"h": 84
 					}
 				},
 				{
@@ -129,10 +108,31 @@
 						"h": 84
 					},
 					"frame": {
-						"x": 345,
-						"y": 99,
+						"x": 113,
+						"y": 221,
 						"w": 101,
 						"h": 84
+					}
+				},
+				{
+					"filename": "meteorGrey_big4.png",
+					"rotated": false,
+					"trimmed": false,
+					"sourceSize": {
+						"w": 98,
+						"h": 96
+					},
+					"spriteSourceSize": {
+						"x": 0,
+						"y": 0,
+						"w": 98,
+						"h": 96
+					},
+					"frame": {
+						"x": 116,
+						"y": 315,
+						"w": 98,
+						"h": 96
 					}
 				},
 				{
@@ -150,8 +150,8 @@
 						"h": 82
 					},
 					"frame": {
-						"x": 1,
-						"y": 101,
+						"x": 135,
+						"y": 5,
 						"w": 89,
 						"h": 82
 					}
@@ -171,8 +171,8 @@
 						"h": 82
 					},
 					"frame": {
-						"x": 92,
-						"y": 101,
+						"x": 135,
+						"y": 97,
 						"w": 89,
 						"h": 82
 					}
@@ -183,6 +183,6 @@
 	"meta": {
 		"app": "https://www.codeandweb.com/texturepacker",
 		"version": "3.0",
-		"smartupdate": "$TexturePacker:SmartUpdate:786ed8c12dbf4e84227dcb060dc7018d:55ccb1f7cb4a5dfe4bfca11d25a39693:c2d9fb8ba8f67da6da86a926e353808f$"
+		"smartupdate": "$TexturePacker:SmartUpdate:706db43dce51bb459085020a39364534:55ccb1f7cb4a5dfe4bfca11d25a39693:c2d9fb8ba8f67da6da86a926e353808f$"
 	}
 }
