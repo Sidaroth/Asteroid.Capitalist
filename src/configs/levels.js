@@ -420,7 +420,7 @@ export default {
             {
                 config: {
                     location: new Vector(2000, 0),
-                    enemyCount: 15,
+                    enemyCount: 12,
                     enemySpacing: new Vector(75, 0),
                     enemyConfig: {
                         type: 'standard',
@@ -433,7 +433,7 @@ export default {
             {
                 config: {
                     location: new Vector(2000, 0),
-                    enemyCount: 15,
+                    enemyCount: 12,
                     enemySpacing: new Vector(75, 0),
                     enemyConfig: {
                         type: 'standard',
@@ -454,7 +454,7 @@ export default {
                     },
                     movement: undefined,
                 },
-                spawnTime: 180000,
+                spawnTime: 183000,
             },
             {
                 config: {
@@ -468,7 +468,7 @@ export default {
                     },
                     movement: undefined,
                 },
-                spawnTime: 180450,
+                spawnTime: 183450,
             },
             {
                 config: {
@@ -481,7 +481,7 @@ export default {
                     },
                     movement: undefined,
                 },
-                spawnTime: 180700,
+                spawnTime: 183700,
             },
             {
                 config: {
@@ -494,7 +494,7 @@ export default {
                     },
                     movement: undefined,
                 },
-                spawnTime: 180100,
+                spawnTime: 183100,
             },
             {
                 config: {
@@ -507,7 +507,7 @@ export default {
                     },
                     movement: undefined,
                 },
-                spawnTime: 191000,
+                spawnTime: 194000,
             },
             {
                 config: {
@@ -520,7 +520,7 @@ export default {
                     },
                     movement: undefined,
                 },
-                spawnTime: 200000,
+                spawnTime: 204000,
             },
             {
                 config: {
@@ -533,7 +533,7 @@ export default {
                     },
                     movement: createSine,
                 },
-                spawnTime: 207500,
+                spawnTime: 211500,
             },
             {
                 config: {
@@ -546,7 +546,7 @@ export default {
                     },
                     movement: createReverseSigmoid,
                 },
-                spawnTime: 215000,
+                spawnTime: 218000,
             },
             {
                 config: {
@@ -559,7 +559,7 @@ export default {
                     },
                     movement: createSigmoid,
                 },
-                spawnTime: 215000,
+                spawnTime: 223000,
             },
             {
                 config: {
@@ -572,7 +572,7 @@ export default {
                     },
                     movement: undefined,
                 },
-                spawnTime: 220200,
+                spawnTime: 225200,
             },
             {
                 config: {
@@ -585,7 +585,7 @@ export default {
                     },
                     movement: undefined,
                 },
-                spawnTime: 220240,
+                spawnTime: 225240,
             },
             {
                 config: {
@@ -598,7 +598,7 @@ export default {
                     },
                     movement: undefined,
                 },
-                spawnTime: 220280,
+                spawnTime: 225280,
             },
             {
                 config: {
@@ -611,7 +611,7 @@ export default {
                     },
                     movement: undefined,
                 },
-                spawnTime: 220320,
+                spawnTime: 225320,
             },
         ],
         powerups: [
