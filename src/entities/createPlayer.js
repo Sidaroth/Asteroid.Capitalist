@@ -79,6 +79,9 @@ const createPlayer = function createPlayerFunc() {
                     icon.setVisible(false);
                 }
             });
+            if (e.lives <= 0) {
+                state.emitGlobal(eventConfig.GAME.ENDED);
+            }
         });
 
         state.listenGlobal(eventConfig.ENTITY.SCOREAWARDED, (score) => {
@@ -223,6 +226,13 @@ const createPlayer = function createPlayerFunc() {
         airDensity = t;
     }
 
+    function destroy() {
+        if (scoreText) {
+            scoreText.destroy();
+            scoreText = undefined;
+        }
+    }
+
     // functions and properties listed here will be public.
     const localState = {
         // props
@@ -235,6 +245,7 @@ const createPlayer = function createPlayerFunc() {
         setAccelerationForceMagnitude,
         getAirDensity,
         setAirDensity,
+        destroy,
         // powerups
         setROFModifier,
     };

@@ -6,8 +6,9 @@ import createBoss from './createBoss';
 const createLevelMaster = () => {
     const state = {};
     const enemyPool = [];
-    const upcomingWaves = [];
-    const upcomingPowerups = [];
+    let upcomingWaves = [];
+    let upcomingPowerups = [];
+    let enemies = [];
     let levelStartTime;
     let nextWave;
     let nextPowerup;
@@ -28,10 +29,15 @@ const createLevelMaster = () => {
 
     function spawnWave(location, spacing, size, config, movementFunction) {
         if (config.type === 'boss') {
-            store.game.addEntity(state.spawnBoss(location, config));
+            const boss = state.spawnBoss(location, config);
+            enemies.push(boss);
+            store.game.addEntity(boss);
         } else {
+            const loc = location.clone();
             for (let i = 0; i < size; i += 1) {
-                store.game.addEntity(state.spawnEnemy(location.add(spacing), config, movementFunction));
+                const enemy = state.spawnEnemy(loc.add(spacing), config, movementFunction);
+                enemies.push(enemy);
+                store.game.addEntity(enemy);
             }
         }
     }
@@ -67,12 +73,21 @@ const createLevelMaster = () => {
         }
     }
 
+    function reset(levelConfig) {
+        upcomingWaves = [];
+        upcomingPowerups = [];
+        enemies.forEach(e => e.destroy());
+        enemies = [];
+        readSpawnConfig(levelConfig);
+    }
+
     const localState = {
         spawnEnemy,
         spawnWave,
         spawnBoss,
         readSpawnConfig,
         update,
+        reset,
     };
 
     return createState('EnemyFactory', state, {

@@ -1,6 +1,5 @@
 import gameConfig from 'configs/gameConfig';
 import AudioManager from 'core/createAudioManager';
-import createPlayer from 'entities/createPlayer';
 import UI from 'scenes/UI';
 import canListen from 'components/events/canListen';
 import isScene from 'components/isScene';
@@ -9,11 +8,10 @@ import createQuadTree from '../quadTree/createQuadTree';
 import Rect from '../quadTree/rect';
 import createKeyboard from 'core/createKeyboard';
 import store from 'root/store';
-import enemyFactory from 'entities/createLevelMaster';
-import createParallaxBackground from 'entities/createParallaxBackground';
 import Background from './Background';
 import World from './World';
-import levels from 'configs/levels';
+import MainMenu from './MainMenu';
+import eventConfig from 'configs/eventConfig';
 
 /**
  * Responsible for delegating the various levels, holding the various core systems and such.
@@ -24,8 +22,8 @@ const Game = function GameFunc() {
     let UIScene;
     let backgroundScene;
     let world;
+    let mainMenu;
     const keyboard = createKeyboard();
-    let parallaxBackground;
 
     // TODO: Move into world1/level1 scene, not the global world.
     const gameEntities = [];
@@ -60,26 +58,36 @@ const Game = function GameFunc() {
         // After assets are loaded.
         backgroundScene = Background();
         store.backgroundScene = backgroundScene;
-        world = World();
-        store.world = world;
+        mainMenu = MainMenu();
         UIScene = UI();
         store.UIScene = UIScene;
         state.getScene().scene.add(gameConfig.SCENES.BACKGROUND, backgroundScene.getScene(), true);
-        state.getScene().scene.add(gameConfig.SCENES.WORLD, world.getScene(), true);
+        state.getScene().scene.add(gameConfig.SCENES.MAINMENU, mainMenu.getScene(), true);
         state.getScene().scene.add(gameConfig.SCENES.UI, UIScene.getScene(), true);
         state.getScene().scene.bringToTop(UIScene.getScene());
         audioManager = AudioManager(UIScene.getScene());
         store.audioManager = audioManager;
         gfxContext = UIScene.getScene().add.graphics();
 
+        state.listenGlobal(eventConfig.GAME.STARTED, () => {
+            world = World();
+            store.world = world;
+            state.getScene().scene.add(gameConfig.SCENES.WORLD, world.getScene(), true);
+            state.getScene().scene.remove(mainMenu.getScene());
+            mainMenu.getScene().destroy();
+            mainMenu = undefined;
+        });
+
+        state.listenGlobal(eventConfig.GAME.ENDED, () => {
+            mainMenu = MainMenu();
+            state.getScene().scene.add(gameConfig.SCENES.MAINMENU, mainMenu.getScene(), true);
+            state.getScene().scene.remove(world.getScene());
+            world.getScene().destroy();
+            world = undefined;
+            store.world = undefined;
+        });
+
         createInput();
-
-        parallaxBackground = createParallaxBackground();
-        enemyFactory.readSpawnConfig(levels.level1);
-
-        const player = createPlayer();
-        store.player = player;
-        addEntity(player);
     }
 
     function create() {
@@ -104,8 +112,10 @@ const Game = function GameFunc() {
         qTree.clear();
         qTree.insertAll(gameEntities);
 
-        parallaxBackground.update(time);
-        enemyFactory.update(time);
+        backgroundScene.update(time);
+        if (world) {
+            world.update(time);
+        }
 
         gameEntities.forEach((entity) => {
             entity.update(time);

@@ -24,7 +24,7 @@ const createButton = function createButtonFunc(parent) {
     }
 
     function onClick(e) {
-        state.emit(eventConfig.EVENTS.BUTTON.CLICK, e);
+        state.emit(eventConfig.BUTTON.CLICK, e);
     }
 
     function refresh() {
@@ -36,7 +36,7 @@ const createButton = function createButtonFunc(parent) {
         }
         background.clear();
         background.lineStyle(3, 0xcccccc, 1);
-        background.fillStyle(0x333333, 1);
+        background.fillStyle(0x333333, 0.7);
         background.strokeRect(state.getX(), state.getY(), state.getWidth(), state.getHeight());
         background.fillRect(state.getX(), state.getY(), state.getWidth(), state.getHeight());
 
@@ -45,7 +45,7 @@ const createButton = function createButtonFunc(parent) {
 
         if (!textElem) {
             textElem = parent.add.text(0, 0, '', {
-                font: '64px Arial',
+                font: '64px future',
                 fill: '#eeeeee',
                 align: 'center',
             });

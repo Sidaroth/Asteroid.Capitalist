@@ -1,6 +1,7 @@
 export default {
     GAME: {
         STARTED: 'game started',
+        ENDED: 'game ended',
     },
     ENTITY: {
         DIE: 'entity died',
@@ -18,5 +19,8 @@ export default {
     },
     METEOR: {
         DESTROY: 'meteor destroyed',
+    },
+    BUTTON: {
+        CLICK: 'click',
     },
 };

@@ -11,6 +11,7 @@ export default {
         UI: 'UI',
         BACKGROUND: 'game_background',
         WORLD: 'game_world',
+        MAINMENU: 'main_menu',
     },
     DEFAULT_TEXT_STYLE: {
         font: '32px future',
@@ -27,7 +28,7 @@ export default {
                 x: 100,
                 y: 300,
             },
-            lives: 3,
+            lives: 1,
             invulnerabilityPeriod: 4000,
         },
     },

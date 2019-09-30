@@ -20,13 +20,15 @@ const createBullet = (pos, direction, type = undefined) => {
     let creationTime;
 
     function createSprite() {
-        if (type === gameConfig.TYPES.ENEMY) {
-            state.createSpriteFromKey(store.world.getScene(), spriteConfig.BLUE_LASER.KEY);
-        } else {
-            state.createSpriteFromKey(store.world.getScene(), spriteConfig.LASER.KEY);
-        }
+        if (store.world) {
+            if (type === gameConfig.TYPES.ENEMY) {
+                state.createSpriteFromKey(store.world.getScene(), spriteConfig.BLUE_LASER.KEY);
+            } else {
+                state.createSpriteFromKey(store.world.getScene(), spriteConfig.LASER.KEY);
+            }
 
-        state.setRotation(direction.angle());
+            state.setRotation(direction.angle());
+        }
     }
 
     function __constructor() {

@@ -84,7 +84,9 @@ const hasSprite = function hasSpriteFunc(state) {
     }
 
     function destroy() {
-        sprite.destroy();
+        if (sprite) {
+            sprite.destroy();
+        }
     }
 
     return {
