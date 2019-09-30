@@ -25,7 +25,6 @@ const Game = function GameFunc() {
     let mainMenu;
     const keyboard = createKeyboard();
 
-    // TODO: Move into world1/level1 scene, not the global world.
     const gameEntities = [];
     const qTree = createQuadTree(new Rect(0, 0, gameConfig.GAME.VIEWWIDTH, gameConfig.GAME.VIEWHEIGHT), 1, 8); // Specify world bounds.
     let gfxContext;

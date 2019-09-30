@@ -55,7 +55,6 @@ const createPlayer = function createPlayerFunc() {
     }
 
     function __constructor() {
-        state.setImmune(true); // TODO: MUST FIX
         store.score = 0;
         state.type = gameConfig.TYPES.PLAYER;
         createSprite();

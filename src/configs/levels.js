@@ -7,6 +7,7 @@ import createReverseSigmoid from 'src/math/movement/reverseSigmoid';
 import getRandomInt from 'src/math/getRandomInt';
 import vFormation from './waves/vFormation';
 import tightFormation from './waves/tightFormation';
+import alternatingStandardShooterSine from './waves/alternatingStandardShooterSine';
 
 export default {
     level1: {
@@ -367,32 +368,7 @@ export default {
                 },
                 spawnTime: 140000,
             },
-            {
-                config: {
-                    location: new Vector(2000, 0),
-                    enemyCount: 12,
-                    enemySpacing: new Vector(150, 0),
-                    enemyConfig: {
-                        type: 'standard',
-                        health: 2,
-                    },
-                    movement: createSine,
-                },
-                spawnTime: 150500,
-            },
-            {
-                config: {
-                    location: new Vector(2000, 0),
-                    enemyCount: 12,
-                    enemySpacing: new Vector(150, 0),
-                    enemyConfig: {
-                        type: 'shooting',
-                        health: 1,
-                    },
-                    movement: createSine,
-                },
-                spawnTime: 150750,
-            },
+            ...alternatingStandardShooterSine(150000, 12),
             {
                 config: {
                     location: new Vector(2000, 240),
@@ -417,7 +393,7 @@ export default {
                     },
                     movement: undefined,
                 },
-                spawnTime: 165000,
+                spawnTime: 166000,
             },
             {
                 config: {
@@ -535,6 +511,12 @@ export default {
                     type: gameConfig.CONSTS.POWERUPS.DOUBLE_ROF,
                 },
                 spawnTime: 65000,
+            },
+            {
+                config: {
+                    location: new Vector(gameConfig.GAME.VIEWWIDTH / 2, 800),
+                    type: gameConfig.CONSTS.POWERUPS.DOUBLE_ROF,
+                },
             },
         ],
         levelLength: 360000, // estimated, in ms.
