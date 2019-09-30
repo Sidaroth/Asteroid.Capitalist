@@ -45,7 +45,9 @@ const createAudioManager = function createAudioManagerFunc(parentScene) {
 
         Object.keys(audioConfig.MUSIC).forEach((objKey) => {
             const MUSIC = audioConfig.MUSIC[objKey];
-            music.set(MUSIC.KEY, scene.sound.add(MUSIC.KEY));
+            music.set(MUSIC.KEY, scene.sound.add(MUSIC.KEY, {
+                loop: true,
+            }));
         });
 
         Object.keys(audioConfig.SFX).forEach((objKey) => {
