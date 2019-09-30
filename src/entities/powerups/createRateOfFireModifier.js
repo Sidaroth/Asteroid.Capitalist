@@ -21,7 +21,7 @@ const createRateOfFireModifier = (pos) => {
     }
 
     function activate() {
-        store.audioManager.playSfx(audioConfig.SFX.DOUBLE_ROF.KEY, 5);
+        store.audioManager.playSfx(audioConfig.SFX.DOUBLE_ROF.KEY, 6);
         state.entity.setROFModifier(modifier);
     }
 

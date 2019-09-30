@@ -94,7 +94,29 @@ export default {
                 spawnTime: 50000,
             },
         ],
-        powerups: [],
+        powerups: [
+            {
+                config: {
+                    location: new Vector(gameConfig.GAME.VIEWWIDTH / 2, 200),
+                    type: gameConfig.CONSTS.POWERUPS.SHIELD,
+                },
+                spawnTime: 5000,
+            },
+            {
+                config: {
+                    location: new Vector(gameConfig.GAME.VIEWWIDTH / 2, 200),
+                    type: gameConfig.CONSTS.POWERUPS.SHIELD,
+                },
+                spawnTime: 45000,
+            },
+            {
+                config: {
+                    location: new Vector(gameConfig.GAME.VIEWWIDTH / 2, 200),
+                    type: gameConfig.CONSTS.POWERUPS.DOUBLE_ROF,
+                },
+                spawnTime: 17500,
+            },
+        ],
         levelLength: 75000, // in ms.
     },
 };

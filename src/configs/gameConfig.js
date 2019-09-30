@@ -47,6 +47,10 @@ export default {
             LEFT: 2,
             RIGHT: 3,
         },
+        POWERUPS: {
+            SHIELD: 'shield',
+            DOUBLE_ROF: 'double_ROF',
+        },
     },
     TYPES: {
         PLAYER: 'player',

@@ -2,6 +2,9 @@ import createEnemy from './createEnemy';
 import createState from 'utils/createState';
 import store from 'src/store';
 import createBoss from './createBoss';
+import gameConfig from 'configs/gameConfig';
+import createShield from './powerups/createShield';
+import createRateOfFireModifier from './powerups/createRateOfFireModifier';
 
 const createLevelMaster = () => {
     const state = {};
@@ -42,7 +45,14 @@ const createLevelMaster = () => {
         }
     }
 
-    // TODO: MUST-FIX powerup spawning.
+    function spawnPowerup(location, type) {
+        if (type === gameConfig.CONSTS.POWERUPS.SHIELD) {
+            createShield(location);
+        } else if (type === gameConfig.CONSTS.POWERUPS.DOUBLE_ROF) {
+            createRateOfFireModifier(location);
+        }
+    }
+
     function readSpawnConfig(config) {
         const { waves, powerups } = config;
         waves.forEach((wave) => {
@@ -61,7 +71,8 @@ const createLevelMaster = () => {
     }
 
     function update(time) {
-        if (nextWave && performance.now() > levelStartTime + nextWave.spawnTime) {
+        const now = performance.now();
+        if (nextWave && now > levelStartTime + nextWave.spawnTime) {
             spawnWave(
                 nextWave.config.location,
                 nextWave.config.enemySpacing,
@@ -70,6 +81,11 @@ const createLevelMaster = () => {
                 nextWave.config.movement,
             );
             nextWave = upcomingWaves.pop();
+        }
+
+        if (nextPowerup && now > levelStartTime + nextPowerup.spawnTime) {
+            spawnPowerup(nextPowerup.config.location, nextPowerup.config.type);
+            nextPowerup = upcomingPowerups.pop();
         }
     }
 

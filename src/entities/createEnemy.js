@@ -34,7 +34,7 @@ const createEnemy = (pos, conf = {}, movementFunc = undefined) => {
         if (config.type === 'standard') {
             state.createSpriteFromAtlas(store.world.getScene(), spriteConfig.SHIPPACK.KEY, 'spaceShips_001.png');
         } else if (config.type === 'shooting') {
-            state.createSpriteFromAtlas(store.world.getScene(), spriteConfig.SHIPPACK.KEY, 'spaceShips_001.png');
+            state.createSpriteFromAtlas(store.world.getScene(), spriteConfig.SHIPPACK.KEY, 'spaceShips_003.png');
         }
 
         state.setPosition(pos);
@@ -71,7 +71,7 @@ const createEnemy = (pos, conf = {}, movementFunc = undefined) => {
                 .copy(playerPos)
                 .sub(p)
                 .getUnit();
-            createBullet(p.add(direction.clone().multiply(15)), direction, gameConfig.TYPES.ENEMY);
+            createBullet(p.add(direction.clone().multiply(40)), direction, gameConfig.TYPES.ENEMY);
             store.audioManager.playSfx(audioConfig.SFX.LASER.KEY, 0.5);
 
             timeOfLastShot = performance.now();
