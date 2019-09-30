@@ -5,6 +5,8 @@ import createCosine from 'src/math/movement/cosine';
 import createSigmoid from 'src/math/movement/sigmoid';
 import createReverseSigmoid from 'src/math/movement/reverseSigmoid';
 import getRandomInt from 'src/math/getRandomInt';
+import vFormation from './waves/vFormation';
+import tightFormation from './waves/tightFormation';
 
 export default {
     level1: {
@@ -16,11 +18,11 @@ export default {
                     enemySpacing: new Vector(75, 0),
                     enemyConfig: {
                         type: 'boss',
-                        health: 400, // should be fine, though a bit difficult. Probably needs some powerups.
+                        health: 325, // should be fine, though a bit difficult. Probably needs some powerups.
                     },
-                    movement: undefined,
+                    movement: undefined, // Boss has it's own movement pattern predefined.
                 },
-                spawnTime: 240000,
+                spawnTime: 245000,
             },
             {
                 config: {
@@ -402,7 +404,7 @@ export default {
                     },
                     movement: undefined,
                 },
-                spawnTime: 160000,
+                spawnTime: 165000,
             },
             {
                 config: {
@@ -415,7 +417,7 @@ export default {
                     },
                     movement: undefined,
                 },
-                spawnTime: 161000,
+                spawnTime: 165000,
             },
             {
                 config: {
@@ -428,7 +430,7 @@ export default {
                     },
                     movement: createReverseSigmoid,
                 },
-                spawnTime: 170000,
+                spawnTime: 178000,
             },
             {
                 config: {
@@ -441,61 +443,9 @@ export default {
                     },
                     movement: createSigmoid,
                 },
-                spawnTime: 170000,
-            },
-            {
-                config: {
-                    location: new Vector(2000, 240),
-                    enemyCount: 2,
-                    enemySpacing: new Vector(0, 80),
-                    enemyConfig: {
-                        type: 'standard',
-                        health: 4,
-                    },
-                    movement: undefined,
-                },
                 spawnTime: 183000,
             },
-            {
-                config: {
-                    location: new Vector(2000, 280),
-                    enemyCount: 1,
-                    enemySpacing: new Vector(0, 80),
-                    enemyConfig: {
-                        type: 'shooting',
-                        health: 2,
-                        rateOfFire: 20,
-                    },
-                    movement: undefined,
-                },
-                spawnTime: 183450,
-            },
-            {
-                config: {
-                    location: new Vector(2000, 120),
-                    enemyCount: 2,
-                    enemySpacing: new Vector(0, 160),
-                    enemyConfig: {
-                        type: 'standard',
-                        health: 4,
-                    },
-                    movement: undefined,
-                },
-                spawnTime: 183700,
-            },
-            {
-                config: {
-                    location: new Vector(2000, 240),
-                    enemyCount: 2,
-                    enemySpacing: new Vector(0, 80),
-                    enemyConfig: {
-                        type: 'standard',
-                        health: 4,
-                    },
-                    movement: undefined,
-                },
-                spawnTime: 183100,
-            },
+            ...tightFormation(190000, 240),
             {
                 config: {
                     location: new Vector(2000, 200),
@@ -507,7 +457,7 @@ export default {
                     },
                     movement: undefined,
                 },
-                spawnTime: 194000,
+                spawnTime: 199000,
             },
             {
                 config: {
@@ -520,7 +470,7 @@ export default {
                     },
                     movement: undefined,
                 },
-                spawnTime: 204000,
+                spawnTime: 199900,
             },
             {
                 config: {
@@ -533,7 +483,7 @@ export default {
                     },
                     movement: createSine,
                 },
-                spawnTime: 211500,
+                spawnTime: 210500,
             },
             {
                 config: {
@@ -546,7 +496,7 @@ export default {
                     },
                     movement: createReverseSigmoid,
                 },
-                spawnTime: 218000,
+                spawnTime: 217000,
             },
             {
                 config: {
@@ -559,60 +509,10 @@ export default {
                     },
                     movement: createSigmoid,
                 },
-                spawnTime: 223000,
+                spawnTime: 222000,
             },
-            {
-                config: {
-                    location: new Vector(2000, 620),
-                    enemyCount: 1,
-                    enemySpacing: new Vector(0, 80),
-                    enemyConfig: {
-                        type: 'shooting',
-                        health: 1,
-                    },
-                    movement: undefined,
-                },
-                spawnTime: 225200,
-            },
-            {
-                config: {
-                    location: new Vector(2000, 580),
-                    enemyCount: 2,
-                    enemySpacing: new Vector(0, 80),
-                    enemyConfig: {
-                        type: 'shooting',
-                        health: 1,
-                    },
-                    movement: undefined,
-                },
-                spawnTime: 225240,
-            },
-            {
-                config: {
-                    location: new Vector(2000, 460),
-                    enemyCount: 2,
-                    enemySpacing: new Vector(0, 160),
-                    enemyConfig: {
-                        type: 'shooting',
-                        health: 1,
-                    },
-                    movement: undefined,
-                },
-                spawnTime: 225280,
-            },
-            {
-                config: {
-                    location: new Vector(2000, 340),
-                    enemyCount: 2,
-                    enemySpacing: new Vector(0, 240),
-                    enemyConfig: {
-                        type: 'shooting',
-                        health: 1,
-                    },
-                    movement: undefined,
-                },
-                spawnTime: 225320,
-            },
+            ...vFormation(232000, 240),
+            ...vFormation(233000, 620),
         ],
         powerups: [
             {

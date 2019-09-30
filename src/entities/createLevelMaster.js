@@ -31,6 +31,7 @@ const createLevelMaster = () => {
     }
 
     function spawnWave(location, spacing, size, config, movementFunction) {
+        console.log(performance.now());
         if (config.type === 'boss') {
             const boss = state.spawnBoss(location, config);
             enemies.push(boss);
