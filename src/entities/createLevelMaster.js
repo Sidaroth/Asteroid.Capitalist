@@ -96,7 +96,6 @@ const createLevelMaster = () => {
         upcomingPowerups = [];
         enemies.forEach(e => e.destroy());
         enemies = [];
-        readSpawnConfig(levelConfig);
     }
 
     const localState = {
