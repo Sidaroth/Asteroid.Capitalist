@@ -6,6 +6,7 @@ export default {
         DIE: 'entity died',
         RESPAWN: 'entity respawned',
         TAKEDAMAGE: 'entity took damage',
+        SCOREAWARDED: 'score awarded',
     },
     KEY: {
         DOWN: 'key down',

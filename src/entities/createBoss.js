@@ -29,26 +29,28 @@ const createBoss = (pos, config) => {
     const rateOfFire = 2;
 
     function __constructor() {
+        state.type = 'boss';
         state.createSpriteFromAtlas(store.world.getScene(), spriteConfig.SHIPPACK.KEY, 'spaceShips_005.png');
         state.setRotation(Math.PI / 2);
         state.setPosition(pos.clone().add(800));
 
         const collisionRadius = 100;
         state.setColliderShape(Matter.Bodies.circle(state.getX(), state.getY(), collisionRadius));
-        state.setVisionRadius(collisionRadius);
+        state.setVisionRadius(collisionRadius * 1.5);
         state.setCollisionCategory(gameConfig.COLLISION.enemy);
         state.setCollidesWith([gameConfig.COLLISION.bullet, gameConfig.COLLISION.player]);
-        store.game.addEntity(state);
-        store.audioManager.playSfx(audioConfig.SFX.SIREN.KEY, 2);
 
         state.listenOn(state, eventConfig.ENTITY.DIE, (e) => {
             if (e.lives <= 0) {
+                state.emitGlobal(eventConfig.ENTITY.SCOREAWARDED, state.getMaxHealth() * 10);
                 const explosion = createExplosion();
                 explosion.setPosition(state.getPosition());
                 explosion.setScale(3);
                 state.destroy();
             }
         });
+
+        store.audioManager.playSfx(audioConfig.SFX.SIREN.KEY, 2);
     }
 
     function shoot() {
@@ -94,9 +96,14 @@ const createBoss = (pos, config) => {
         return time;
     }
 
+    function destroy() {
+        store.game.removeEntity(state);
+    }
+
     const localState = {
         __constructor,
         update,
+        destroy,
     };
 
     return createState('Boss', state, {

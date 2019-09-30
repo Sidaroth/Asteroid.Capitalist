@@ -45,6 +45,7 @@ const createEnemy = (pos, conf = {}, movementFunc = undefined) => {
 
         state.listenOn(state, eventConfig.ENTITY.DIE, (e) => {
             if (e.lives <= 0) {
+                state.emitGlobal(eventConfig.ENTITY.SCOREAWARDED, state.getMaxHealth() * 10);
                 const explosion = createExplosion();
                 explosion.setPosition(state.getPosition());
                 state.destroy();

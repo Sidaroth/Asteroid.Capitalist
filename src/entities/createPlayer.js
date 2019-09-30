@@ -29,6 +29,7 @@ const createPlayer = function createPlayerFunc() {
     let rateOfFire = 5; // Per second.
     let timeOfLastShot = 0;
     let facingDirection;
+    let scoreText;
 
     // powerups.
     let ROFModifier = 1;
@@ -46,7 +47,12 @@ const createPlayer = function createPlayerFunc() {
         state.createSpriteFromAtlas(store.world.getScene(), spriteConfig.SHIPPACK.KEY, 'playerShip2_green.png');
     }
 
+    function prettyScoreString() {
+        return store.score.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ' ');
+    }
+
     function __constructor() {
+        store.score = 0;
         state.type = gameConfig.TYPES.PLAYER;
         createSprite();
         state.setPosition({ x: gameConfig.GAME.VIEWWIDTH / 2, y: gameConfig.GAME.VIEWHEIGHT / 2 });
@@ -57,6 +63,8 @@ const createPlayer = function createPlayerFunc() {
             const icon = store.UIScene.getScene().add.image(30 + 80 * i, 30, spriteConfig.PLAYER_SHIP_ICON.KEY);
             livesIcons.push(icon);
         }
+
+        scoreText = store.UIScene.getScene().add.text(300, 10, `$ ${prettyScoreString()}`, gameConfig.DEFAULT_TEXT_STYLE);
 
         state.listenOn(state, eventConfig.ENTITY.DIE, (e) => {
             const explosion = createExplosion();
@@ -69,6 +77,11 @@ const createPlayer = function createPlayerFunc() {
                     icon.setVisible(false);
                 }
             });
+        });
+
+        state.listenGlobal(eventConfig.ENTITY.SCOREAWARDED, (score) => {
+            store.score += score;
+            scoreText.text = `$ ${prettyScoreString()}`;
         });
     }
 
