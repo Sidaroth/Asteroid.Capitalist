@@ -30,7 +30,7 @@ const createPlayer = function createPlayerFunc() {
     let timeOfLastShot = 0;
     let facingDirection;
 
-    // powerups. TODO: Do this better.
+    // powerups.
     let ROFModifier = 1;
 
     const invulnerableBlinkTime = 100;

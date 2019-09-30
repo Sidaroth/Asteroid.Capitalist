@@ -8,6 +8,7 @@ import canEmit from 'components/events/canEmit';
 import isGameEntity from 'components/entities/isGameEntity';
 import isPowerup from 'components/isPowerup';
 import spriteConfig from 'configs/spriteConfig';
+import audioConfig from 'configs/audioConfig';
 
 const createRateOfFireModifier = (pos) => {
     const state = {};
@@ -20,6 +21,7 @@ const createRateOfFireModifier = (pos) => {
     }
 
     function activate() {
+        store.audioManager.playSfx(audioConfig.SFX.DOUBLE_ROF.KEY, 5);
         state.entity.setROFModifier(modifier);
     }
 

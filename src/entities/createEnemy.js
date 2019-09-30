@@ -24,12 +24,12 @@ const createEnemy = (pos, movementFunc = undefined) => {
 
     function __constructor() {
         state.available = false;
-        state.createSpriteFromAtlas(store.world.getScene(), spriteConfig.SHIPPACK.KEY, 'enemyRed2.png');
+        state.createSpriteFromAtlas(store.world.getScene(), spriteConfig.SHIPPACK.KEY, 'spaceShips_001.png');
         state.setPosition(pos);
         state.setColliderShape(Matter.Bodies.circle(state.getX(), state.getY(), 35));
         state.setCollisionCategory(gameConfig.COLLISION.enemy);
         state.setCollidesWith([gameConfig.COLLISION.bullet, gameConfig.COLLISION.player]);
-        state.setRotation(-Math.PI / 2);
+        state.setRotation(Math.PI / 2);
 
         state.listenOn(state, eventConfig.ENTITY.DIE, (e) => {
             if (e.lives <= 0) {

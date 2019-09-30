@@ -9,6 +9,7 @@ import hasCollision from 'components/entities/hasCollision';
 import store from 'src/store';
 import spriteConfig from 'configs/spriteConfig';
 import Phaser from 'phaser';
+import audioConfig from 'configs/audioConfig';
 
 const createShield = (pos) => {
     const state = {};
@@ -25,9 +26,11 @@ const createShield = (pos) => {
         const world = store.world.getScene();
         sprite = new Phaser.GameObjects.Sprite(world, state.entity.getX(), state.entity.getY(), spriteConfig.SHIELD.KEY);
         world.add.existing(sprite);
+        store.audioManager.playSfx(audioConfig.SFX.SHIELD_UP.KEY, 4);
     }
 
     function deactivate() {
+        store.audioManager.playSfx(audioConfig.SFX.SHIELD_DOWN.KEY, 4);
         state.entity.setImmune(false);
         sprite.destroy();
     }

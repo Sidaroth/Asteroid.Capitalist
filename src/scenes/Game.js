@@ -17,6 +17,7 @@ import levels from 'configs/levels';
 import createRateOfFireModifier from 'entities/powerups/createRateOfFireModifier';
 import Vector from 'src/math/vector';
 import createShield from 'entities/powerups/createShield';
+import createBoss from 'entities/createBoss';
 
 /**
  * Responsible for delegating the various levels, holding the various core systems and such.
@@ -84,6 +85,7 @@ const Game = function GameFunc() {
 
         const RAF = createRateOfFireModifier(new Vector(gameConfig.GAME.VIEWWIDTH / 2, 400));
         const shield = createShield(new Vector(gameConfig.GAME.VIEWWIDTH / 2, 800));
+        const boss = createBoss(new Vector(1600, 400));
 
         const player = createPlayer();
         store.player = player;

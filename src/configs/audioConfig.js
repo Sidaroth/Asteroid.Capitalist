@@ -8,11 +8,23 @@ export default {
     SFX: {
         LASER: {
             KEY: 'laser',
-            PATH: 'assets/images/Bonus/laser6.ogg',
+            PATH: 'assets/audio/laser6.ogg',
         },
         EXPLOSION: {
             KEY: 'explosion',
-            PATH: 'assets/images/Bonus/explosion.ogg',
+            PATH: 'assets/audio/explosion.ogg',
+        },
+        SHIELD_UP: {
+            KEY: 'shieldup',
+            PATH: 'assets/audio/shieldUp.ogg',
+        },
+        SHIELD_DOWN: {
+            KEY: 'shield_down',
+            PATH: 'assets/audio/shieldDown.ogg',
+        },
+        DOUBLE_ROF: {
+            KEY: 'double_rof',
+            PATH: 'assets/audio/powerup.ogg',
         },
     },
 };
