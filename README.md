@@ -36,10 +36,13 @@ If you want to contribute to the project, and submit any pull requests are very 
 ### Attributions
 Music (CC-0):
 - [Zombies March by yd](https://opengameart.org/content/zombies-march)
+
 Sound Effects (CC-3)
 - [Explosion by unfa](https://freesound.org/people/unfa/sounds/352143/)
+
 Sound Effects (CC-0)
 - [Sirens by aquinn](https://opengameart.org/content/sirens-and-alarm-noise)
 - [Powerups by Joth](https://opengameart.org/content/7-space-sounds)
+
 Sprites, Backgrounds, Fonts and Sound Effects (CC0 1.0)
 - [Misc by Kenney.nl](https://kenney.nl)
