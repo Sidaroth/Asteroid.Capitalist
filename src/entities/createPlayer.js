@@ -31,6 +31,8 @@ const createPlayer = function createPlayerFunc() {
     let facingDirection;
     let scoreText;
 
+    const edgeOffset = 50;
+
     // powerups.
     let ROFModifier = 1;
 
@@ -130,6 +132,16 @@ const createPlayer = function createPlayerFunc() {
         }
     }
 
+    function checkBounds(pos) {
+        const newPos = pos;
+        if (pos.x < edgeOffset) newPos.x = edgeOffset;
+        if (pos.x > gameConfig.GAME.VIEWWIDTH - edgeOffset) newPos.x = gameConfig.GAME.VIEWWIDTH - edgeOffset;
+        if (pos.y < edgeOffset) newPos.y = edgeOffset;
+        if (pos.y > gameConfig.GAME.VIEWHEIGHT - edgeOffset) newPos.y = gameConfig.GAME.VIEWHEIGHT - edgeOffset;
+
+        return newPos;
+    }
+
     function move(time) {
         acceleration.zero();
         checkMovement();
@@ -140,14 +152,10 @@ const createPlayer = function createPlayerFunc() {
 
         if (velocity.squaredLength() < 0.5 * time.deltaScale) velocity.zero(); // We don't want to drift "endlessly" when the velocity is almost non-existant.
 
-        const pos = state.getPosition();
+        let pos = state.getPosition();
         pos.x += velocity.x * time.deltaScale;
         pos.y += velocity.y * time.deltaScale;
-
-        if (pos.x < 0) pos.x = 0;
-        if (pos.x > gameConfig.GAME.VIEWWIDTH) pos.x = gameConfig.GAME.VIEWWIDTH;
-        if (pos.y < 0) pos.y = 0;
-        if (pos.y > gameConfig.GAME.VIEWHEIGHT) pos.y = gameConfig.GAME.VIEWHEIGHT;
+        pos = checkBounds(pos);
 
         state.setPosition(pos);
     }
