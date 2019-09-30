@@ -17,6 +17,34 @@ export default {
         font: '32px future',
         fill: '#ffffff',
     },
+    TITLE_TEXT_STYLE: {
+        font: '100px future',
+        fill: '#ffffff',
+    },
+    STORY_TEXT_STYLE: {
+        font: '40px future',
+        fill: '#ffffff',
+        align: 'center',
+        wordWrap: {
+            width: 1400,
+        },
+    },
+    INSTRUCTIONS_TEXT_STYLE: {
+        font: '32px future',
+        fill: '#ffffff',
+        align: 'center',
+        wordWrap: {
+            width: 1400,
+        },
+    },
+    CREDITS_TEXT_STYLE: {
+        font: '24px future',
+        fill: '#ffffff',
+        align: 'center',
+        wordWrap: {
+            width: 1400,
+        },
+    },
     UI_DEFAULT: {
         tint: 0xaaaaaa,
     },
