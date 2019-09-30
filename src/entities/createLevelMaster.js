@@ -40,6 +40,8 @@ const createLevelMaster = () => {
         nextPowerup = upcomingPowerups.pop();
 
         levelStartTime = performance.now();
+
+        console.log(nextWave);
     }
 
     function update(time) {

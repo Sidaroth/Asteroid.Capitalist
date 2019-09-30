@@ -9,7 +9,7 @@ import createQuadTree from '../quadTree/createQuadTree';
 import Rect from '../quadTree/rect';
 import createKeyboard from 'core/createKeyboard';
 import store from 'root/store';
-import enemyFactory from 'entities/createEnemyFactory';
+import enemyFactory from 'entities/createLevelMaster';
 import createParallaxBackground from 'entities/createParallaxBackground';
 import Background from './Background';
 import World from './World';
@@ -18,6 +18,7 @@ import createRateOfFireModifier from 'entities/powerups/createRateOfFireModifier
 import Vector from 'src/math/vector';
 import createShield from 'entities/powerups/createShield';
 import createBoss from 'entities/createBoss';
+import clamp from 'src/math/clamp';
 
 /**
  * Responsible for delegating the various levels, holding the various core systems and such.

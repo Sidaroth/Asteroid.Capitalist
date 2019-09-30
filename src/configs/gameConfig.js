@@ -39,6 +39,7 @@ export default {
         player: 0x0003,
         enemy: 0x0004,
         powerup: 0x0005,
+        enemyBullet: 0x0006,
     },
     CONSTS: {
         DIRECTION: {

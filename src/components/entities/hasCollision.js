@@ -13,7 +13,7 @@ const hasCollision = (state) => {
 
     // Only used to filter out entities that are not necessary to check collision against.
     let visionCircle;
-    const visionRadius = 35;
+    let visionRadius = 35;
 
     function __constructor() {
         // Collider.
@@ -55,6 +55,10 @@ const hasCollision = (state) => {
 
     function addCollidesWith(cat) {
         collidesWith.push(cat);
+    }
+
+    function setVisionRadius(radius) {
+        visionRadius = radius;
     }
 
     function drawVision(somethingInRange = false) {
@@ -120,6 +124,7 @@ const hasCollision = (state) => {
         setColliderShape,
         addCollidesWith,
         setCollidesWith,
+        setVisionRadius,
         update,
     };
 };

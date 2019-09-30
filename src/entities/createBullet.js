@@ -11,7 +11,7 @@ import canListen from 'components/events/canListen';
 import eventConfig from 'configs/eventConfig';
 import spriteConfig from 'configs/spriteConfig';
 
-const createBullet = (pos, direction) => {
+const createBullet = (pos, direction, type = undefined) => {
     const state = {};
     const speed = 15;
     const velocity = direction.clone().setLength(speed);
@@ -20,7 +20,12 @@ const createBullet = (pos, direction) => {
     let creationTime;
 
     function createSprite() {
-        state.createSpriteFromKey(store.world.getScene(), spriteConfig.LASER.KEY);
+        if (type === gameConfig.TYPES.ENEMY) {
+            state.createSpriteFromKey(store.world.getScene(), spriteConfig.BLUE_LASER.KEY);
+        } else {
+            state.createSpriteFromKey(store.world.getScene(), spriteConfig.LASER.KEY);
+        }
+
         state.setRotation(direction.angle());
     }
 
@@ -29,6 +34,7 @@ const createBullet = (pos, direction) => {
         creationTime = Date.now();
         state.setPosition(pos);
         createSprite();
+
         state.setColliderShape(Matter.Bodies.circle(state.getX(), state.getY(), 5));
         state.setCollisionCategory(gameConfig.COLLISION.bullet);
         state.setCollidesWith([gameConfig.COLLISION.enemy]);
@@ -36,6 +42,7 @@ const createBullet = (pos, direction) => {
         state.listenOn(state, eventConfig.COLLISION.START, (e) => {
             state.destroy();
         });
+
         store.game.addEntity(state);
     }
 

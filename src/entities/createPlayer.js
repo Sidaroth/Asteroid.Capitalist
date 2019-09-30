@@ -106,7 +106,7 @@ const createPlayer = function createPlayerFunc() {
 
     function shoot() {
         if (store.mouse && store.mouse.isDown) {
-            const now = Date.now();
+            const now = performance.now();
             if (now - timeOfLastShot > 1000 / (rateOfFire * ROFModifier)) {
                 timeOfLastShot = now;
 

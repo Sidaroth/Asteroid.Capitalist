@@ -31,6 +31,14 @@ export default {
         KEY: 'laser',
         PATH: 'assets/images/PNG/Lasers/laserGreen05.png',
     },
+    RED_LASER: {
+        KEY: 'red_laser',
+        PATH: 'assets/images/PNG/Lasers/laserRed03.png',
+    },
+    BLUE_LASER: {
+        KEY: 'blue_laser',
+        PATH: 'assets/images/PNG/Lasers/laserBlue03.png',
+    },
     // Atlases/spritesheets.
     SHIPPACK: {
         KEY: 'ship',
