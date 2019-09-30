@@ -13,10 +13,8 @@ export default {
         WORLD: 'game_world',
     },
     DEFAULT_TEXT_STYLE: {
-        font: 'Roboto',
-        fontSize: 20,
+        font: '32px future',
         fill: '#ffffff',
-        smoothed: false,
     },
     UI_DEFAULT: {
         tint: 0xaaaaaa,

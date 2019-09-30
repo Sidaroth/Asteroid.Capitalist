@@ -38,6 +38,10 @@ const hasHealth = function hasHealthFunc(state, config = {}) {
         return health;
     }
 
+    function getMaxHealth() {
+        return maxHealth;
+    }
+
     function setLives(l) {
         lives = l;
     }
@@ -113,6 +117,7 @@ const hasHealth = function hasHealthFunc(state, config = {}) {
         isInvulnerable,
         setHealth,
         getHealth,
+        getMaxHealth,
         setLives,
         getLives,
         setRespawnPosition,

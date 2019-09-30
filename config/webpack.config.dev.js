@@ -89,7 +89,7 @@ module.exports = {
                 ],
             },
             {
-                test: /\.(jpg|png|woff)$/,
+                test: /\.(jpg|png|woff|ttf)$/,
                 use: 'file-loader',
             },
         ],
