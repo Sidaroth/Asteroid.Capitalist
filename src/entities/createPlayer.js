@@ -40,7 +40,7 @@ const createPlayer = function createPlayerFunc() {
     const invulnerableBlinkTime = 100;
     let lastBlink = performance.now();
 
-    const livesIcons = [];
+    let livesIcons = [];
     let activePowerups = [];
 
     // Drag
@@ -233,6 +233,10 @@ const createPlayer = function createPlayerFunc() {
             scoreText.destroy();
             scoreText = undefined;
         }
+        livesIcons.forEach((icon) => {
+            icon.destroy();
+        });
+        livesIcons = [];
     }
 
     // functions and properties listed here will be public.
