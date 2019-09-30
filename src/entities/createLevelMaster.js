@@ -41,7 +41,7 @@ const createLevelMaster = () => {
 
         levelStartTime = performance.now();
 
-        console.log(nextWave);
+        // console.log(nextWave);
     }
 
     function update(time) {

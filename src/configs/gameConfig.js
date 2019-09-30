@@ -2,7 +2,7 @@ export default {
     GAME: {
         VIEWHEIGHT: 1080,
         VIEWWIDTH: 1920,
-        TITLE: 'Replace Me',
+        TITLE: 'Asteroid Capitalist',
     },
     SCENES: {
         BOOT: 'game_boot',

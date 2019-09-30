@@ -6,5 +6,5 @@ export default {
         ENABLE_FACTORY_FILTER: false,
         FACTORY_FILTER: ['Note'],
     },
-    DEBUG: true,
+    DEBUG: false,
 };

@@ -123,7 +123,7 @@ const Game = function GameFunc() {
             entity.update(time);
         });
 
-        if (UIScene.getGUIController().object.renderQTree) {
+        if (UIScene.getGUIController() && UIScene.getGUIController().object.renderQTree) {
             qTree.render(gfxContext);
         }
         return time;

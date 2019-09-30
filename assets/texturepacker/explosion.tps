@@ -132,7 +132,7 @@
             <key>json</key>
             <struct type="DataFile">
                 <key>name</key>
-                <filename></filename>
+                <filename>../images/explosion.json</filename>
             </struct>
         </map>
         <key>multiPack</key>
@@ -181,7 +181,7 @@
         </struct>
         <key>individualSpriteSettings</key>
         <map type="IndividualSpriteSettingsMap">
-            <key type="filename">../images/explosions/tank_explosion2.png</key>
+            <key type="filename">../images/explosions/explosion0.png</key>
             <struct type="IndividualSpriteSettings">
                 <key>pivotPoint</key>
                 <point_f>0.5,0.5</point_f>
@@ -194,7 +194,7 @@
                 <key>scale9FromFile</key>
                 <false/>
             </struct>
-            <key type="filename">../images/explosions/tank_explosion3.png</key>
+            <key type="filename">../images/explosions/explosion1.png</key>
             <struct type="IndividualSpriteSettings">
                 <key>pivotPoint</key>
                 <point_f>0.5,0.5</point_f>
@@ -207,7 +207,7 @@
                 <key>scale9FromFile</key>
                 <false/>
             </struct>
-            <key type="filename">../images/explosions/tank_explosion4.png</key>
+            <key type="filename">../images/explosions/explosion2.png</key>
             <struct type="IndividualSpriteSettings">
                 <key>pivotPoint</key>
                 <point_f>0.5,0.5</point_f>
@@ -220,7 +220,7 @@
                 <key>scale9FromFile</key>
                 <false/>
             </struct>
-            <key type="filename">../images/explosions/tank_explosion8.png</key>
+            <key type="filename">../images/explosions/explosion3.png</key>
             <struct type="IndividualSpriteSettings">
                 <key>pivotPoint</key>
                 <point_f>0.5,0.5</point_f>
@@ -236,10 +236,10 @@
         </map>
         <key>fileList</key>
         <array>
-            <filename>../images/explosions/tank_explosion2.png</filename>
-            <filename>../images/explosions/tank_explosion3.png</filename>
-            <filename>../images/explosions/tank_explosion4.png</filename>
-            <filename>../images/explosions/tank_explosion8.png</filename>
+            <filename>../images/explosions/explosion0.png</filename>
+            <filename>../images/explosions/explosion1.png</filename>
+            <filename>../images/explosions/explosion2.png</filename>
+            <filename>../images/explosions/explosion3.png</filename>
         </array>
         <key>ignoreFileList</key>
         <array/>

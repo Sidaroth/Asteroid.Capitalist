@@ -33,6 +33,8 @@ module.exports = {
             components: path.resolve(__dirname, '../src/components'),
             utils: path.resolve(__dirname, '../src/utils'),
             root: path.resolve(__dirname, '../src'),
+            src: path.resolve(__dirname, '../src'),
+            math: path.resolve(__dirname, '../src/math'),
         },
     },
     module: {
@@ -82,9 +84,9 @@ module.exports = {
         }),
         new HtmlWebpackPlugin({
             template: '../node_modules/html-webpack-template/index.ejs',
-            title: 'Boilerplate',
+            title: 'Asteroid Capitalist',
             meta: [{ name: 'robots', content: 'noindex,nofollow' }],
-            appMountIds: ['content'],
+            appMountIds: ['game'],
             inject: false,
             minify: {
                 collapseWhitespace: true,
