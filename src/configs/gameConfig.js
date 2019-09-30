@@ -22,7 +22,7 @@ export default {
         fill: '#ffffff',
     },
     STORY_TEXT_STYLE: {
-        font: '40px future',
+        font: '32px future',
         fill: '#ffffff',
         align: 'center',
         wordWrap: {

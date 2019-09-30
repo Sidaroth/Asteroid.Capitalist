@@ -55,13 +55,14 @@ const createPlayer = function createPlayerFunc() {
     }
 
     function __constructor() {
+        // state.setImmune(true); // TODO: MUST FIX
         store.score = 0;
         state.type = gameConfig.TYPES.PLAYER;
         createSprite();
         state.setPosition({ x: gameConfig.GAME.VIEWWIDTH / 2, y: gameConfig.GAME.VIEWHEIGHT / 2 });
         state.setColliderShape(Matter.Bodies.circle(state.getX(), state.getY(), 35));
         state.setCollisionCategory(gameConfig.COLLISION.player);
-        state.setCollidesWith([gameConfig.COLLISION.enemy]); // TODO: Enemy bullets, but not our own.
+        state.setCollidesWith([gameConfig.COLLISION.enemy]);
         for (let i = 0; i < state.getLives(); i += 1) {
             const icon = store.UIScene.getScene().add.image(30 + 80 * i, 30, spriteConfig.PLAYER_SHIP_ICON.KEY);
             livesIcons.push(icon);

@@ -21,7 +21,7 @@ const createEnemy = (pos, conf = {}, movementFunc = undefined) => {
     const state = {};
     const available = false;
     const maxSpeed = 3;
-    const velocity = new Vector(-2.5, 0);
+    const velocity = new Vector(-3, 0);
     const killZoneLimit = -200;
     let movementFunction = movementFunc;
     const config = conf;
@@ -88,7 +88,7 @@ const createEnemy = (pos, conf = {}, movementFunc = undefined) => {
         state.setPosition(newPos);
 
         // If the enemy is a shooting type, and it has actually moved onto the screen.
-        if (config.type === 'shooting' && newPos.x < gameConfig.GAME.VIEWWIDTH - 50) {
+        if (config.type === 'shooting' && newPos.x < gameConfig.GAME.VIEWWIDTH - 50 && newPos.x > 0) {
             shoot();
         }
 
@@ -119,7 +119,7 @@ const createEnemy = (pos, conf = {}, movementFunc = undefined) => {
         hasPosition: hasPosition(state),
         hasSprite: hasSprite(state),
         hasCollider: hasCollision(state),
-        hasHealth: hasHealth(state),
+        hasHealth: hasHealth(state, config),
     });
 };
 
