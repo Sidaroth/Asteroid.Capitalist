@@ -26,11 +26,11 @@ const createShield = (pos) => {
         const world = store.world.getScene();
         sprite = new Phaser.GameObjects.Sprite(world, state.entity.getX(), state.entity.getY(), spriteConfig.SHIELD.KEY);
         world.add.existing(sprite);
-        store.audioManager.playSfx(audioConfig.SFX.SHIELD_UP.KEY, 4);
+        store.audioManager.playSfx(audioConfig.SFX.SHIELD_UP.KEY, 6);
     }
 
     function deactivate() {
-        store.audioManager.playSfx(audioConfig.SFX.SHIELD_DOWN.KEY, 4);
+        store.audioManager.playSfx(audioConfig.SFX.SHIELD_DOWN.KEY, 6);
         state.entity.setImmune(false);
         sprite.destroy();
     }

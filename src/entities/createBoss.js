@@ -50,7 +50,7 @@ const createBoss = (pos, config) => {
             }
         });
 
-        store.audioManager.playSfx(audioConfig.SFX.SIREN.KEY, 2);
+        store.audioManager.playSfx(audioConfig.SFX.SIREN.KEY, 3);
     }
 
     function shoot() {
