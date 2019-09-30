@@ -26,7 +26,7 @@ const createEnemy = (pos, conf = {}, movementFunc = undefined) => {
     let movementFunction = movementFunc;
     const config = conf;
 
-    const rateOfFire = getRandomInt(5, 10) / 10;
+    let rateOfFire = conf.rateOfFire || getRandomInt(5, 10) / 10;
     let timeOfLastShot = 0;
 
     function __constructor() {
@@ -59,6 +59,10 @@ const createEnemy = (pos, conf = {}, movementFunc = undefined) => {
 
     function setVelocity(vel) {
         velocity.copy(vel);
+    }
+
+    function setRateOfFire(r) {
+        rateOfFire = r;
     }
 
     function shoot() {
@@ -109,6 +113,7 @@ const createEnemy = (pos, conf = {}, movementFunc = undefined) => {
         update,
         setMovementFunction,
         setVelocity,
+        setRateOfFire,
     };
 
     return createState('Enemy', state, {
