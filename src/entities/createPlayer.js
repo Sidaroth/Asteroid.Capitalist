@@ -17,6 +17,7 @@ import spriteConfig from 'configs/spriteConfig';
 import eventConfig from 'configs/eventConfig';
 import createExplosion from './createExplosion';
 import audioConfig from 'configs/audioConfig';
+import prettifyIntegerToString from 'utils/prettifyIntegerToString';
 
 const createPlayer = function createPlayerFunc() {
     // variables and functions here are private unless listed below in localState.
@@ -50,7 +51,7 @@ const createPlayer = function createPlayerFunc() {
     }
 
     function prettyScoreString() {
-        return store.score.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ' ');
+        return prettifyIntegerToString(store.score);
     }
 
     function __constructor() {

@@ -5,6 +5,8 @@ import createButton from 'entities/createButton';
 import canListen from 'components/events/canListen';
 import eventConfig from 'configs/eventConfig';
 import canEmit from 'components/events/canEmit';
+import store from 'src/store';
+import prettifyIntegerToString from 'utils/prettifyIntegerToString';
 
 /**
  * Layer/Scene for world elements.
@@ -38,6 +40,18 @@ const MainMenu = function MainMenuFunc() {
         );
         title.setX(title.x - title.width / 2);
 
+        let storyText = 'Our solar system have been emptied of valueable minerals, and venture capitalists have hired every available space mining company to travel across the galaxy and find valueable resources. \n\nThis has sparked a lawless war in the outer edges of our galaxy. You are the sole solicitor of one of these mining companies and have to survive your trip back to our solar system.';
+        if (store.score > 0) {
+            storyText = `\n\n\nCongratulations, you earned\n\n $ ${prettifyIntegerToString(store.score)}`;
+        }
+        story = state.getScene().add.text(
+            gameConfig.GAME.VIEWWIDTH / 2,
+            250,
+            storyText,
+            gameConfig.STORY_TEXT_STYLE,
+        );
+        story.setX(story.x - story.width / 2);
+
         instructions = state.getScene().add.text(
             gameConfig.GAME.VIEWWIDTH / 2,
             820,
@@ -46,13 +60,6 @@ const MainMenu = function MainMenuFunc() {
         );
         instructions.setX(instructions.x - instructions.width / 2);
 
-        story = state.getScene().add.text(
-            gameConfig.GAME.VIEWWIDTH / 2,
-            250,
-            'Our solar system have been emptied of valueable minerals, and venture capitalists have hired every available space mining company to travel across the galaxy and find valueable resources. \n\nThis has sparked a lawless war in the outer edges of our galaxy. You are the sole solicitor of one of these mining companies and have to survive your trip back to our solar system.',
-            gameConfig.STORY_TEXT_STYLE,
-        );
-        story.setX(story.x - story.width / 2);
 
         credits = state.getScene().add.text(
             gameConfig.GAME.VIEWWIDTH / 2,
@@ -68,6 +75,12 @@ const MainMenu = function MainMenuFunc() {
         playButton = undefined;
         title.destroy();
         title = undefined;
+        story.destroy();
+        story = undefined;
+        instructions.destroy();
+        instructions = undefined;
+        credits.destroy();
+        credits = undefined;
     }
 
     const localState = {
