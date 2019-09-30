@@ -61,8 +61,6 @@ const createLevelMaster = () => {
         upcomingWaves.sort((a, b) => b.spawnTime - a.spawnTime);
         nextWave = upcomingWaves.pop();
 
-        console.log(upcomingWaves);
-
         powerups.forEach((powerup) => {
             upcomingPowerups.push(powerup);
         });
