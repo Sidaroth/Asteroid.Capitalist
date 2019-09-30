@@ -56,7 +56,7 @@ export default {
                 x: 100,
                 y: 300,
             },
-            lives: 5,
+            lives: 8,
             invulnerabilityPeriod: 4000,
         },
     },
