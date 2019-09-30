@@ -66,7 +66,7 @@ const createPlayer = function createPlayerFunc() {
             livesIcons.push(icon);
         }
 
-        scoreText = store.UIScene.getScene().add.text(300, 10, `$ ${prettyScoreString()}`, gameConfig.DEFAULT_TEXT_STYLE);
+        scoreText = store.UIScene.getScene().add.text(500, 10, `$ ${prettyScoreString()}`, gameConfig.DEFAULT_TEXT_STYLE);
 
         state.listenOn(state, eventConfig.ENTITY.DIE, (e) => {
             const explosion = createExplosion();
