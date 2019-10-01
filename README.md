@@ -3,6 +3,7 @@ Code for open jam 2019 - Theme: "The Future"
 
 Phaser 3.19.0 Open Jam 2018 project, built upon: https://github.com/Sidaroth/Phaser3.Boilerplate </br>
 Documentation for Phaser: https://photonstorm.github.io/phaser3-docs/index.html
+Itch.io: https://garlov.itch.io/asteroid-capitalist
 
 ## Description
 
@@ -31,7 +32,7 @@ Our team for the jam consisted of 2 people.
 4. npm start
 
 ### Contribute
-If you want to contribute to the project, and submit any pull requests are very much welcome! If you have any ideas for additional features, improvements or have found any bugs feel free to open an issue and we'll get to it as soon as time allows.
+If you want to contribute to the project, any pull requests are very much welcome! If you have any ideas for additional features, improvements or have found any bugs feel free to open an issue and we'll get to it as soon as time allows.
 
 ### Attributions
 Music (CC-0):
