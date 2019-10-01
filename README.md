@@ -7,7 +7,14 @@ Itch.io: https://garlov.itch.io/asteroid-capitalist
 
 ## Description
 
-COMING SOON(tm)
+<b>Controls: Use WASD/Arrow keys to move the ship, and the mouse to aim and fire.</b>
+
+Our solar system has been emptied of valuable minerals, and venture capitalists have hired every available space mining company to travel across the galaxy and find valuable resources. 
+
+This has sparked a lawless war in the outer edges of our galaxy. You are the sole solicitor of one of these mining companies and have to survive your trip back to our solar system.
+
+Can you fight through the waves of enemies to bring some extra cash home?
+Comment your scores below!
 
 ### Team
 Our team for the jam consisted of 2 people.
