@@ -16,6 +16,7 @@ import Vector from 'src/math/vector';
 import audioConfig from 'configs/audioConfig';
 import eventConfig from 'configs/eventConfig';
 import createExplosion from './createExplosion';
+import takeDamageTween from 'src/tweens/takeDamageTween';
 
 const createBoss = (pos, config) => {
     const state = {};
@@ -51,6 +52,10 @@ const createBoss = (pos, config) => {
                     state.emitGlobal(eventConfig.GAME.ENDED);
                 }, 1500);
             }
+        });
+
+        state.listenOn(state, eventConfig.ENTITY.TAKEDAMAGE, (e) => {
+            takeDamageTween(state.getSprite(), store.game.getScene());
         });
 
         store.audioManager.playSfx(audioConfig.SFX.SIREN.KEY, 3);

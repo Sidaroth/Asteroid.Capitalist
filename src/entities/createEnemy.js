@@ -16,6 +16,7 @@ import createExplosion from './createExplosion';
 import getRandomInt from 'src/math/getRandomInt';
 import createBullet from './createBullet';
 import audioConfig from 'configs/audioConfig';
+import takeDamageTween from 'src/tweens/takeDamageTween';
 
 const createEnemy = (pos, conf = {}, movementFunc = undefined) => {
     const state = {};
@@ -43,6 +44,10 @@ const createEnemy = (pos, conf = {}, movementFunc = undefined) => {
         state.setCollidesWith([gameConfig.COLLISION.bullet, gameConfig.COLLISION.player]);
         state.setRotation(Math.PI / 2);
 
+        state.setupListeners();
+    }
+
+    function setupListeners() {
         state.listenOn(state, eventConfig.ENTITY.DIE, (e) => {
             if (e.lives <= 0) {
                 state.emitGlobal(eventConfig.ENTITY.SCOREAWARDED, state.getMaxHealth() * 10);
@@ -50,6 +55,10 @@ const createEnemy = (pos, conf = {}, movementFunc = undefined) => {
                 explosion.setPosition(state.getPosition());
                 state.destroy();
             }
+        });
+
+        state.listenOn(state, eventConfig.ENTITY.TAKEDAMAGE, (e) => {
+            takeDamageTween(state.getSprite(), store.game.getScene());
         });
     }
 
@@ -110,6 +119,7 @@ const createEnemy = (pos, conf = {}, movementFunc = undefined) => {
         // methods
         __constructor,
         destroy,
+        setupListeners,
         update,
         setMovementFunction,
         setVelocity,
