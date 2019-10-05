@@ -6,8 +6,8 @@ import Matter from 'matter-js';
 const isPowerup = (state) => {
     let duration = 10000;
     let entity;
-    let startTime;
     let active = false;
+    let lifeTime = 0;
 
     function __constructor() {
         state.type = gameConfig.TYPES.POWERUP;
@@ -36,7 +36,6 @@ const isPowerup = (state) => {
         state.setColliderShape(undefined);
         state.setCollidesWith([]);
 
-        startTime = performance.now();
         state.entity.addPowerup(state);
         active = true;
     }
@@ -45,8 +44,13 @@ const isPowerup = (state) => {
         active = false;
     }
 
-    function update() {
-        if (performance.now() > startTime + duration) state.deactivate();
+    function update(time) {
+        if (active) {
+            lifeTime += time.delta;
+            if (lifeTime > duration) state.deactivate();
+        }
+
+        return time;
     }
 
     function isActive() {

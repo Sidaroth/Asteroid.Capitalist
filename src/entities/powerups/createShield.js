@@ -41,6 +41,8 @@ const createShield = (pos) => {
             sprite.y = state.entity.getY();
             sprite.rotation += 0.05 * time.deltaScale;
         }
+
+        return time;
     }
 
     const localState = {

@@ -11,6 +11,7 @@ import alternatingStandardShooterSine from './waves/alternatingStandardShooterSi
 
 export default {
     level1: {
+        startTimeOverride: undefined, // Sets the start time in ms for debugging.
         waves: [
             {
                 config: {
@@ -496,7 +497,7 @@ export default {
                     location: new Vector(gameConfig.GAME.VIEWWIDTH / 2, 200),
                     type: gameConfig.CONSTS.POWERUPS.SHIELD,
                 },
-                spawnTime: 20000,
+                spawnTime: 1200,
             },
             {
                 config: {

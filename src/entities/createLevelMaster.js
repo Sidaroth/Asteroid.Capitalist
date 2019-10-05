@@ -15,6 +15,7 @@ const createLevelMaster = () => {
     let levelStartTime;
     let nextWave;
     let nextPowerup;
+    let levelTime = 0;
 
     function spawnEnemy(location, config, movementFunc) {
         const availableEnemy = enemyPool.find(e => e.type === config.type && e.available);
@@ -54,7 +55,19 @@ const createLevelMaster = () => {
     }
 
     function readSpawnConfig(config) {
-        const { waves, powerups } = config;
+        let waves;
+        let powerups;
+        const { startTimeOverride } = config;
+        ({ waves, powerups } = config);
+        levelTime = 0;
+
+        // Debug filtering
+        if (startTimeOverride) {
+            levelTime = startTimeOverride;
+            waves = waves.filter(w => w.spawnTime > startTimeOverride);
+            powerups = powerups.filter(p => p.spawnTime > startTimeOverride);
+        }
+
         waves.forEach((wave) => {
             upcomingWaves.push(wave);
         });
@@ -71,8 +84,8 @@ const createLevelMaster = () => {
     }
 
     function update(time) {
-        const now = performance.now();
-        if (nextWave && now > levelStartTime + nextWave.spawnTime) {
+        levelTime += time.delta;
+        if (nextWave && levelTime > nextWave.spawnTime) {
             spawnWave(
                 nextWave.config.location,
                 nextWave.config.enemySpacing,
@@ -83,7 +96,7 @@ const createLevelMaster = () => {
             nextWave = upcomingWaves.pop();
         }
 
-        if (nextPowerup && now > levelStartTime + nextPowerup.spawnTime) {
+        if (nextPowerup && levelTime > nextPowerup.spawnTime) {
             spawnPowerup(nextPowerup.config.location, nextPowerup.config.type);
             nextPowerup = upcomingPowerups.pop();
         }
