@@ -497,7 +497,7 @@ export default {
                     location: new Vector(gameConfig.GAME.VIEWWIDTH / 2, 200),
                     type: gameConfig.CONSTS.POWERUPS.SHIELD,
                 },
-                spawnTime: 1200,
+                spawnTime: 20000,
             },
             {
                 config: {

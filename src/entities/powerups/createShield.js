@@ -10,10 +10,12 @@ import store from 'src/store';
 import spriteConfig from 'configs/spriteConfig';
 import Phaser from 'phaser';
 import audioConfig from 'configs/audioConfig';
+import expirationTween from 'src/tweens/expirationTween';
 
 const createShield = (pos) => {
     const state = {};
     let sprite;
+    let aboutToExpire = false;
 
     function __constructor() {
         state.createSpriteFromKey(store.world.getScene(), spriteConfig.POWERUP_SHIELD_ICON.KEY);
@@ -35,11 +37,21 @@ const createShield = (pos) => {
         sprite.destroy();
     }
 
+    function toggleExpirationTween() {
+        aboutToExpire = true;
+        const repeats = 10;
+        expirationTween(sprite, store.game.getScene(), state.duration * 0.25 / repeats, repeats);
+    }
+
     function update(time) {
         if (sprite) {
             sprite.x = state.entity.getX();
             sprite.y = state.entity.getY();
             sprite.rotation += 0.05 * time.deltaScale;
+        }
+
+        if (!aboutToExpire && state.lifeTime > state.duration * 0.75) {
+            toggleExpirationTween();
         }
 
         return time;

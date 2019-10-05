@@ -4,10 +4,11 @@ import gameConfig from 'configs/gameConfig';
 import Matter from 'matter-js';
 
 const isPowerup = (state) => {
-    let duration = 10000;
+    const duration = 10000;
+    const lifeTime = 0;
+
     let entity;
     let active = false;
-    let lifeTime = 0;
 
     function __constructor() {
         state.type = gameConfig.TYPES.POWERUP;
@@ -25,7 +26,7 @@ const isPowerup = (state) => {
     }
 
     function setDuration(dur) {
-        duration = dur;
+        state.duration = dur;
     }
 
     function activate() {
@@ -46,8 +47,8 @@ const isPowerup = (state) => {
 
     function update(time) {
         if (active) {
-            lifeTime += time.delta;
-            if (lifeTime > duration) state.deactivate();
+            state.lifeTime += time.delta;
+            if (state.lifeTime > state.duration) state.deactivate();
         }
 
         return time;
@@ -60,6 +61,8 @@ const isPowerup = (state) => {
     return {
         // props
         entity,
+        lifeTime,
+        duration,
         // methods
         __constructor,
         setDuration,
