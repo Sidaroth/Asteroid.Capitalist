@@ -40,7 +40,7 @@ const MainMenu = function MainMenuFunc() {
         );
         title.setX(title.x - title.width / 2);
 
-        let storyText = 'Our solar system have been emptied of valueable minerals, and venture capitalists have hired every available space mining company to travel across the galaxy and find valueable resources. \n\nThis has sparked a lawless war in the outer edges of our galaxy. You are the sole solicitor of one of these mining companies and have to survive your trip back to our solar system.';
+        let storyText = 'Our solar system has been emptied of valueable minerals, and resources are getting scarce. Venture capitalists have hired every available space mining company to travel across the galaxy and find resources. \n\nThis hunt for profit has sparked a lawless war in the outer edges of our galaxy. You are the sole solicitor of one of these mining companies and have to survive your trip back to our solar system. The company is willing to pay a bounty for every opposing company ship you encounter and take out.';
         if (store.score > 0) {
             storyText = `\n\n\nCongratulations, you earned\n\n $ ${prettifyIntegerToString(store.score)}`;
         }
