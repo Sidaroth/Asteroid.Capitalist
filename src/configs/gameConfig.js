@@ -117,5 +117,6 @@ export default {
             TOUCH_PAD: 17,
         },
         DEADZONE: 0.08,
+        SENSITIVITY: 18,
     },
 };

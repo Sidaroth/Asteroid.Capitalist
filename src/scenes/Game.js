@@ -13,6 +13,7 @@ import World from './World';
 import MainMenu from './MainMenu';
 import eventConfig from 'configs/eventConfig';
 import createGamepad from 'core/createGamepad';
+import createMouse from 'core/createMouse';
 
 /**
  * Responsible for delegating the various levels, holding the various core systems and such.
@@ -26,6 +27,7 @@ const Game = function GameFunc() {
     let mainMenu;
     const keyboard = createKeyboard();
     const gamepad = createGamepad();
+    const mouse = createMouse();
 
     const gameEntities = [];
     const qTree = createQuadTree(new Rect(0, 0, gameConfig.GAME.VIEWWIDTH, gameConfig.GAME.VIEWHEIGHT), 1, 8); // Specify world bounds.
@@ -47,13 +49,10 @@ const Game = function GameFunc() {
     }
 
     function createInput() {
+        mouse.enable(state.getScene());
         keyboard.enable();
         gamepad.enable();
         store.keyboard = keyboard;
-
-        state.getScene().input.on('pointermove', (pointer) => {
-            store.mouse = pointer;
-        });
     }
 
     function init() {
@@ -78,6 +77,7 @@ const Game = function GameFunc() {
             state.getScene().scene.remove(mainMenu.getScene());
             mainMenu.getScene().destroy();
             mainMenu = undefined;
+            document.getElementById('game').style.cursor = 'none';
         });
 
         state.listenGlobal(eventConfig.GAME.ENDED, () => {
@@ -87,6 +87,7 @@ const Game = function GameFunc() {
             world.getScene().destroy();
             world = undefined;
             store.world = undefined;
+            document.getElementById('game').style.cursor = 'default';
         });
 
         createInput();

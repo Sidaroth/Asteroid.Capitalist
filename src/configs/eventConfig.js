@@ -23,4 +23,7 @@ export default {
     BUTTON: {
         CLICK: 'click',
     },
+    MOUSE: {
+        MOVE: 'move',
+    },
 };

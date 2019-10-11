@@ -20,7 +20,7 @@ const phaserConfig = {
     scene: [BootScene().getScene(), LoadScene().getScene(), game.getScene()],
 };
 
-document.getElementById('game').style.cursor = 'crosshair';
+document.getElementById('game').style.cursor = 'default';
 
 const app = new Phaser.Game(phaserConfig);
 store.game = game;

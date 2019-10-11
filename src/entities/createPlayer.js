@@ -18,6 +18,7 @@ import eventConfig from 'configs/eventConfig';
 import createExplosion from './createExplosion';
 import audioConfig from 'configs/audioConfig';
 import prettifyIntegerToString from 'utils/prettifyIntegerToString';
+import Phaser from 'phaser';
 
 const createPlayer = function createPlayerFunc() {
     // variables and functions here are private unless listed below in localState.
@@ -42,33 +43,27 @@ const createPlayer = function createPlayerFunc() {
 
     let livesIcons = [];
     let activePowerups = [];
+    let crosshair;
 
     // Drag
     let airDensity = 0.05; // We're in space after all....
 
     function createSprite() {
         state.createSpriteFromAtlas(store.world.getScene(), spriteConfig.SHIPPACK.KEY, 'playerShip2_green.png');
+
+        const uiScene = store.UIScene.getScene();
+        const crosshairX = store.mouse && store.mouse.phaserPointer ? store.mouse.phaserPointer.x : gameConfig.GAME.VIEWWIDTH / 2;
+        const crosshairY = store.mouse && store.mouse.phaserPointer ? store.mouse.phaserPointer.y : gameConfig.GAME.VIEWHEIGHT / 2;
+        crosshair = new Phaser.GameObjects.Sprite(uiScene, crosshairX, crosshairY, spriteConfig.CROSSHAIR.KEY);
+        crosshair.setOrigin(0.5);
+        uiScene.add.existing(crosshair);
     }
 
     function prettyScoreString() {
         return prettifyIntegerToString(store.score);
     }
 
-    function __constructor() {
-        store.score = 0;
-        state.type = gameConfig.TYPES.PLAYER;
-        createSprite();
-        state.setPosition({ x: gameConfig.GAME.VIEWWIDTH / 2, y: gameConfig.GAME.VIEWHEIGHT / 2 });
-        state.setColliderShape(Matter.Bodies.circle(state.getX(), state.getY(), 35));
-        state.setCollisionCategory(gameConfig.COLLISION.player);
-        state.setCollidesWith([gameConfig.COLLISION.enemy]);
-        for (let i = 0; i < state.getLives(); i += 1) {
-            const icon = store.UIScene.getScene().add.image(30 + 80 * i, 30, spriteConfig.PLAYER_SHIP_ICON.KEY);
-            livesIcons.push(icon);
-        }
-
-        scoreText = store.UIScene.getScene().add.text(700, 10, `$ ${prettyScoreString()}`, gameConfig.DEFAULT_TEXT_STYLE);
-
+    function setupListeners() {
         state.listenOn(state, eventConfig.ENTITY.DIE, (e) => {
             const explosion = createExplosion();
             explosion.setPosition(state.getPosition());
@@ -89,6 +84,32 @@ const createPlayer = function createPlayerFunc() {
             store.score += score;
             scoreText.text = `$ ${prettyScoreString()}`;
         });
+
+        state.listenGlobal(eventConfig.MOUSE.MOVE, (p) => {
+            if (crosshair) {
+                crosshair.x = p.x;
+                crosshair.y = p.y;
+            }
+        });
+    }
+
+    function __constructor() {
+        store.score = 0;
+        state.type = gameConfig.TYPES.PLAYER;
+        createSprite();
+
+        state.setPosition({ x: gameConfig.GAME.VIEWWIDTH / 2, y: gameConfig.GAME.VIEWHEIGHT / 2 });
+        state.setColliderShape(Matter.Bodies.circle(state.getX(), state.getY(), 35));
+        state.setCollisionCategory(gameConfig.COLLISION.player);
+        state.setCollidesWith([gameConfig.COLLISION.enemy]);
+
+        scoreText = store.UIScene.getScene().add.text(700, 10, `$ ${prettyScoreString()}`, gameConfig.DEFAULT_TEXT_STYLE);
+        for (let i = 0; i < state.getLives(); i += 1) {
+            const icon = store.UIScene.getScene().add.image(30 + 80 * i, 30, spriteConfig.PLAYER_SHIP_ICON.KEY);
+            livesIcons.push(icon);
+        }
+
+        setupListeners();
     }
 
     function calculateDrag(fluidDensity) {
@@ -133,9 +154,16 @@ const createPlayer = function createPlayerFunc() {
     }
 
     function shoot() {
-        if (store.mouse && store.mouse.isDown) {
+        const mouse = store.mouse ? store.mouse.phaserPointer : undefined;
+        const mouseFire = mouse && mouse.isDown && mouse.button === 0;
+        const gamepadData = state.getGamePadButtonData();
+        const gamepadFire = gamepadData && (gamepadData.X || gamepadData.R2 || gamepadData.R1); // TODO Set gamepad binds elsewhere.
+
+        if (mouseFire || gamepadFire) {
             const now = performance.now();
-            if (now - timeOfLastShot > 1000 / (rateOfFire * ROFModifier)) {
+            const canShootYet = now - timeOfLastShot > 1000 / (rateOfFire * ROFModifier);
+
+            if (canShootYet) {
                 timeOfLastShot = now;
 
                 const pos = state.getPosition();
@@ -196,11 +224,24 @@ const createPlayer = function createPlayerFunc() {
         });
     }
 
+    function updateCrosshair(time) {
+        const axes = state.getGamepadAxesData();
+        if (axes) {
+            crosshair.x += gameConfig.GAMEPAD_MAPPING.SENSITIVITY * axes.R_HOR * time.deltaScale;
+            crosshair.y += gameConfig.GAMEPAD_MAPPING.SENSITIVITY * axes.R_VER * time.deltaScale;
+        }
+
+        const edgeBound = checkBounds(crosshair);
+        crosshair.x = edgeBound.x;
+        crosshair.y = edgeBound.y;
+    }
+
     function update(time) {
         if (!state.waitingForRespawn) {
             updatePowerups(time);
             move(time);
-            lookAt(store.mouse);
+            updateCrosshair(time);
+            lookAt(crosshair);
             shoot();
             updateSprite();
         }

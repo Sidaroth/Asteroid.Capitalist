@@ -39,6 +39,10 @@ export default {
         KEY: 'blue_laser',
         PATH: 'assets/images/PNG/Lasers/laserBlue03.png',
     },
+    CROSSHAIR: {
+        KEY: 'crosshair',
+        PATH: 'assets/images/PNG/crosshair177_scaled.png',
+    },
     // Atlases/spritesheets.
     SHIPPACK: {
         KEY: 'ship',
