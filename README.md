@@ -7,7 +7,10 @@ Itch.io: https://garlov.itch.io/asteroid-capitalist
 
 ## Description
 
-<b>Controls: Use WASD/Arrow keys to move the ship, and the mouse to aim and fire.</b>
+<b>Controls: Use WASD/Arrow keys to move the ship, and the mouse to aim and fire.
+ 
+ Using a controller is also supported. Steer with left thumbstick, aim with right thumbstick. Shoot with X (PS) / A (XBOX) or right triggers.
+</b>
 
 Our solar system has been emptied of valueable minerals, and resources are getting scarce. Venture capitalists have hired every available space mining company to travel across the galaxy and find resources.
 
