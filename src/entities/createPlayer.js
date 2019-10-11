@@ -101,18 +101,27 @@ const createPlayer = function createPlayerFunc() {
     }
 
     function checkMovement() {
-        const input = new Array(4).fill(false);
+        const keyboardInput = new Array(4).fill(false);
         Object.keys(keybindings.MOVEMENT).forEach((key, direction) => {
-            input[direction] = state.isInputDown(...keybindings.MOVEMENT[key]);
+            keyboardInput[direction] = state.isBoundKeyDown(...keybindings.MOVEMENT[key]);
         });
 
         const accel = new Vector();
-        if (input[gameConfig.CONSTS.DIRECTION.UP]) accel.add(0, -accelerationForceMag);
-        if (input[gameConfig.CONSTS.DIRECTION.DOWN]) accel.add(0, accelerationForceMag);
-        if (input[gameConfig.CONSTS.DIRECTION.LEFT]) accel.add(-accelerationForceMag, 0);
-        if (input[gameConfig.CONSTS.DIRECTION.RIGHT]) accel.add(accelerationForceMag, 0);
+        if (keyboardInput.some(val => val)) {
+            if (keyboardInput[gameConfig.CONSTS.DIRECTION.UP]) accel.add(0, -accelerationForceMag);
+            if (keyboardInput[gameConfig.CONSTS.DIRECTION.DOWN]) accel.add(0, accelerationForceMag);
+            if (keyboardInput[gameConfig.CONSTS.DIRECTION.LEFT]) accel.add(-accelerationForceMag, 0);
+            if (keyboardInput[gameConfig.CONSTS.DIRECTION.RIGHT]) accel.add(accelerationForceMag, 0);
+            acceleration.add(accel);
+            return;
+        }
 
-        acceleration.add(accel);
+        const axes = state.getGamepadAxesData();
+        if (axes) {
+            accel.add(0, accelerationForceMag * axes.L_VER);
+            accel.add(accelerationForceMag * axes.L_HOR, 0);
+            acceleration.add(accel);
+        }
     }
 
     function lookAt(pos) {

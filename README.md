@@ -47,7 +47,7 @@ Sound Effects (CC-3)
 
 Sound Effects (CC-0)
 - [Sirens by aquinn](https://opengameart.org/content/sirens-and-alarm-noise)
-- [Powerups by Joth](https://opengameart.org/content/7-space-sounds)
+- [Rate of Fire Powerup by Joth](https://opengameart.org/content/7-space-sounds)
 
 Sprites, Backgrounds, Fonts and Sound Effects (CC0 1.0)
 - [Misc by Kenney.nl](https://kenney.nl)

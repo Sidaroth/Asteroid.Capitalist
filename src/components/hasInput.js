@@ -2,7 +2,7 @@ import store from 'root/store';
 import eventConfig from 'configs/eventConfig';
 
 const hasInput = function hasInputFunc(state) {
-    const { keyboard } = store;
+    const { keyboard, gamepads } = store;
 
     function onKeyDown(e) {
         state.emit(eventConfig.KEY.DOWN, e);
@@ -12,8 +12,16 @@ const hasInput = function hasInputFunc(state) {
         state.emit(eventConfig.KEY.UP, e);
     }
 
-    function isInputDown(...bindings) {
-        return bindings.some(binding => keyboard.isKeyDown(binding));
+    function isBoundKeyDown(...bindings) {
+        const kbInput = bindings.some(binding => keyboard.isKeyDown(binding));
+        if (kbInput) return kbInput;
+
+        return kbInput;
+    }
+
+    function getGamepadAxesData() {
+        const pad = gamepads.getGamepadState();
+        return pad ? pad.axes : undefined;
     }
 
     function __constructor() {
@@ -28,7 +36,8 @@ const hasInput = function hasInputFunc(state) {
     return {
         __constructor,
         getKeyboard,
-        isInputDown,
+        isBoundKeyDown,
+        getGamepadAxesData,
     };
 };
 

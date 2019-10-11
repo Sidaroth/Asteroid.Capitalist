@@ -12,6 +12,7 @@ import Background from './Background';
 import World from './World';
 import MainMenu from './MainMenu';
 import eventConfig from 'configs/eventConfig';
+import createGamepad from 'core/createGamepad';
 
 /**
  * Responsible for delegating the various levels, holding the various core systems and such.
@@ -24,6 +25,7 @@ const Game = function GameFunc() {
     let world;
     let mainMenu;
     const keyboard = createKeyboard();
+    const gamepad = createGamepad();
 
     const gameEntities = [];
     const qTree = createQuadTree(new Rect(0, 0, gameConfig.GAME.VIEWWIDTH, gameConfig.GAME.VIEWHEIGHT), 1, 8); // Specify world bounds.
@@ -46,6 +48,7 @@ const Game = function GameFunc() {
 
     function createInput() {
         keyboard.enable();
+        gamepad.enable();
         store.keyboard = keyboard;
 
         state.getScene().input.on('pointermove', (pointer) => {
