@@ -4,7 +4,7 @@ const hasSprite = function hasSpriteFunc(state) {
     let sprite;
     let key;
 
-    function __constructor() {}
+    function __constructor() { }
 
     function createSpriteFromKey(scene, tileKey) {
         key = tileKey;
